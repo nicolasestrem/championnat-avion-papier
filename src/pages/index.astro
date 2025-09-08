@@ -1,16 +1,168 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Championnat du Monde de Lancer d'Avions en Papier 2025 - Mérignac">
+  <Header />
+  <Hero />
+  
+  <main>
+    <!-- Rejoignez l'aventure Section -->
+    <section class="py-16 bg-blue-600 text-white">
+      <div class="container text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-orange-400">Rejoignez l'aventure !</h2>
+        <p class="text-lg max-w-3xl mx-auto">
+          Inscrivez-vous dès maintenant pour participer à une journée remplie de fun, de compétition et de créativité.
+        </p>
+      </div>
+    </section>
+
+    <!-- Info Cards Section -->
+    <section id="info" class="py-16 bg-gray-50">
+      <div class="container">
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Left Card -->
+          <div class="bg-blue-50 rounded-lg p-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-blue-900 mb-6">
+              LE CHAMPIONNAT DU MONDE POUR LES ENFANTS
+            </h2>
+            <p class="text-lg mb-4">Une aventure ludique et éducative pour petits et grands !</p>
+            
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <span class="text-2xl">✈️</span>
+                <div>
+                  <h4 class="font-bold text-blue-800">S'INSTALLER DANS LE COCKPIT D'UN VÉRITABLE AVION DE CHASSE</h4>
+                  <p class="text-gray-700">Sans décollage, vos enfants pourront prendre place aux commandes – pour se sentir comme de vrais pilotes.</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-3">
+                <span class="text-2xl">✈️</span>
+                <div>
+                  <h4 class="font-bold text-blue-800">PLIER DES AVIONS EN PAPIER COMME DES PROS</h4>
+                  <p class="text-gray-700">Un espace dédié pour créer son avion en papier comme pour participer au concours... ou simplement pour s'amuser.</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-3">
+                <span class="text-2xl">🎮</span>
+                <div>
+                  <h4 class="font-bold text-blue-800">ASSEMBLER UN MINI AVION EN KIT</h4>
+                  <p class="text-gray-700">Repartez avec un modèle réduit d'avion qu'ils ont monté eux-mêmes.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Card -->
+          <div class="bg-orange-50 rounded-lg p-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-orange-900 mb-6">
+              Que peuvent faire les enfants au Championnat ?
+            </h2>
+            
+            <p class="text-lg mb-6">
+              Le <strong>Championnat du Monde de Lancer d'Avions en Papier</strong> est une aventure ludique et éducative pour petits et grands ! Voici ce qui attend les enfants tout au long de la journée:
+            </p>
+            
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <span class="text-2xl">✈️</span>
+                <div>
+                  <h4 class="font-bold text-orange-800">S'installer dans le cockpit d'un véritable avion de chasse</h4>
+                  <p class="text-gray-700">Des rentrées, les enfants peuvent prendre place aux commandes – pour se sentir comme de vrais pilotes.</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-3">
+                <span class="text-2xl">📋</span>
+                <div>
+                  <h4 class="font-bold text-orange-800">Plier des avions en papier comme des pros</h4>
+                  <p class="text-gray-700">Un espace dédié leur permet de créer leur propre avion pour participer au concours... ou simplement pour s'amuser.</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-3">
+                <span class="text-2xl">🎮</span>
+                <div>
+                  <h4 class="font-bold text-orange-800">Assembler un mini avion en kit</h4>
+                  <p class="text-gray-700">Les enfants repartent avec un modèle réduit d'avion qu'ils ont monté eux-mêmes – un joli souvenir du Championnat.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Histoire Section -->
+    <section class="py-16">
+      <div class="container">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-orange-500">Une Histoire déjà riche</h2>
+        
+        <div class="max-w-4xl mx-auto space-y-6">
+          <div class="flex items-start gap-4">
+            <span class="text-3xl font-bold text-blue-600">Un rendez-vous aérien à Mérignac</span>
+          </div>
+          
+          <p class="text-lg leading-relaxed">
+            L'histoire a commencé en 2018 à <strong>Gastes</strong>, dans les Landes. Cette rencontre autour du pliage et du lancer d'origines en papier a tout de suite trouvé son public. À l'initiative du projet, <strong>Francis Pascutto</strong>, accompagné par sa commune, a lancé une première édition remportée par un gendarme originaire de Bordeaux.
+          </p>
+          
+          <p class="text-lg leading-relaxed">
+            Après une pause en 2020, l'événement est revenu en 2021 avec une formule repensée. En 2022, son organisation a été reprise par le <strong>Rotary Club de Mérignac</strong>, avec le soutien du <strong>Rotaract Bordeaux Lys</strong>.
+          </p>
+          
+          <p class="text-lg leading-relaxed">
+            En 2023, la manifestation s'est tenue à <strong>Mérignac</strong>, au cœur de la région aéronautique. Le public a répondu présent. L'édition 2024 a rassemblé 300 participants venus de 15 pays différents, dont des lycéens d'Amérique du Sud et d'Asie.
+          </p>
+          
+          <p class="text-lg leading-relaxed">
+            Chaque année, des performances remarquables sont réalisées. Le record à battre reste de <strong>88,31 mètres</strong>, établi en 2022 par une équipe américaine. En 2024, <strong>Kevin Cermak</strong> a atteint 47 mètres, un nouveau record adulte, tandis que <strong>Benoît Maury</strong> a remporté le meilleur temps de vol avec plus de 7 secondes.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sponsors Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="container">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+          <span class="text-gray-700">🛠️ Nos sponsors –</span>
+          <span class="text-orange-500">Un grand merci pour votre soutien !</span>
+        </h2>
+        
+        <p class="text-center text-lg mb-12 max-w-3xl mx-auto">
+          Grâce à la générosité de nos partenaires, le <strong>Championnat du Monde de Lancer d'Avions en Papier</strong> peut prendre son envol. Découvrez celles et ceux qui nous accompagnent dans cette belle aventure :
+        </p>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
+          <!-- Add sponsor logos here -->
+          <div class="bg-white p-4 rounded-lg shadow-md flex items-center justify-center h-24">
+            <span class="text-gray-400">ASAS-TECH</span>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-md flex items-center justify-center h-24">
+            <span class="text-gray-400">SEFCO</span>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-md flex items-center justify-center h-24">
+            <span class="text-gray-400">Holiday Inn</span>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-md flex items-center justify-center h-24">
+            <span class="text-gray-400">Alinea</span>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-md flex items-center justify-center h-24">
+            <span class="text-gray-400">Le Pin Galant</span>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-md flex items-center justify-center h-24">
+            <span class="text-gray-400">Restaurant Le Spirit</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
