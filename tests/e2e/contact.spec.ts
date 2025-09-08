@@ -108,4 +108,12 @@ test.describe('Contact Page', () => {
     const calendarButton = page.locator('button:has-text("Ajouter au calendrier")');
     await expect(calendarButton).toBeVisible();
   });
+
+  test('calendar button triggers ICS download', async ({ page }) => {
+    const [download] = await Promise.all([
+      page.waitForEvent('download'),
+      page.locator('#add-to-calendar').click()
+    ]);
+    await expect(download.suggestedFilename()).toBe('championnat-avion-papier-2025.ics');
+  });
 });
