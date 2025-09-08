@@ -6,11 +6,27 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "npm run test:e2e && npm run lint:css",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "lint:css": "stylelint \"src/**/*.{css,astro}\"",
+    "lint:css:fix": "stylelint \"src/**/*.{css,astro}\" --fix",
+    "lighthouse": "lhci autorun",
+    "lighthouse:view": "lhci open"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
     "astro": "^5.13.6",
     "tailwindcss": "^4.1.13"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.55.0",
+    "stylelint": "^16.24.0",
+    "stylelint-config-standard": "^39.0.0",
+    "stylelint-config-tailwindcss": "^1.0.0"
   }
 }

@@ -1,0 +1,150 @@
+name: PR Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  label:
+    name: Auto Label
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/labeler@v4
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
+  size:
+    name: PR Size Check
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check PR size
+        uses: CodelyTV/pr-size-labeler@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          xs_label: 'size/xs'
+          xs_max_size: '10'
+          s_label: 'size/s'
+          s_max_size: '100'
+          m_label: 'size/m'
+          m_max_size: '500'
+          l_label: 'size/l'
+          l_max_size: '1000'
+          xl_label: 'size/xl'
+          fail_if_xl: false
+
+  preview:
+    name: Deploy Preview
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build project
+        run: npm run build
+      
+      - name: Deploy preview to Netlify
+        uses: nwtgck/actions-netlify@v2.0
+        with:
+          publish-dir: './dist'
+          production-deploy: false
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "PR Preview #${{ github.event.pull_request.number }}"
+          enable-commit-comment: false
+          enable-commit-status: true
+          enable-pull-request-comment: true
+          overwrites-pull-request-comment: true
+          alias: pr-${{ github.event.pull_request.number }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 5
+
+  changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    outputs:
+      docs: ${{ steps.filter.outputs.docs }}
+      src: ${{ steps.filter.outputs.src }}
+      tests: ${{ steps.filter.outputs.tests }}
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            docs:
+              - '**/*.md'
+              - 'LICENSE'
+            src:
+              - 'src/**'
+              - 'public/**'
+              - 'package*.json'
+              - 'astro.config.mjs'
+              - 'tsconfig.json'
+            tests:
+              - 'tests/**'
+              - 'playwright.config.ts'
+              - '.stylelintrc.json'
+              - 'lighthouserc.js'
+
+  spell-check:
+    name: Spell Check
+    runs-on: ubuntu-latest
+    if: needs.changes.outputs.docs == 'true'
+    needs: changes
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Spell Check
+        uses: streetsidesoftware/cspell-action@v5
+        with:
+          files: |
+            **/*.md
+            **/*.astro
+            **/*.ts
+            **/*.js
+
+  bundle-size:
+    name: Bundle Size Check
+    runs-on: ubuntu-latest
+    if: needs.changes.outputs.src == 'true'
+    needs: changes
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build project
+        run: npm run build
+      
+      - name: Check bundle size
+        uses: andresz1/size-limit-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          skip_step: build
