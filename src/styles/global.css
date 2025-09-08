@@ -2,10 +2,10 @@
 
 @layer base {
   :root {
-    --color-primary: #0066CC;
-    --color-secondary: #FFA500;
-    --color-rotary-blue: #005DAA;
-    --color-rotary-gold: #F7A81B;
+    --color-primary: #06c;
+    --color-secondary: #fa0;
+    --color-rotary-blue: #005daa;
+    --color-rotary-gold: #f7a81b;
   }
 
   h1, h2, h3, h4, h5, h6 {
