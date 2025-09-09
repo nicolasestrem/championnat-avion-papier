@@ -2,6 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+// Build Formspree action URL from environment variable if available
+const formId = import.meta.env.PUBLIC_FORMSPREE_ID;
+const formAction = formId ? `https://formspree.io/f/${formId}` : '#';
 ---
 
 <Layout title="Contact & FAQ - Championnat de Lancer d'Avions en Papier">
@@ -71,7 +75,7 @@ import Footer from '../components/Footer.astro';
               </div>
             </div>
 
-            <button class="btn-secondary w-full">
+            <button id="add-to-calendar" class="btn-secondary w-full">
               Ajouter au calendrier 📅
             </button>
           </div>
@@ -80,7 +84,7 @@ import Footer from '../components/Footer.astro';
           <div>
             <h2 class="text-3xl font-bold mb-6">Envoyez-nous un message</h2>
             
-            <form class="space-y-4" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <form class="space-y-4" action={formAction} method="POST">
               <div>
                 <label for="name" class="block text-sm font-medium mb-2">Nom *</label>
                 <input type="text" id="name" name="name" required 
@@ -213,7 +217,42 @@ import Footer from '../components/Footer.astro';
       </div>
     </section>
   </main>
-  
+
+  <script>
+    const btn = document.getElementById('add-to-calendar');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const title = "Championnat du Monde de Lancer d'Avions en Papier 2025";
+        const description = "Championnat du Monde de Lancer d'Avions en Papier à Mérignac";
+        const location = "Complexe Sportif Daniel Colombier, Mérignac, France";
+        const start = new Date('2025-05-17T10:00:00Z');
+        const end = new Date('2025-05-17T17:00:00Z');
+        const format = (date) => date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+        const ics = [
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'BEGIN:VEVENT',
+          `DTSTART:${format(start)}`,
+          `DTEND:${format(end)}`,
+          `SUMMARY:${title}`,
+          `DESCRIPTION:${description}`,
+          `LOCATION:${location}`,
+          'END:VEVENT',
+          'END:VCALENDAR'
+        ].join('\n');
+        const blob = new Blob([ics], { type: 'text/calendar' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'championnat-avion-papier-2025.ics';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      });
+    }
+  </script>
+
   <Footer />
 </Layout>
 

@@ -65,7 +65,7 @@ File-based routing through `src/pages/`. Each `.astro` file becomes a route.
 Static build outputs to `dist/` folder. Configured for Netlify/Vercel with automatic preview deployments on PRs.
 
 ### Contact Form Integration
-Contact form uses Formspree. Replace `YOUR_FORM_ID` in `src/pages/contact.astro` with actual Formspree endpoint.
+Contact form uses Formspree. Set `PUBLIC_FORMSPREE_ID` in `.env` and the `contact.astro` page will build the endpoint automatically.
 
 ### Performance Targets
 - Performance: 95+

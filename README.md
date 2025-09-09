@@ -104,11 +104,7 @@ The color scheme is defined in `src/styles/global.css`:
 
 ### Contact Form
 
-Replace `YOUR_FORM_ID` in `src/pages/contact.astro` with your Formspree endpoint:
-
-```html
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-```
+Set your Formspree ID in a `.env` file as `PUBLIC_FORMSPREE_ID` and the contact page will submit to the correct endpoint automatically.
 
 ## 🚀 Deployment
 
