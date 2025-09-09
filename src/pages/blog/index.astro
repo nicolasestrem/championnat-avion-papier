@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import BlogCard from '../../components/BlogCard.astro';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => 
+  b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+---
+
+<Layout title="Articles - Championnat du Monde de Lancer d'Avions en Papier">
+  <Header />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="py-16 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+      <div class="container">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Articles & Tutoriels</h1>
+        <p class="text-xl max-w-3xl">
+          Découvrez nos guides, techniques et actualités sur l'art du pliage et du lancer d'avions en papier
+        </p>
+      </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="py-16">
+      <div class="container">
+        {sortedPosts.length === 0 ? (
+          <p class="text-center text-gray-600 text-lg">
+            Aucun article disponible pour le moment. Revenez bientôt !
+          </p>
+        ) : (
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {sortedPosts.map((post) => (
+              <BlogCard post={post} />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="container">
+        <h2 class="text-3xl font-bold text-center mb-8">Explorer par Catégorie</h2>
+        <div class="grid md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          <a href="/blog/category/tutoriels" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+            <span class="text-4xl mb-2 block">📚</span>
+            <span class="font-semibold text-blue-800">Tutoriels</span>
+          </a>
+          <a href="/blog/category/techniques" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+            <span class="text-4xl mb-2 block">🎯</span>
+            <span class="font-semibold text-blue-800">Techniques</span>
+          </a>
+          <a href="/blog/category/competition" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+            <span class="text-4xl mb-2 block">🏆</span>
+            <span class="font-semibold text-blue-800">Compétition</span>
+          </a>
+          <a href="/blog/category/actualites" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+            <span class="text-4xl mb-2 block">📰</span>
+            <span class="font-semibold text-blue-800">Actualités</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
