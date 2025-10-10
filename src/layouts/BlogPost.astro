@@ -1,4 +1,18 @@
 ---
+/**
+ * @typedef {'Tutoriels' | 'Techniques' | 'Compétition' | 'Actualités'} Category
+ *
+ * @param {object} props
+ * @param {string} props.title
+ * @param {string} props.description
+ * @param {Date} props.publishDate
+ * @param {string=} props.author
+ * @param {Category} props.category
+ * @param {string[]=} props.tags
+ * @param {string=} props.image
+ * @param {string=} props.imageAlt
+ * @param {number=} props.readingTime
+ */
 import Layout from './Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';

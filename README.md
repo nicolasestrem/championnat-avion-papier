@@ -17,6 +17,7 @@
 - 🌍 **Performance**: 95+ Lighthouse score
 - 🔒 **Secure**: No database, no vulnerabilities
 - 💰 **Cost Effective**: Free hosting on Netlify/Vercel
+- 📖 **Well-Documented**: Comprehensive JSDoc comments for all components and pages.
 
 ## 📋 Prerequisites
 
@@ -66,12 +67,21 @@ championnat-avion-papier/
 │   ├── components/      # Reusable Astro components
 │   │   ├── Header.astro
 │   │   ├── Footer.astro
-│   │   └── Hero.astro
+│   │   ├── Hero.astro
+│   │   └── BlogCard.astro
+│   ├── content/         # Content collections
+│   │   └── blog/        # Blog posts
 │   ├── layouts/         # Page layouts
-│   │   └── Layout.astro
+│   │   ├── Layout.astro
+│   │   └── BlogPost.astro
 │   ├── pages/           # Route pages
-│   │   ├── index.astro  # Homepage
-│   │   └── contact.astro # Contact/FAQ page
+│   │   ├── index.astro
+│   │   ├── contact.astro
+│   │   └── blog/
+│   │       ├── index.astro
+│   │       ├── [...slug].astro
+│   │       └── category/
+│   │           └── [category].astro
 │   └── styles/          # Global styles
 │       └── global.css
 ├── tests/               # Test files

@@ -1,4 +1,13 @@
 ---
+/**
+ * This is a dynamic route in Astro that handles the rendering of individual
+ * blog posts.
+ *
+ * The `getStaticPaths` function is used to generate a static page for each
+ * blog post in the `blog` content collection at build time. The `post` prop,
+ * which is a `CollectionEntry<'blog'>`, is then passed to the `BlogPost`
+ * layout for rendering.
+ */
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 

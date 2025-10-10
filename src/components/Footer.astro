@@ -1,6 +1,17 @@
 ---
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const recentPosts = posts
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 3);
 ---
 
+<!--
+  Heads up!
+
+  This component is a static component that does not receive any props.
+-->
 <footer class="bg-gray-900 text-white py-8 mt-16">
   <div class="container">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -8,18 +19,20 @@
       <div>
         <h3 class="text-xl font-bold mb-4">Articles Récents</h3>
         <div class="space-y-3">
-          <article class="border-l-4 border-orange-500 pl-3">
-            <h4 class="font-semibold">Techniques Simples pour Plier un Avion en Papier Performant et Élégant</h4>
-            <p class="text-sm text-gray-400 mt-1">06/06/2025</p>
-          </article>
-          <article class="border-l-4 border-orange-500 pl-3">
-            <h4 class="font-semibold">Tuto Avion en Papier Facile: Le planeur</h4>
-            <p class="text-sm text-gray-400 mt-1">06/06/2025</p>
-          </article>
-          <article class="border-l-4 border-orange-500 pl-3">
-            <h4 class="font-semibold">Tuto Avion en papier facile: « LE FAUCON »</h4>
-            <p class="text-sm text-gray-400 mt-1">06/06/2025</p>
-          </article>
+          {recentPosts.map((post) => (
+            <article class="border-l-4 border-orange-500 pl-3">
+              <h4 class="font-semibold hover:text-orange-400 transition-colors">
+                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+              </h4>
+              <p class="text-sm text-gray-400 mt-1">
+                {new Date(post.data.publishDate).toLocaleDateString('fr-FR', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </p>
+            </article>
+          ))}
         </div>
       </div>
 
