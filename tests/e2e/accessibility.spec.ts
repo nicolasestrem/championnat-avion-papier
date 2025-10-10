@@ -70,12 +70,21 @@ test.describe('Accessibility', () => {
     await page.goto('/');
     
     // Get all headings
-    const headings = await page.$$eval('h1, h2, h3, h4, h5, h6', elements => 
-      elements.map(el => ({
-        level: parseInt(el.tagName[1]),
-        text: el.textContent?.trim()
-      }))
+    const headings = await page.$$eval('[data-page-root] h1, [data-page-root] h2, [data-page-root] h3, [data-page-root] h4, [data-page-root] h5, [data-page-root] h6', elements =>
+      elements
+        .filter(el => {
+          const overlayHost = el.closest('astro-dev-toolbar, astro-dev-overlay');
+          const overlayId = el.closest('#astro-dev-toolbar, #astro-dev-overlay');
+          const overlayData = el.closest('[data-astro-dev-toolbar]');
+          const contentRegion = el.closest('main, header, footer');
+          return !overlayHost && !overlayId && !overlayData && !!contentRegion;
+        })
+        .map(el => ({
+          level: parseInt(el.tagName[1]),
+          text: el.textContent?.trim()
+        }))
     );
+
     
     // Should have exactly one h1
     const h1Count = headings.filter(h => h.level === 1).length;

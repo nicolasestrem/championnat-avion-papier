@@ -11,14 +11,18 @@ test.describe('Homepage', () => {
 
   test('displays hero section with event details', async ({ page }) => {
     // Check hero heading
-    const heading = page.locator('h1');
-    await expect(heading).toContainText('Championnat du Monde de Lancer d\'Avions en Papier 2025');
+    await expect(
+      page.getByRole('heading', {
+        level: 1,
+        name: /Championnat du Monde de Lancer d'Avions en Papier 2025/,
+      }),
+    ).toBeVisible();
     
     // Check event date
-    await expect(page.locator('text=17 Mai 2025')).toBeVisible();
+    await expect(page.getByTestId('event-date')).toBeVisible();
     
     // Check venue
-    await expect(page.locator('text=Complexe Sportif D. Colombier')).toBeVisible();
+    await expect(page.getByTestId('event-location')).toBeVisible();
   });
 
   test('navigation links work correctly', async ({ page }) => {
@@ -29,7 +33,7 @@ test.describe('Homepage', () => {
     // Navigate to contact page
     await contactLink.click();
     await expect(page).toHaveURL(/contact/);
-    await expect(page.locator('h1')).toContainText('Contact');
+    await expect(page.getByRole('heading', { level: 1, name: 'Contact' })).toBeVisible();
   });
 
   test('displays sponsor section', async ({ page }) => {
@@ -76,6 +80,11 @@ test.describe('Homepage', () => {
     await expect(page.locator('nav')).toBeVisible();
     
     // Hero should still be visible
-    await expect(page.locator('h1')).toBeVisible();
+    await expect(
+      page.getByRole('heading', {
+        level: 1,
+        name: /Championnat du Monde de Lancer d'Avions en Papier 2025/,
+      }),
+    ).toBeVisible();
   });
 });

@@ -8,7 +8,7 @@ test.describe('Contact Page', () => {
   test('has correct title and headings', async ({ page }) => {
     await expect(page).toHaveTitle(/Contact.*FAQ/);
     await expect(page.locator('h1')).toContainText('Contact');
-    await expect(page.locator('h2:has-text("FAQ")')).toBeVisible();
+    await expect(page.getByRole('heading', { level: 2, name: 'FAQ' }).first()).toBeVisible();
   });
 
   test('displays contact information', async ({ page }) => {
