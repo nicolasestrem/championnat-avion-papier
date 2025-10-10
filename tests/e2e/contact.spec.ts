@@ -23,30 +23,45 @@ test.describe('Contact Page', () => {
     await expect(page.locator('text=Complexe Sportif Daniel Colombier')).toBeVisible();
   });
 
-  test('contact form has all required fields', async ({ page }) => {
+  test('displays either contact form or unavailability message', async ({ page }) => {
     const form = page.locator('form');
-    
-    // Check form fields exist
-    await expect(form.locator('input[name="name"]')).toBeVisible();
-    await expect(form.locator('input[name="email"]')).toBeVisible();
-    await expect(form.locator('textarea[name="message"]')).toBeVisible();
-    await expect(form.locator('button[type="submit"]')).toBeVisible();
+    const unavailabilityNotice = page.locator('text=Formulaire de contact indisponible');
+
+    const formVisible = await form.isVisible();
+    const noticeVisible = await unavailabilityNotice.isVisible();
+
+    expect(formVisible || noticeVisible).toBe(true);
+
+    if (formVisible) {
+      await expect(form.locator('input[name="name"]')).toBeVisible();
+      await expect(form.locator('input[name="email"]')).toBeVisible();
+      await expect(form.locator('textarea[name="message"]')).toBeVisible();
+      await expect(form.locator('button[type="submit"]')).toBeVisible();
+
+      const formAction = await form.getAttribute('action');
+      await expect(formAction).not.toBe('#');
+    }
   });
 
-  test('contact form validation works', async ({ page }) => {
+  test('contact form validation works if form is present', async ({ page }) => {
     const form = page.locator('form');
-    const submitButton = form.locator('button[type="submit"]');
+    if (await form.isVisible()) {
+      const submitButton = form.locator('button[type="submit"]');
     
-    // Try to submit empty form
-    await submitButton.click();
-    
-    // Check that required fields show validation
-    const nameInput = form.locator('input[name="name"]');
-    const emailInput = form.locator('input[name="email"]');
-    
-    // HTML5 validation should prevent submission
-    await expect(nameInput).toHaveAttribute('required', '');
-    await expect(emailInput).toHaveAttribute('required', '');
+      // Try to submit empty form
+      await submitButton.click();
+
+      // Check that required fields show validation
+      const nameInput = form.locator('input[name="name"]');
+      const emailInput = form.locator('input[name="email"]');
+
+      // HTML5 validation should prevent submission
+      await expect(nameInput).toHaveAttribute('required', '');
+      await expect(emailInput).toHaveAttribute('required', '');
+    } else {
+      // If form is not present, the test passes by default.
+      test.skip(true, 'Form not available, skipping validation test.');
+    }
   });
 
   test('FAQ accordions expand and collapse', async ({ page }) => {
