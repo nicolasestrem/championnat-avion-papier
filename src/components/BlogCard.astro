@@ -1,9 +1,14 @@
 ---
 /**
- * @typedef {import('astro:content').CollectionEntry<'blog'>} Post
+ * Renders a card for a blog post.
  *
- * @param {object} props
- * @param {Post} props.post
+ * This component displays a preview of a blog post, including its image,
+ * category, title, description, publication date, and reading time.
+ * It links to the full blog post page.
+ *
+ * @component
+ * @param {object} props - The properties for the component.
+ * @param {import('astro:content').CollectionEntry<'blog'>} props.post - The blog post data from Astro's content collection.
  */
 import type { CollectionEntry } from 'astro:content';
 

@@ -1,8 +1,15 @@
 ---
 /**
- * @param {object} props
- * @param {string} props.title
- * @param {string=} props.description
+ * A basic layout component for all pages.
+ *
+ * This component sets up the basic HTML structure, including the `head`
+ * with metadata, fonts, and global styles. It provides a `slot` for
+ * page content to be injected.
+ *
+ * @component
+ * @param {object} props - The properties for the layout.
+ * @param {string} props.title - The title of the page, used in the `<title>` tag and for SEO.
+ * @param {string} [props.description] - The meta description for the page. Defaults to a generic site description.
  */
 import '../styles/global.css';
 

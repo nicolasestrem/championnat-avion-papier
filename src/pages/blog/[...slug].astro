@@ -1,16 +1,27 @@
 ---
 /**
- * This is a dynamic route in Astro that handles the rendering of individual
- * blog posts.
+ * Renders a single blog post page.
  *
- * The `getStaticPaths` function is used to generate a static page for each
- * blog post in the `blog` content collection at build time. The `post` prop,
- * which is a `CollectionEntry<'blog'>`, is then passed to the `BlogPost`
- * layout for rendering.
+ * This is a dynamic route that generates a static page for each blog post
+ * in the `blog` content collection. It uses `getStaticPaths` to define
+ * which paths to pre-render at build time.
+ *
+ * @page
+ * @see src/layouts/BlogPost.astro
+ * @see src/content/config.ts
  */
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 
+/**
+ * Generates static paths for all blog posts.
+ *
+ * This function is required for dynamic routes in Astro's static site generation.
+ * It fetches all blog posts and creates a route for each one based on its slug.
+ * The entire post object is passed as props to the page component.
+ *
+ * @returns {Promise<Array<{params: {slug: string}, props: CollectionEntry<'blog'>}>>} An array of objects defining the paths and props for each page.
+ */
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.map((post) => ({
@@ -18,6 +29,11 @@ export async function getStaticPaths() {
     props: post,
   }));
 }
+
+/**
+ * The props for this page, which correspond to a single blog post entry.
+ * @typedef {import('astro:content').CollectionEntry<'blog'>} Props
+ */
 type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
