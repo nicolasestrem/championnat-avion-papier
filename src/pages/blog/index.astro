@@ -1,4 +1,10 @@
 ---
+/**
+ * This page displays a grid of all blog posts, sorted by publication date.
+ *
+ * The category links are currently hardcoded and will be updated to link to
+ * dynamic category pages.
+ */
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
@@ -9,6 +15,23 @@ const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => 
   b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
 );
+
+const categories = [...new Set(posts.map((post) => post.data.category))];
+const categoryEmojis = {
+  'Tutoriels': '📚',
+  'Techniques': '🎯',
+  'Compétition': '🏆',
+  'Actualités': '📰',
+};
+
+const slugify = (text) => text.toString().toLowerCase()
+  .normalize('NFD') // split an accented letter in the base letter and the accent
+  .replace(/[\u0300-\u036f]/g, '') // remove all previously split accents
+  .replace(/\s+/g, '-')
+  .replace(/[^\w-]+/g, '')
+  .replace(/--+/g, '-')
+  .replace(/^-+/, '')
+  .replace(/-+$/, '');
 ---
 
 <Layout title="Articles - Championnat du Monde de Lancer d'Avions en Papier">
@@ -46,23 +69,13 @@ const sortedPosts = posts.sort((a, b) =>
     <section class="py-16 bg-gray-50">
       <div class="container">
         <h2 class="text-3xl font-bold text-center mb-8">Explorer par Catégorie</h2>
-        <div class="grid md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-          <a href="/blog/category/tutoriels" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
-            <span class="text-4xl mb-2 block">📚</span>
-            <span class="font-semibold text-blue-800">Tutoriels</span>
-          </a>
-          <a href="/blog/category/techniques" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
-            <span class="text-4xl mb-2 block">🎯</span>
-            <span class="font-semibold text-blue-800">Techniques</span>
-          </a>
-          <a href="/blog/category/competition" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
-            <span class="text-4xl mb-2 block">🏆</span>
-            <span class="font-semibold text-blue-800">Compétition</span>
-          </a>
-          <a href="/blog/category/actualites" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
-            <span class="text-4xl mb-2 block">📰</span>
-            <span class="font-semibold text-blue-800">Actualités</span>
-          </a>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          {categories.map((category) => (
+            <a href={`/blog/category/${slugify(category)}`} class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+                <span class="text-4xl mb-2 block">{categoryEmojis[category] || '📁'}</span>
+                <span class="font-semibold text-blue-800">{category}</span>
+            </a>
+          ))}
         </div>
       </div>
     </section>

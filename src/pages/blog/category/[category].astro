@@ -1,0 +1,88 @@
+---
+/**
+ * This page displays a grid of all blog posts for a specific category.
+ * The category is determined by the `category` param in the URL.
+ * `getStaticPaths` generates a page for each unique category from the
+ * content collection.
+ */
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+
+const slugify = (text) => text.toString().toLowerCase()
+  .normalize('NFD') // split an accented letter in the base letter and the accent
+  .replace(/[\u0300-\u036f]/g, '') // remove all previously split accents
+  .replace(/\s+/g, '-')
+  .replace(/[^\w-]+/g, '')
+  .replace(/--+/g, '-')
+  .replace(/^-+/, '')
+  .replace(/-+$/, '');
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const categories = [...new Set(posts.map((post) => post.data.category))];
+
+  return categories.map((category) => {
+    const categorySlug = slugify(category);
+    return {
+        params: { category: categorySlug },
+        props: {
+            category,
+            posts: posts.filter(post => slugify(post.data.category) === categorySlug)
+        },
+    }
+  });
+}
+
+const { category, posts } = Astro.props;
+
+const sortedPosts = posts.sort((a, b) =>
+  b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+---
+
+<Layout title={`Articles - Catégorie: ${category} - Championnat du Monde de Lancer d'Avions en Papier`}>
+  <Header />
+
+  <main>
+    <!-- Hero Section -->
+    <section class="py-16 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+      <div class="container">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Catégorie: {category}</h1>
+        <p class="text-xl max-w-3xl">
+          Articles et tutoriels dans la catégorie "{category}"
+        </p>
+      </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="py-16">
+      <div class="container">
+        {sortedPosts.length === 0 ? (
+          <p class="text-center text-gray-600 text-lg">
+            Aucun article disponible dans cette catégorie.
+          </p>
+        ) : (
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {sortedPosts.map((post) => (
+              <BlogCard post={post} />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+
+    <div class="text-center mb-16">
+        <a
+        href="/blog"
+        class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+        >
+        Retour à tous les articles
+        </a>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

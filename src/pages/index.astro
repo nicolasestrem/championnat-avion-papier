@@ -1,4 +1,10 @@
 ---
+/**
+ * This page is the main entry point of the website.
+ *
+ * It fetches the three most recent blog posts and displays them in a dedicated
+ * section.
+ */
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
@@ -185,22 +191,22 @@ const recentPosts = posts
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
           <!-- Add sponsor logos here -->
           <div class="bg-white p-4 rounded-lg shadow-md flex items-center justify-center h-24">
-            <span class="text-gray-400">ASAS-TECH</span>
+            <img src="https://via.placeholder.com/150x80.png?text=ASAS-TECH" alt="ASAS-TECH Logo" class="max-h-16 object-contain" />
           </div>
           <div class="bg-white p-4 rounded-lg shadow-md flex items-center justify-center h-24">
-            <span class="text-gray-400">SEFCO</span>
+            <img src="https://via.placeholder.com/150x80.png?text=SEFCO" alt="SEFCO Logo" class="max-h-16 object-contain" />
           </div>
           <div class="bg-white p-4 rounded-lg shadow-md flex items-center justify-center h-24">
-            <span class="text-gray-400">Holiday Inn</span>
+            <img src="https://via.placeholder.com/150x80.png?text=Holiday+Inn" alt="Holiday Inn Logo" class="max-h-16 object-contain" />
           </div>
           <div class="bg-white p-4 rounded-lg shadow-md flex items-center justify-center h-24">
-            <span class="text-gray-400">Alinea</span>
+            <img src="https://via.placeholder.com/150x80.png?text=Alinea" alt="Alinea Logo" class="max-h-16 object-contain" />
           </div>
           <div class="bg-white p-4 rounded-lg shadow-md flex items-center justify-center h-24">
-            <span class="text-gray-400">Le Pin Galant</span>
+            <img src="https://via.placeholder.com/150x80.png?text=Le+Pin+Galant" alt="Le Pin Galant Logo" class="max-h-16 object-contain" />
           </div>
           <div class="bg-white p-4 rounded-lg shadow-md flex items-center justify-center h-24">
-            <span class="text-gray-400">Restaurant Le Spirit</span>
+            <img src="https://via.placeholder.com/150x80.png?text=Restaurant+Le+Spirit" alt="Restaurant Le Spirit Logo" class="max-h-16 object-contain" />
           </div>
         </div>
       </div>

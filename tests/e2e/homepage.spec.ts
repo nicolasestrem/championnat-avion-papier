@@ -41,8 +41,8 @@ test.describe('Homepage', () => {
     await expect(sponsorSection).toBeVisible();
     
     // Check some sponsor names
-    await expect(page.locator('text=ASAS-TECH')).toBeVisible();
-    await expect(page.locator('text=Holiday Inn')).toBeVisible();
+    await expect(page.locator('img[alt="ASAS-TECH Logo"]')).toBeVisible();
+    await expect(page.locator('img[alt="Holiday Inn Logo"]')).toBeVisible();
   });
 
   test('displays histoire section', async ({ page }) => {
