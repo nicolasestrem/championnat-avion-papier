@@ -1,10 +1,18 @@
 ---
 /**
- * This page provides contact information, a contact form, and an FAQ section.
+ * Renders the contact and FAQ page.
  *
- * It dynamically builds the Formspree action URL from an environment variable
- * and includes a client-side script to generate a downloadable .ics file for
- * adding the event to a calendar.
+ * This page provides multiple ways to contact the event organizers, including
+ * an email address, phone number, social media links, and a contact form.
+ * It also features an interactive FAQ section and a button to download
+.
+ * a calendar event file (.ics). The Formspree action URL is dynamically
+ * built from an environment variable.
+ *
+ * @page
+ * @see src/layouts/Layout.astro
+ * @see src/components/Header.astro
+ * @see src/components/Footer.astro
  */
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
@@ -226,6 +234,12 @@ const formAction = formId ? `https://formspree.io/f/${formId}` : '#';
   </main>
 
   <script>
+    /**
+     * Handles the "Add to Calendar" button click event.
+     *
+     * This script generates a .ics (iCalendar) file for the event and
+     * triggers a download for the user. The event details are hardcoded.
+     */
     const btn = document.getElementById('add-to-calendar');
     if (btn) {
       btn.addEventListener('click', () => {
@@ -234,7 +248,14 @@ const formAction = formId ? `https://formspree.io/f/${formId}` : '#';
         const location = "Complexe Sportif Daniel Colombier, Mérignac, France";
         const start = new Date('2025-05-17T10:00:00Z');
         const end = new Date('2025-05-17T17:00:00Z');
+
+        /**
+         * Formats a Date object into the iCalendar UTC format (YYYYMMDDTHHMMSSZ).
+         * @param {Date} date - The date to format.
+         * @returns {string} The formatted date string.
+         */
         const format = (date) => date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
         const ics = [
           'BEGIN:VCALENDAR',
           'VERSION:2.0',
@@ -247,6 +268,7 @@ const formAction = formId ? `https://formspree.io/f/${formId}` : '#';
           'END:VEVENT',
           'END:VCALENDAR'
         ].join('\n');
+
         const blob = new Blob([ics], { type: 'text/calendar' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');

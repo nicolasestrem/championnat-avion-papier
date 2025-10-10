@@ -1,9 +1,15 @@
 ---
 /**
- * This page displays a grid of all blog posts for a specific category.
- * The category is determined by the `category` param in the URL.
- * `getStaticPaths` generates a page for each unique category from the
- * content collection.
+ * Renders a page displaying all blog posts for a specific category.
+ *
+ * This is a dynamic route that generates a static page for each unique
+ * category found in the 'blog' content collection. The category is
+ * determined by the `category` URL parameter.
+ *
+ * @page
+ * @see src/layouts/Layout.astro
+ * @see src/components/BlogCard.astro
+ * @see src/utils/slugify.ts
  */
 import { getCollection } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
@@ -12,6 +18,16 @@ import Footer from '../../../components/Footer.astro';
 import BlogCard from '../../../components/BlogCard.astro';
 import { slugify } from '../../../utils/slugify';
 
+/**
+ * Generates static paths for each unique blog post category.
+ *
+ * This function is required for dynamic routes in Astro's static site generation.
+ * It finds all unique categories across all blog posts, creates a slug for each,
+ * and generates a page for that slug. It passes the original category name and
+ * the filtered posts as props to the component.
+ *
+ * @returns {Promise<Array<object>>} An array of objects defining the paths and props for each category page.
+ */
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   const categories = [...new Set(posts.map((post) => post.data.category))];
@@ -28,6 +44,12 @@ export async function getStaticPaths() {
   });
 }
 
+/**
+ * The props for this page.
+ * @typedef {object} Props
+ * @property {string} category - The name of the category.
+ * @property {import('astro:content').CollectionEntry<'blog'>[]} posts - An array of posts belonging to this category.
+ */
 const { category, posts } = Astro.props;
 
 const sortedPosts = posts.sort((a, b) =>

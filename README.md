@@ -59,35 +59,34 @@ npm run lighthouse   # Run Lighthouse CI
 
 ## 🏗️ Project Structure
 
+A high-level overview of the most important files and folders.
+
 ```
 championnat-avion-papier/
-├── public/              # Static assets (images, fonts, etc.)
+├── public/                # Static assets (images, fonts, etc.)
 │   └── favicon.svg
 ├── src/
-│   ├── components/      # Reusable Astro components
+│   ├── components/        # Reusable Astro components (.astro)
 │   │   ├── Header.astro
 │   │   ├── Footer.astro
-│   │   ├── Hero.astro
-│   │   └── BlogCard.astro
-│   ├── content/         # Content collections
-│   │   └── blog/        # Blog posts
-│   ├── layouts/         # Page layouts
+│   │   └── ...
+│   ├── content/           # Content collections (Markdown, config)
+│   │   ├── config.ts      # Schema definitions for collections
+│   │   └── blog/          # Blog posts in Markdown (.md)
+│   ├── layouts/           # Page layouts (.astro)
 │   │   ├── Layout.astro
 │   │   └── BlogPost.astro
-│   ├── pages/           # Route pages
+│   ├── pages/             # Site pages and API routes (.astro)
 │   │   ├── index.astro
-│   │   ├── contact.astro
-│   │   └── blog/
-│   │       ├── index.astro
-│   │       ├── [...slug].astro
-│   │       └── category/
-│   │           └── [category].astro
-│   └── styles/          # Global styles
-│       └── global.css
-├── tests/               # Test files
-│   ├── e2e/            # Playwright E2E tests
-│   └── lighthouse/     # Lighthouse CI configs
-└── .github/            # GitHub Actions workflows
+│   │   └── ...
+│   ├── styles/            # Global styles (.css)
+│   │   └── global.css
+│   └── utils/             # Utility functions (.ts)
+│       └── slugify.ts
+├── tests/                 # Test files
+│   ├── e2e/               # Playwright E2E tests
+│   └── lighthouse/        # Lighthouse CI configs
+└── .github/               # GitHub Actions workflows
     └── workflows/
 ```
 

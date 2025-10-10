@@ -1,9 +1,16 @@
 ---
 /**
- * This page displays a grid of all blog posts, sorted by publication date.
+ * Renders the main blog page, displaying all blog posts.
  *
- * The category links are currently hardcoded and will be updated to link to
- * dynamic category pages.
+ * This page fetches all entries from the 'blog' content collection,
+ * sorts them by publication date in descending order, and displays them
+ * in a grid. It also includes a section for browsing posts by category.
+ *
+ * @page
+ * @see src/layouts/Layout.astro
+ * @see src/components/Header.astro
+ * @see src/components/Footer.astro
+ * @see src/components/BlogCard.astro
  */
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
@@ -24,14 +31,23 @@ const categoryEmojis = {
   'Actualités': '📰',
 };
 
+/**
+ * Converts a string into a URL-friendly slug.
+ *
+ * This function lowercases the string, removes accents, replaces spaces
+ * with hyphens, and removes all non-alphanumeric characters except hyphens.
+ *
+ * @param {string} text - The text to slugify.
+ * @returns {string} The slugified text.
+ */
 const slugify = (text) => text.toString().toLowerCase()
   .normalize('NFD') // split an accented letter in the base letter and the accent
   .replace(/[\u0300-\u036f]/g, '') // remove all previously split accents
-  .replace(/\s+/g, '-')
-  .replace(/[^\w-]+/g, '')
-  .replace(/--+/g, '-')
-  .replace(/^-+/, '')
-  .replace(/-+$/, '');
+  .replace(/\s+/g, '-') // replace spaces with -
+  .replace(/[^\w-]+/g, '') // remove all non-word chars
+  .replace(/--+/g, '-') // replace multiple - with single -
+  .replace(/^-+/, '') // trim - from start of text
+  .replace(/-+$/, ''); // trim - from end of text
 ---
 
 <Layout title="Articles - Championnat du Monde de Lancer d'Avions en Papier">

@@ -1,17 +1,23 @@
 ---
 /**
- * @typedef {'Tutoriels' | 'Techniques' | 'Compétition' | 'Actualités'} Category
+ * Renders the layout for a single blog post.
  *
- * @param {object} props
- * @param {string} props.title
- * @param {string} props.description
- * @param {Date} props.publishDate
- * @param {string=} props.author
- * @param {Category} props.category
- * @param {string[]=} props.tags
- * @param {string=} props.image
- * @param {string=} props.imageAlt
- * @param {number=} props.readingTime
+ * This component wraps the content of a blog post with the standard
+ * site header and footer. It displays the post's metadata, such as title,
+ * author, publication date, and category, and provides a styled
+ * container for the post content.
+ *
+ * @component
+ * @param {object} props - The properties for the blog post, usually from frontmatter.
+ * @param {string} props.title - The title of the blog post.
+ * @param {string} props.description - A short description of the post.
+ * @param {Date} props.publishDate - The date the post was published.
+ * @param {string} [props.author='Équipe Championnat'] - The author of the post.
+ * @param {'Tutoriels' | 'Techniques' | 'Compétition' | 'Actualités'} props.category - The primary category of the post.
+ * @param {string[]} [props.tags=[]] - An array of tags associated with the post.
+ * @param {string} [props.image] - The path to the post's featured image.
+ * @param {string} [props.imageAlt] - The alt text for the featured image.
+ * @param {number} [props.readingTime] - The estimated reading time in minutes.
  */
 import Layout from './Layout.astro';
 import Header from '../components/Header.astro';
