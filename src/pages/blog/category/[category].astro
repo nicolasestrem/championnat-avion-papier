@@ -10,15 +10,7 @@ import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import BlogCard from '../../../components/BlogCard.astro';
-
-const slugify = (text) => text.toString().toLowerCase()
-  .normalize('NFD') // split an accented letter in the base letter and the accent
-  .replace(/[\u0300-\u036f]/g, '') // remove all previously split accents
-  .replace(/\s+/g, '-')
-  .replace(/[^\w-]+/g, '')
-  .replace(/--+/g, '-')
-  .replace(/^-+/, '')
-  .replace(/-+$/, '');
+import { slugify } from '../../../utils/slugify';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
