@@ -35,6 +35,16 @@ const categoryColors = {
 const categoryColor = categoryColors[category] || 'bg-gray-100 text-gray-800';
 ---
 
+<style>
+  [dir="rtl"] .group:hover .rtl-arrow {
+    transform: translateX(-0.25rem);
+  }
+
+  [dir="rtl"] .rtl-arrow {
+    transform: scaleX(-1);
+  }
+</style>
+
 <article class="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden h-full flex flex-col">
   {image && (
     <div class="aspect-[16/9] overflow-hidden bg-gray-100">
@@ -80,7 +90,7 @@ const categoryColor = categoryColors[category] || 'bg-gray-100 text-gray-800';
       >
         Lire la suite
         <svg 
-          class="w-4 h-4 group-hover:translate-x-1 transition-transform"
+          class="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:-scale-x-100 rtl:group-hover:-translate-x-1"
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24"
