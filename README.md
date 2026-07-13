@@ -1,12 +1,34 @@
-Key findings:
-  - 70% of traffic is mobile (430 of 615 clicks) → mobile-first design is non-negotiable.
-  - The site's #1 organic page is the weakest content: /tuto-avion-en-papier-facile-planeur/ — the ~120-word Instagram repurpose — pulls 20,241 impressions but converts only 0.91% at
-  position ~6.7. "tuto avion en papier" alone has 4,453 impressions with 0.34% CTR. Rewriting this as a real tutorial with HowTo schema is the single biggest SEO win available.
-  - The query space is almost entirely folding tutorials, not the event: "avion en papier planeur" (1,681 imp.), "planeur en papier" (1,369), "tuto avion en papier facile" (694)... The
-  event queries ("championnat du monde avion en papier") already rank #1 with 53% CTR — brand is fine; tutorials are the growth engine. This validates your "full expansion" choice
-  perfectly.
-  - Content gaps visible in queries with zero matching content: "avion en papier rond/circulaire" (ring plane, ~500 imp. combined), "record du monde avion en papier" (year variants),
-  "lanceur d'avion en papier", "avion en papier à imprimer / gabarit" (printable templates — nothing on site), English "paper airplane competition 2026" (66 imp.).
-  - The empty /ressources-avions-papier/ page still gets 1,059 impressions — imagine it with content.
-  - Redirect map must also cover /tuto/ and /tag/* archive URLs that Google has indexed.
-  - Audience is France + francophone countries → French-only confirmed as the right call.
+# championnatavionpapier.fr
+
+Site officiel du **Championnat du Monde de Lancer d'Avions en Papier** (Mérignac, au profit des Pompiers Solidaires). Site statique **Astro 5**, éditable via **Sveltia CMS**, hébergé sur **Cloudflare Workers**. Il remplace l'ancien site WordPress/Elementor.
+
+## Stack
+
+- **Astro 5** (sortie statique, zéro JS par défaut) · **Tailwind CSS v4** · **Fira Sans** auto-hébergée (`@fontsource`)
+- Contenu en **content collections** (Markdown/JSON validés par Zod) — voir `src/content.config.ts`
+- Images via `astro:assets` · SEO : sitemap, JSON-LD (Event/HowTo/FAQPage/Organization/BreadcrumbList), carte de redirections `public/_redirects`
+- CMS **Sveltia** sur `/admin/` (git-based : chaque enregistrement = commit → build Cloudflare)
+
+## Développement
+
+```bash
+npm install
+npm run dev      # serveur local
+npm run build    # build de production → dist/
+npm run verify   # astro check + build + vérif des liens internes
+npm run check:links
+```
+
+## Structure
+
+- `src/content/` — tout le contenu éditable (reglages, tutoriels, actualités, éditions, sponsors, faq, records, pages)
+- `src/components/` — `seo/` (JSON-LD, head), `layout/` (header/footer/nav), `ui/` (kit visuel)
+- `src/pages/` — routes (URL conservées depuis WordPress ; voir `public/_redirects` pour les 301)
+- `workers/sveltia-cms-auth/` — Worker OAuth GitHub pour le CMS
+- `public/admin/` — configuration Sveltia CMS
+- `_source/` — exports WordPress d'origine (référence, non buildé)
+- `docs/` — spec, plan d'implémentation, **DEPLOYMENT.md**, **CONTENT-REVIEW.md**
+
+## Mise en ligne
+
+Voir **`docs/DEPLOYMENT.md`** (déploiement Cloudflare, OAuth CMS, bascule DNS) et **`docs/CONTENT-REVIEW.md`** (contenu à relire avant la mise en ligne).

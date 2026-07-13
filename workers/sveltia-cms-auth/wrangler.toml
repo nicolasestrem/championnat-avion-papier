@@ -1,0 +1,11 @@
+name = "sveltia-cms-auth"
+main = "src/index.js"
+compatibility_date = "2026-07-01"
+
+# Secrets (set with `wrangler secret put <NAME>`, do NOT commit values):
+#   GITHUB_CLIENT_ID       — from the GitHub OAuth App
+#   GITHUB_CLIENT_SECRET   — from the GitHub OAuth App
+#
+# Vars (safe to commit): the domain(s) allowed to start the auth flow.
+[vars]
+ALLOWED_DOMAINS = "championnatavionpapier.fr"
