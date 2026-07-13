@@ -179,8 +179,10 @@ git add -A && git commit -m "feat: scaffold Astro 5 + Tailwind v4 + sitemap + wr
 
 ## Task 3: Design tokens, fonts, base layout & head
 
+**Font decision (resolved):** Frutiger is **not licensed** for web embedding. Use **Fira Sans** (self-hosted via `@fontsource/fira-sans`) — a freely-licensed humanist sans with the airport-signage legibility that motivated Frutiger. Zero external font requests (self-hosted woff2).
+
 **Files:**
-- Create: `src/fonts/` (Frutiger woff2 subset), `src/styles/global.css` (tokens), `src/components/seo/BaseHead.astro`, `src/layouts/BaseLayout.astro`, `src/lib/seo.ts`
+- Create: `src/styles/global.css` (tokens + `@fontsource` imports), `src/components/seo/BaseHead.astro`, `src/layouts/BaseLayout.astro`, `src/lib/seo.ts`
 
 **Interfaces:**
 - Produces:
@@ -188,49 +190,35 @@ git add -A && git commit -m "feat: scaffold Astro 5 + Tailwind v4 + sitemap + wr
   - `BaseHead` same props; emits `<title>`, meta description, canonical, OG/Twitter tags, favicon, Cloudflare Web Analytics beacon.
   - CSS custom properties: `--color-sky`, `--color-sky-deep`, `--color-paper`, `--color-ink`, `--color-orange` (safety accent), font families `--font-brand` (Frutiger), `--font-body`.
 
-- [ ] **Step 1: Subset Frutiger to woff2**
-
-Source TTFs are in `uploads/**/Frutiger.ttf` and `Frutiger_bold.ttf` (locate exact paths via `find uploads -iname 'Frutiger*'`). Subset to Latin + French accents:
+- [ ] **Step 1: Install Fira Sans (self-hosted)**
 
 ```bash
-npm i -D fonttools-wasm || pip install fonttools brotli
-pyftsubset uploads/path/Frutiger.ttf --output-file=src/fonts/frutiger.woff2 --flavor=woff2 --layout-features='*' --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+2000-206F,U+20AC
-pyftsubset uploads/path/Frutiger_bold.ttf --output-file=src/fonts/frutiger-bold.woff2 --flavor=woff2 --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+2000-206F,U+20AC
+npm i @fontsource/fira-sans
 ```
 
-(If Frutiger licensing is unclear, fall back to a self-hosted humanist sans like `Frutiger`-alike **"Fira Sans"** / **"Inter"** — flag to user. Plan continues assuming Frutiger is licensed for web, per its presence in the WP media library.)
+(No Frutiger subsetting — Frutiger is not licensed for web. `@fontsource` ships self-hosted woff2, so there are no external font requests.)
 
-- [ ] **Step 2: Write `src/styles/global.css` tokens + font-face**
+- [ ] **Step 2: Write `src/styles/global.css` tokens + font imports**
 
 ```css
 @import "tailwindcss";
-
-@font-face {
-  font-family: "Frutiger";
-  src: url("/src/fonts/frutiger.woff2") format("woff2");
-  font-weight: 400; font-display: swap;
-}
-@font-face {
-  font-family: "Frutiger";
-  src: url("/src/fonts/frutiger-bold.woff2") format("woff2");
-  font-weight: 700; font-display: swap;
-}
+@import "@fontsource/fira-sans/400.css";
+@import "@fontsource/fira-sans/500.css";
+@import "@fontsource/fira-sans/700.css";
 
 @theme {
   --color-sky: #4ba3e3;
   --color-sky-deep: #0b4a8f;
   --color-paper: #f7f9fb;
   --color-ink: #14202e;
-  --color-orange: # f26a1b;
-  --font-brand: "Frutiger", system-ui, sans-serif;
-  --font-body: "Frutiger", system-ui, sans-serif;
+  --color-orange: #f26a1b;
+  --font-brand: "Fira Sans", system-ui, sans-serif;
+  --font-body: "Fira Sans", system-ui, sans-serif;
 }
 
 :root { color-scheme: light; }
 body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); }
 ```
-
-(Fix the `--color-orange` value to `#f26a1b` — no space; shown here to be corrected on write.)
 
 - [ ] **Step 3: Write `src/lib/seo.ts`**
 
@@ -472,7 +460,7 @@ git add -A && git commit -m "feat: content collections + Zod schemas + seed regl
 **Interfaces:**
 - Produces named, deduplicated image files referenced by content frontmatter. Naming: kebab-case, meaningful (`nakamura-etape-1.avif`, `flyer-2026.webp`, `pompiers-solidaires-rotary.avif`).
 
-- [ ] **Step 1: Identify the 222 originals** (exclude `-WIDTHxHEIGHT` variants) under `uploads/2025`, `uploads/2026` and the fonts/PDFs/videos noted in the analysis.
+- [ ] **Step 1: Identify the 222 originals** (exclude `-WIDTHxHEIGHT` variants) under `uploads/2025`, `uploads/2026` and the PDFs/videos noted in the analysis. (Skip the Frutiger `.ttf` files — not licensed for web; Fira Sans is used instead per Task 3.)
 
 - [ ] **Step 2: Copy needed images → `src/assets/`** grouped by usage (`tutoriels/`, `editions/`, `event/`, `press/`), renamed meaningfully. Copy the 3 PDFs → `public/files/`. Copy the 10s teaser mp4 → `public/files/` (championship film stays on YouTube).
 
