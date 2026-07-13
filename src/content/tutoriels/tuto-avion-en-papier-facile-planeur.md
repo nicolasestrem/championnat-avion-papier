@@ -5,8 +5,8 @@ seoDescription: "Découvrez comment créer facilement des avions en papier avec 
 difficulte: "facile"
 typeVol: "duree"
 dureePliage: "3 min"
-image: "../../assets/placeholder.avif"
-imageAlt: "Planeur en papier facile, un avion à ailes larges idéal pour débuter"
+image: "../../assets/tutoriels/planeur-diagramme.png"
+imageAlt: "Diagramme de pliage d'un planeur en papier, étape par étape jusqu'à l'avion terminé"
 etapes:
   - texte: "Le pli central. Pose ta feuille A4 en mode portrait (le côté long vers le haut). Plie-la en deux dans le sens de la longueur pour que le bord gauche rejoigne le bord droit. Marque bien le pli avec l'ongle, puis déplie. Tu as maintenant une ligne au milieu : c'est ton guide pour tout le reste. Un planeur qui vole droit commence toujours par un pli central bien centré."
   - texte: "Les coins du haut. Rabats le coin supérieur droit vers la ligne du milieu, de façon à ce que le bord du haut se pose exactement sur cette ligne. Fais pareil avec le coin gauche. Le haut de la feuille forme maintenant un grand triangle qui pointe vers le bas. Ces deux plis doivent être bien symétriques : compare-les à l'œil avant de continuer."

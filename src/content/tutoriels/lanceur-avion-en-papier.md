@@ -5,8 +5,8 @@ seoDescription: "Fabriquez un lanceur d'avion en papier à élastique pour propu
 difficulte: "intermediaire"
 typeVol: "distance"
 dureePliage: "10 min"
-image: "../../assets/placeholder.avif"
-imageAlt: "Lanceur d'avion en papier à élastique, une petite catapulte pour propulser les avions"
+image: "../../assets/tutoriels/tutoriel-generique.avif"
+imageAlt: "Illustration d'un avion en papier blanc en vol dans un ciel bleu"
 etapes:
   - texte: "Prépare la poignée du lanceur. Prends un bâtonnet rigide (bâtonnet de glace, crayon ou petite règle) : ce sera la poignée que tu tiendras en main. À une extrémité, fixe solidement un élastique avec du ruban adhésif, en le laissant former une boucle qui dépasse de 3 à 4 cm. Cette boucle est le cœur de la catapulte."
   - texte: "Renforce la boucle d'accroche. Vérifie que l'élastique est bien attaché : il va subir de la tension à chaque lancer. Ajoute un deuxième tour de ruban adhésif si nécessaire. La boucle doit rester libre et souple pour venir s'accrocher au crochet de l'avion."

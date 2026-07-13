@@ -21,7 +21,10 @@ Tout le contenu français ci-dessous a été **rédigé/réécrit pour la migrat
 
 ## Points à trancher / lacunes identifiées à la vérification
 
-1. **Images d'illustration manquantes** — 6 tutoriels (planeur, faucon, rond, lanceur, intercepteur, classique) utilisent une image générique `placeholder.avif` en visuel principal et n'ont **pas de photos par étape** (seuls Nakamura et Flèche Classique ont leurs vraies photos d'étapes issues de WordPress). Décision à prendre : produire des photos de pliage, utiliser une illustration générique, ou lancer sans photos par étape.
+1. **Images d'illustration — premier passage effectué.** État actuel des visuels principaux (aucun tutoriel n'a de photos **par étape**, sauf Nakamura et Flèche Classique qui gardent leurs vraies photos d'étapes issues de WordPress) :
+   - **Planeur** → `planeur-diagramme.png` : vrai schéma de pliage (6 vignettes) retrouvé dans les uploads WordPress. À valider.
+   - **Classique** (`plier-un-avion-en-papier-3`) → `classique-modele.png` : vrai rendu d'un avion classique retrouvé dans les uploads. À valider.
+   - **Faucon, Rond, Lanceur, Intercepteur** → `tutoriel-generique.avif` : illustration décorative sur-mesure (avion en papier blanc sur ciel bleu, aux couleurs de la marque). **Aucune photo source n'existe** pour ces 4 pliages. Décision restante : produire de vraies photos de pliage (idéalement par étape), commander des illustrations, ou conserver l'illustration générique. Le script de génération est `scripts/make-tutorial-fallback.mjs`.
 2. **Slug « avion rond »** — publié en `/avion-papier-rond/` au lieu du `/avion-en-papier-rond/` prévu. Page neuve sans historique SEO : choisir le slug canonique définitif.
 3. **Mentions légales** — les détails de l'entité juridique (éditeur, hébergeur, directeur de publication, adresse) sont à confirmer ; un `TODO` est laissé dans le fichier, aucune adresse n'a été inventée.
 4. **Faits canoniques 2026** — vérifiez `src/content/reglages/reglages.json` : date (samedi 13 juin 2026), lieu (Complexe sportif Daniel Colombier), horaires (sélections 11h–15h, finales 15h30), tarifs (8 € / entrée libre), bénéficiaire (Pompiers Solidaires), URL HelloAsso.

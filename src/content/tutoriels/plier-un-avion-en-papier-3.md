@@ -5,8 +5,8 @@ seoDescription: "Apprendre plier un avion en papier classique facilement pour to
 difficulte: "facile"
 typeVol: "distance"
 dureePliage: "5 min"
-image: "../../assets/placeholder.avif"
-imageAlt: "Un avion en papier classique plié à partir d'une feuille A4"
+image: "../../assets/tutoriels/classique-modele.png"
+imageAlt: "Un avion en papier classique à nez pointu, plié à partir d'une simple feuille"
 etapes:
   - texte: "Plie la feuille en deux dans le sens de la longueur. Le format A4 est conseillé. Le bord gauche rejoint le bord droit ; appuie sur toute la longueur pour créer une ligne centrale nette, puis déplie. Cette ligne servira de repère à toutes les étapes suivantes."
   - texte: "Rabats les coins supérieurs vers la ligne centrale. Les deux coins du haut viennent se poser exactement sur l'axe du milieu, formant un triangle qui pointe vers le bas. Veille à ce que les deux côtés soient bien symétriques : c'est la clé d'un vol droit."

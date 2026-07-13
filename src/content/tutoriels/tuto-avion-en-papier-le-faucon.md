@@ -5,8 +5,8 @@ seoDescription: "Préparez-vous pour le Championnat du Monde de Lancer d'Avions 
 difficulte: "intermediaire"
 typeVol: "distance"
 dureePliage: "7 min"
-image: "../../assets/placeholder.avif"
-imageAlt: "Le Faucon, un avion en papier de distance à excellente stabilité en vol"
+image: "../../assets/tutoriels/tutoriel-generique.avif"
+imageAlt: "Illustration d'un avion en papier blanc en vol dans un ciel bleu"
 etapes:
   - texte: "Le pli central. Pose la feuille A4 en mode portrait et plie-la en deux dans le sens de la longueur. Écrase bien le pli, puis déplie. Cette ligne médiane est l'axe de symétrie du Faucon : elle doit être parfaitement centrée, sinon l'avion déviera systématiquement d'un côté en vol."
   - texte: "Les coins supérieurs. Rabats le coin supérieur droit vers la ligne centrale, bord supérieur aligné sur l'axe. Répète à gauche. Tu obtiens un triangle pointant vers le bas. C'est la base du nez, commune à beaucoup d'avions de distance."

@@ -5,8 +5,8 @@ seoDescription: "Fabriquez un avion en papier rond, ce planeur à anneaux étonn
 difficulte: "facile"
 typeVol: "polyvalent"
 dureePliage: "5 min"
-image: "../../assets/placeholder.avif"
-imageAlt: "Avion en papier rond, un planeur à deux anneaux monté sur une paille"
+image: "../../assets/tutoriels/tutoriel-generique.avif"
+imageAlt: "Illustration d'un avion en papier blanc en vol dans un ciel bleu"
 etapes:
   - texte: "Prépare tes deux bandes de papier. Découpe deux bandes dans une feuille A4 : une petite bande d'environ 2 cm de large et 13 cm de long, et une grande bande d'environ 3 cm de large et 20 cm de long. Ces deux bandes formeront les deux anneaux de l'avion — le petit à l'avant, le grand à l'arrière."
   - texte: "Forme le petit anneau. Prends la petite bande, courbe-la en cercle en faisant se chevaucher les extrémités sur environ 1,5 cm, et fixe le chevauchement avec un morceau de ruban adhésif. Tu obtiens un anneau régulier. C'est lui qui guidera l'avant de l'avion, comme un petit gouvernail circulaire."

@@ -5,8 +5,8 @@ seoDescription: "Apprenez à plier l'Intercepteur, l'avion en papier aux ailes e
 difficulte: "avance"
 typeVol: "polyvalent"
 dureePliage: "15 min"
-image: "../../assets/placeholder.avif"
-imageAlt: "L'Intercepteur — avion en papier de compétition aux ailes en flèche"
+image: "../../assets/tutoriels/tutoriel-generique.avif"
+imageAlt: "Illustration d'un avion en papier blanc en vol dans un ciel bleu"
 etapes:
   - texte: "Le pli central. Plie la feuille A4 en deux dans le sens de la longueur, appuie fort sur toute la longueur, puis déplie. Cette ligne centrale sera ton repère pour chaque étape. Sur l'Intercepteur, la symétrie est absolument critique : une asymétrie de 2 mm peut suffire à faire tourner l'avion en spirale."
   - texte: "Les premiers coins (vers le centre). Replie le coin supérieur droit vers la ligne centrale, bord supérieur contre la ligne de symétrie. Même chose à gauche. Tu obtiens le triangle de départ — identique aux premières étapes de la Flèche Classique, mais ce n'est que le début."
