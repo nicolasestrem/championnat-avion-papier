@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import SponsorGrid from '../../components/ui/SponsorGrid.astro';
+
+const sponsors = (await getCollection('sponsors'))
+  .sort((a, b) => a.data.ordre - b.data.ordre)
+  .map((s) => ({ nom: s.data.nom, url: s.data.url, logo: s.data.logo, descriptif: s.data.descriptif }));
+
+const seoTitle = 'Nos partenaires — Championnat du Monde de Lancer d’Avions en Papier';
+const seoDescription =
+  'Découvrez les partenaires et sponsors qui font vivre le Championnat du Monde de lancer d’avions en papier à Mérignac : entreprises, institutions et associations de la métropole bordelaise.';
+
+const breadcrumb = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Partenaires', href: '/sponsors/' },
+];
+---
+
+<PageLayout title="Nos partenaires" seoTitle={seoTitle} seoDescription={seoDescription} breadcrumb={breadcrumb}>
+  <p class="text-lg text-ink/80">
+    Le Championnat prend son envol chaque année grâce à la générosité de ses partenaires. Entreprises, institutions
+    et associations de la métropole bordelaise : un immense merci à celles et ceux qui nous accompagnent dans cette
+    belle aventure solidaire.
+  </p>
+
+  <div class="mt-8">
+    <SponsorGrid sponsors={sponsors} />
+  </div>
+
+  <div class="mt-10 rounded-2xl border border-sky/15 bg-white p-6 text-center">
+    <h2 class="font-brand text-xl font-bold text-sky-deep">Devenir partenaire</h2>
+    <p class="mx-auto mt-3 max-w-2xl text-ink/75">
+      Vous souhaitez associer votre structure à un événement festif, familial et solidaire ? Écrivez-nous pour
+      construire ensemble un partenariat sur mesure.
+    </p>
+    <a href="/contact-faq/" class="mt-4 inline-flex items-center rounded-full bg-orange px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-orange/90">
+      Nous contacter
+    </a>
+  </div>
+</PageLayout>

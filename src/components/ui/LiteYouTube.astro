@@ -1,0 +1,61 @@
+---
+interface Props {
+  id: string;
+  title: string;
+}
+
+const { id, title } = Astro.props;
+const watchUrl = `https://www.youtube.com/watch?v=${id}`;
+const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+---
+
+<div
+  class="lite-yt group relative aspect-video w-full overflow-hidden rounded-2xl bg-ink"
+  data-yt-id={id}
+  data-yt-title={title}
+>
+  <button
+    type="button"
+    class="lite-yt-btn absolute inset-0 flex h-full w-full items-center justify-center"
+    aria-label={`Lire la vidéo : ${title}`}
+  >
+    <img
+      src={thumb}
+      alt=""
+      loading="lazy"
+      width="480"
+      height="360"
+      class="absolute inset-0 h-full w-full object-cover opacity-90 transition-opacity group-hover:opacity-100"
+    />
+    <span class="relative flex h-16 w-16 items-center justify-center rounded-full bg-orange/90 shadow-lg transition-transform group-hover:scale-110">
+      <svg aria-hidden="true" viewBox="0 0 24 24" class="ml-1 h-8 w-8 fill-white"><path d="M8 5v14l11-7z" /></svg>
+    </span>
+  </button>
+  <noscript>
+    <a href={watchUrl} target="_blank" rel="noopener" class="absolute inset-0 flex items-center justify-center bg-ink/70 text-center text-white underline">
+      Voir la vidéo « {title} » sur YouTube
+    </a>
+  </noscript>
+</div>
+
+<script is:inline>
+  document.querySelectorAll('.lite-yt').forEach((el) => {
+    const btn = el.querySelector('.lite-yt-btn');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const id = el.getAttribute('data-yt-id');
+      const title = el.getAttribute('data-yt-title') || 'Vidéo YouTube';
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute('src', `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`);
+      iframe.setAttribute('title', title);
+      iframe.setAttribute('loading', 'lazy');
+      iframe.setAttribute(
+        'allow',
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+      );
+      iframe.setAttribute('allowfullscreen', 'true');
+      iframe.className = 'absolute inset-0 h-full w-full border-0';
+      el.replaceChildren(iframe);
+    });
+  });
+</script>

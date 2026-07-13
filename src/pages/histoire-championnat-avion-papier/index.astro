@@ -1,0 +1,23 @@
+---
+import { getEntry, render } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const page = await getEntry('pages', 'histoire');
+const { Content } = await render(page!);
+
+const breadcrumb = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Le Championnat', href: '/histoire-championnat-avion-papier/' },
+  { label: 'Histoire', href: '/histoire-championnat-avion-papier/' },
+];
+---
+
+<PageLayout
+  title={page!.data.title}
+  seoTitle={page!.data.seoTitle}
+  seoDescription={page!.data.seoDescription}
+  image={page!.data.image?.src}
+  breadcrumb={breadcrumb}
+>
+  <Content />
+</PageLayout>

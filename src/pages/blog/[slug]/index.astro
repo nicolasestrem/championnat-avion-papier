@@ -1,0 +1,22 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+// Announcements render under /blog/<slug>/. The STEM history piece is excluded
+// here because it keeps its flat legacy URL /histoire-avions-papier/.
+export async function getStaticPaths() {
+  const FLAT_SLUGS = new Set(['histoire-avions-papier']);
+  const articles = await getCollection('actualites', (e) => !e.data.draft);
+  return articles
+    .filter((e) => !FLAT_SLUGS.has(e.id))
+    .map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+interface Props {
+  entry: CollectionEntry<'actualites'>;
+}
+
+const { entry } = Astro.props;
+---
+
+<ArticleLayout entry={entry} />

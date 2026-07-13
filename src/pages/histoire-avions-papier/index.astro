@@ -1,0 +1,10 @@
+---
+import { getEntry } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+// The STEM history piece keeps its legacy flat URL /histoire-avions-papier/
+// rather than living under /blog/. It is excluded from the /blog/[slug]/ route.
+const entry = await getEntry('actualites', 'histoire-avions-papier');
+---
+
+<ArticleLayout entry={entry!} />

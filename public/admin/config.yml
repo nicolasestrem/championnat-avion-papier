@@ -1,0 +1,235 @@
+backend:
+  name: github
+  repo: nicolasestrem/championnat-avion-papier
+  branch: main
+  base_url: https://REPLACE_WITH_OAUTH_WORKER
+
+# Nouveaux médias téléversés depuis le CMS (traités ensuite par astro:assets)
+media_folder: src/assets/uploads
+public_folder: /src/assets/uploads
+
+locale: fr
+
+collections:
+  # --- Réglages de l'événement (singleton) ---
+  - name: reglages
+    label: "Réglages de l'événement"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: reglages
+        label: "Réglages"
+        file: src/content/reglages/reglages.json
+        fields:
+          - name: reglages
+            label: "Réglages"
+            widget: object
+            fields:
+              - { name: dateISO, label: "Date & heure ISO", widget: string, hint: "Ex. 2026-06-13T11:00:00+02:00" }
+              - { name: dateLabel, label: "Date affichée", widget: string }
+              - { name: lieu, label: "Lieu", widget: string }
+              - { name: ville, label: "Ville", widget: string }
+              - { name: horaireSelections, label: "Horaires des sélections", widget: string }
+              - { name: horaireFinales, label: "Horaire des finales", widget: string }
+              - { name: tarifCompetiteur, label: "Tarif compétiteur", widget: string }
+              - { name: entreeVisiteur, label: "Entrée visiteurs", widget: string }
+              - { name: beneficiaire, label: "Bénéficiaire", widget: string }
+              - { name: helloAssoUrl, label: "Lien HelloAsso", widget: string }
+              - { name: emailContact, label: "E-mail de contact", widget: string }
+              - { name: emailPrivacy, label: "E-mail confidentialité", widget: string }
+              - { name: instagram, label: "Instagram", widget: string, required: false }
+              - { name: facebook, label: "Facebook", widget: string, required: false }
+
+  # --- Pages éditoriales (accueil, histoire, activités, presse, légal…) ---
+  - name: pages
+    label: "Pages"
+    label_singular: "Page"
+    folder: src/content/pages
+    extension: md
+    format: frontmatter
+    create: true
+    identifier_field: title
+    fields:
+      - { name: title, label: "Titre", widget: string }
+      - { name: seoTitle, label: "Titre SEO", widget: string }
+      - { name: seoDescription, label: "Description SEO", widget: text }
+      - { name: image, label: "Image", widget: image, required: false }
+      - { name: imageAlt, label: "Texte alternatif de l'image", widget: string, required: false }
+      - { name: body, label: "Contenu", widget: markdown }
+
+  # --- Tutoriels ---
+  - name: tutoriels
+    label: "Tutoriels"
+    label_singular: "Tutoriel"
+    folder: src/content/tutoriels
+    extension: md
+    format: frontmatter
+    create: true
+    identifier_field: title
+    fields:
+      - { name: title, label: "Titre", widget: string }
+      - { name: seoTitle, label: "Titre SEO", widget: string }
+      - { name: seoDescription, label: "Description SEO", widget: text }
+      - name: difficulte
+        label: "Difficulté"
+        widget: select
+        options:
+          - { label: "Facile", value: facile }
+          - { label: "Intermédiaire", value: intermediaire }
+          - { label: "Avancé", value: avance }
+      - name: typeVol
+        label: "Type de vol"
+        widget: select
+        options:
+          - { label: "Distance", value: distance }
+          - { label: "Durée", value: duree }
+          - { label: "Polyvalent", value: polyvalent }
+      - { name: dureePliage, label: "Durée du pliage", widget: string }
+      - { name: image, label: "Image principale", widget: image }
+      - { name: imageAlt, label: "Texte alternatif", widget: string }
+      - name: etapes
+        label: "Étapes"
+        label_singular: "Étape"
+        widget: list
+        fields:
+          - { name: texte, label: "Texte de l'étape", widget: text }
+          - { name: image, label: "Image", widget: image, required: false }
+          - { name: alt, label: "Texte alternatif", widget: string, required: false }
+      - name: materiel
+        label: "Matériel"
+        widget: list
+        field: { name: item, label: "Élément", widget: string }
+      - name: faq
+        label: "FAQ"
+        widget: list
+        required: false
+        fields:
+          - { name: q, label: "Question", widget: string }
+          - { name: r, label: "Réponse", widget: text }
+      - name: tags
+        label: "Tags"
+        widget: list
+        required: false
+        field: { name: tag, label: "Tag", widget: string }
+      - { name: datePublication, label: "Date de publication", widget: datetime }
+      - { name: dateMaj, label: "Date de mise à jour", widget: datetime, required: false }
+      - { name: draft, label: "Brouillon", widget: boolean, default: false }
+      - { name: body, label: "Introduction", widget: markdown }
+
+  # --- Actualités (blog) ---
+  - name: actualites
+    label: "Actualités"
+    label_singular: "Article"
+    folder: src/content/actualites
+    extension: md
+    format: frontmatter
+    create: true
+    identifier_field: title
+    fields:
+      - { name: title, label: "Titre", widget: string }
+      - { name: seoTitle, label: "Titre SEO", widget: string, required: false }
+      - { name: description, label: "Description", widget: text }
+      - { name: image, label: "Image", widget: image, required: false }
+      - { name: imageAlt, label: "Texte alternatif", widget: string, required: false }
+      - { name: datePublication, label: "Date de publication", widget: datetime }
+      - { name: dateMaj, label: "Date de mise à jour", widget: datetime, required: false }
+      - name: tags
+        label: "Tags"
+        widget: list
+        required: false
+        field: { name: tag, label: "Tag", widget: string }
+      - { name: draft, label: "Brouillon", widget: boolean, default: false }
+      - { name: body, label: "Contenu", widget: markdown }
+
+  # --- Éditions (une par année) ---
+  - name: editions
+    label: "Éditions"
+    label_singular: "Édition"
+    folder: src/content/editions
+    extension: json
+    format: json
+    create: true
+    identifier_field: annee
+    fields:
+      - { name: annee, label: "Année", widget: number, value_type: int }
+      - { name: lieu, label: "Lieu", widget: string }
+      - { name: participants, label: "Participants", widget: number, value_type: int, required: false }
+      - { name: nations, label: "Nations", widget: number, value_type: int, required: false }
+      - { name: parrain, label: "Parrain", widget: string, required: false }
+      - name: faitsMarquants
+        label: "Faits marquants"
+        widget: list
+        required: false
+        field: { name: fait, label: "Fait marquant", widget: text }
+      - name: records
+        label: "Records"
+        widget: list
+        required: false
+        fields:
+          - { name: categorie, label: "Catégorie", widget: string }
+          - { name: detenteur, label: "Détenteur", widget: string }
+          - { name: valeur, label: "Valeur", widget: string }
+      - name: galerie
+        label: "Galerie"
+        widget: list
+        required: false
+        fields:
+          - { name: image, label: "Image", widget: image }
+          - { name: alt, label: "Texte alternatif", widget: string }
+      - { name: beneficiaire, label: "Bénéficiaire", widget: string, required: false }
+
+  # --- Sponsors / partenaires ---
+  - name: sponsors
+    label: "Partenaires"
+    label_singular: "Partenaire"
+    folder: src/content/sponsors
+    extension: json
+    format: json
+    create: true
+    identifier_field: nom
+    fields:
+      - { name: nom, label: "Nom", widget: string }
+      - { name: url, label: "Site web", widget: string }
+      - { name: logo, label: "Logo", widget: image, required: false }
+      - { name: descriptif, label: "Descriptif", widget: text }
+      - { name: ordre, label: "Ordre d'affichage", widget: number, value_type: int, default: 99 }
+
+  # --- FAQ ---
+  - name: faq
+    label: "FAQ"
+    label_singular: "Question"
+    folder: src/content/faq
+    extension: json
+    format: json
+    create: true
+    identifier_field: question
+    fields:
+      - { name: question, label: "Question", widget: string }
+      - { name: reponse, label: "Réponse", widget: text }
+      - name: categorie
+        label: "Catégorie"
+        widget: select
+        options:
+          - { label: "Infos pratiques", value: pratique }
+          - { label: "Inscription", value: inscription }
+          - { label: "Sur place", value: sur-place }
+          - { label: "Général", value: general }
+      - { name: ordre, label: "Ordre d'affichage", widget: number, value_type: int, default: 99 }
+
+  # --- Records ---
+  - name: records
+    label: "Records"
+    label_singular: "Record"
+    folder: src/content/records
+    extension: json
+    format: json
+    create: true
+    identifier_field: categorie
+    fields:
+      - { name: categorie, label: "Catégorie", widget: string }
+      - { name: detenteur, label: "Détenteur", widget: string }
+      - { name: valeur, label: "Valeur", widget: string }
+      - { name: annee, label: "Année", widget: number, value_type: int }
+      - { name: contexte, label: "Contexte", widget: text, required: false }
+      - { name: actuel, label: "Record actuel", widget: boolean, default: false }

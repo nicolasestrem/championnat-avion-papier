@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Etape {
+  texte: string;
+  image?: ImageMetadata;
+  alt?: string;
+}
+
+interface Props {
+  etapes: Etape[];
+}
+
+const { etapes } = Astro.props;
+---
+
+<ol class="space-y-8">
+  {etapes.map((etape, i) => (
+    <li class="grid gap-4 sm:grid-cols-[auto_1fr] sm:gap-6">
+      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sky-deep font-brand text-lg font-bold text-white" aria-hidden="true">
+        {i + 1}
+      </div>
+      <div class="min-w-0">
+        <p class="text-ink/90">
+          <span class="sr-only">Étape {i + 1}. </span>{etape.texte}
+        </p>
+        {etape.image && (
+          <figure class="mt-3">
+            <Image
+              src={etape.image}
+              alt={etape.alt ?? `Illustration de l'étape ${i + 1}`}
+              widths={[400, 640, 900]}
+              sizes="(min-width: 640px) 560px, 90vw"
+              class="w-full max-w-xl rounded-xl border border-sky/15 bg-white"
+              loading="lazy"
+            />
+          </figure>
+        )}
+      </div>
+    </li>
+  ))}
+</ol>

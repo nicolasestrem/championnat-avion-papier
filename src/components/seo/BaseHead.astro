@@ -1,0 +1,22 @@
+---
+import { SITE, absolute } from '../../lib/seo';
+interface Props { title: string; description: string; image?: string; canonical?: string; noindex?: boolean; }
+const { title, description, image = SITE.defaultImage, canonical, noindex = false } = Astro.props;
+const canonicalURL = canonical ?? absolute(Astro.url.pathname);
+const ogImage = absolute(image);
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content={SITE.locale} />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<slot />

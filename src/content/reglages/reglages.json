@@ -1,0 +1,16 @@
+{
+  "reglages": {
+    "dateISO": "2026-06-13T11:00:00+02:00",
+    "dateLabel": "samedi 13 juin 2026",
+    "lieu": "Complexe sportif Daniel Colombier",
+    "ville": "Mérignac",
+    "horaireSelections": "11h – 15h",
+    "horaireFinales": "15h30",
+    "tarifCompetiteur": "8 €",
+    "entreeVisiteur": "Entrée libre",
+    "beneficiaire": "Pompiers Solidaires",
+    "helloAssoUrl": "https://www.helloasso.com/associations/rotary-merignac/evenements/championnat-du-monde-de-lancer-d-avions-en-papier-2026",
+    "emailContact": "contact@championnatavionpapier.fr",
+    "emailPrivacy": "privacy@championnatavionpapier.fr"
+  }
+}

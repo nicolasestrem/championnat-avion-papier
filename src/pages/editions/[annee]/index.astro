@@ -1,0 +1,78 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Gallery from '../../../components/ui/Gallery.astro';
+import RecordsTable from '../../../components/ui/RecordsTable.astro';
+
+export async function getStaticPaths() {
+  const editions = await getCollection('editions');
+  return editions.map((entry) => ({
+    params: { annee: String(entry.data.annee) },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'editions'>;
+}
+
+const { entry } = Astro.props;
+const e = entry.data;
+
+const recordsRows = e.records.map((rec) => ({
+  categorie: rec.categorie,
+  detenteur: rec.detenteur,
+  valeur: rec.valeur,
+  annee: e.annee,
+  actuel: false,
+}));
+
+const seoTitle = `Championnat d’avions en papier ${e.annee} — ${e.lieu}`;
+const seoDescription = `Retour sur l’édition ${e.annee} du Championnat du Monde de lancer d’avions en papier à ${e.lieu} : faits marquants, records${e.galerie.length > 0 ? ', galerie photos' : ''}.`;
+
+const breadcrumb = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Le Championnat', href: '/histoire-championnat-avion-papier/' },
+  { label: `Édition ${e.annee}`, href: `/editions/${e.annee}/` },
+];
+---
+
+<PageLayout title={`Édition ${e.annee}`} seoTitle={seoTitle} seoDescription={seoDescription} breadcrumb={breadcrumb}>
+  <p class="text-lg text-ink/80">
+    <strong>{e.lieu}</strong>
+    {e.participants && <> · {e.participants} participants</>}
+    {e.nations && <> · {e.nations} nations</>}
+    {e.beneficiaire && <> · au profit des {e.beneficiaire}</>}
+  </p>
+
+  {e.faitsMarquants.length > 0 && (
+    <section class="mt-8">
+      <h2 class="font-brand text-2xl font-bold text-sky-deep">Faits marquants</h2>
+      <ul class="mt-4 list-disc space-y-2 pl-6 text-ink/85">
+        {e.faitsMarquants.map((f) => <li>{f}</li>)}
+      </ul>
+    </section>
+  )}
+
+  {recordsRows.length > 0 && (
+    <section class="mt-10">
+      <h2 class="font-brand text-2xl font-bold text-sky-deep">Records de l’édition</h2>
+      <div class="mt-4">
+        <RecordsTable records={recordsRows} />
+      </div>
+    </section>
+  )}
+
+  {e.galerie.length > 0 && (
+    <section class="mt-10">
+      <h2 class="font-brand text-2xl font-bold text-sky-deep">Galerie</h2>
+      <div class="mt-4">
+        <Gallery items={e.galerie} />
+      </div>
+    </section>
+  )}
+
+  <p class="mt-10">
+    <a href="/histoire-championnat-avion-papier/" class="font-semibold text-sky-deep underline hover:text-orange">← Toute l’histoire du Championnat</a>
+  </p>
+</PageLayout>
