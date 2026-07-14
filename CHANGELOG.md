@@ -21,6 +21,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Sveltia CMS config (`public/admin/`) + GitHub OAuth Worker (`workers/sveltia-cms-auth/`).
 - Deployment + DNS-cutover guide (`docs/DEPLOYMENT.md`) and content-review checklist
   (`docs/CONTENT-REVIEW.md`).
+- `CLAUDE.md` guide for future Claude Code sessions (commands, content-as-data architecture,
+  URL-preservation constraint, JSON-LD layering, CMS/OAuth split).
+- Claude Code automations: `redirect-guardian` subagent (`.claude/agents/`) that reviews
+  content/route diffs for missing 301s, slug collisions, and dropped JSON-LD; and the user-only
+  `new-tutorial` skill (`.claude/skills/`) that scaffolds schema-valid tutorial frontmatter and
+  prompts for the matching `_redirects` line.
 
 ### Changed
 - Font resolved to self-hosted Fira Sans after confirming Frutiger is not web-licensed.
