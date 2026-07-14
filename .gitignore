@@ -28,3 +28,4 @@ pnpm-debug.log*
 
 # Large raw WordPress WXR export (reference only, not built)
 /_source/*.xml
+.claude/settings.local.json.doctor-bak
