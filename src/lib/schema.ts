@@ -31,7 +31,8 @@ export function buildEvent(r: EventInput) {
     },
     offers: {
       '@type': 'Offer',
-      price: '8',
+      // Derived from reglages so structured data stays in sync with the CMS.
+      price: r.tarifCompetiteur.replace(',', '.').replace(/[^\d.]/g, ''),
       priceCurrency: 'EUR',
       url: r.helloAssoUrl,
       availability: 'https://schema.org/InStock',

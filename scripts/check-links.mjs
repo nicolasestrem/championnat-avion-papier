@@ -47,7 +47,12 @@ if (existsSync(REDIRECTS)) {
   for (const raw of readFileSync(REDIRECTS, 'utf8').split(/\r?\n/)) {
     const line = raw.trim();
     if (!line || line.startsWith('#')) continue;
-    const from = line.split(/\s+/)[0];
+    let from = line.split(/\s+/)[0];
+    // Decode percent-encoded source paths (e.g. the emoji old-slug redirect) so
+    // they match hrefs, which we also decode below.
+    try {
+      from = decodeURIComponent(from);
+    } catch {}
     if (from.endsWith('*')) redirectWildcards.push(from.slice(0, -1));
     else redirectExact.add(from);
   }
@@ -89,6 +94,11 @@ for (const file of htmlFiles) {
     // Strip query and hash.
     href = href.split('#')[0].split('?')[0];
     if (href === '') continue;
+    // Decode to match the decoded redirect paths (avoids false positives on
+    // percent-encoded links).
+    try {
+      href = decodeURIComponent(href);
+    } catch {}
 
     const key = href;
     if (seen.has(key)) continue;

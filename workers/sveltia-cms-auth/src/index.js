@@ -42,7 +42,24 @@ export default {
       .split(',')
       .map((d) => d.trim())
       .filter(Boolean);
-    const allowedOrigin = allowed[0] ? `https://${allowed[0]}` : '*';
+    // Reflect the caller's origin when it matches an allowed domain (or is a
+    // local/preview host), so postMessage also works on localhost, *.workers.dev
+    // and preview deploys — not just the primary production domain.
+    let allowedOrigin = allowed[0] ? `https://${allowed[0]}` : '*';
+    const referer = request.headers.get('Referer');
+    if (referer) {
+      try {
+        const refUrl = new URL(referer);
+        const host = refUrl.hostname;
+        const ok =
+          host === 'localhost' ||
+          host === '127.0.0.1' ||
+          host.endsWith('.workers.dev') ||
+          host.endsWith('.pages.dev') ||
+          allowed.some((d) => host === d || host.endsWith(`.${d}`));
+        if (ok) allowedOrigin = refUrl.origin;
+      } catch {}
+    }
 
     if (url.pathname === '/auth') {
       const state = randomState();

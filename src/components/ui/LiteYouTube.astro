@@ -38,10 +38,13 @@ const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
   </noscript>
 </div>
 
-<script is:inline>
+<script>
+  // Bundled (not is:inline) so Astro runs it once per page even with multiple
+  // instances; the hasListener guard prevents duplicate click handlers.
   document.querySelectorAll('.lite-yt').forEach((el) => {
     const btn = el.querySelector('.lite-yt-btn');
-    if (!btn) return;
+    if (!(btn instanceof HTMLElement) || btn.dataset.hasListener) return;
+    btn.dataset.hasListener = 'true';
     btn.addEventListener('click', () => {
       const id = el.getAttribute('data-yt-id');
       const title = el.getAttribute('data-yt-title') || 'Vidéo YouTube';

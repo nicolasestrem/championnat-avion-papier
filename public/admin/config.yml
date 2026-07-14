@@ -4,9 +4,13 @@ backend:
   branch: main
   base_url: https://REPLACE_WITH_OAUTH_WORKER
 
-# Nouveaux médias téléversés depuis le CMS (traités ensuite par astro:assets)
+# Médias téléversés depuis le CMS. Chaque collection avec un champ image
+# redéfinit `media_folder`/`public_folder` en chemin RELATIF à l'entrée
+# (../../assets/uploads), afin que le chemin écrit dans le frontmatter soit
+# résolvable par le helper `image()` d'astro:assets. Les valeurs globales
+# ci-dessous ne servent que de repli (aucune collection sans image ne téléverse).
 media_folder: src/assets/uploads
-public_folder: /src/assets/uploads
+public_folder: /uploads
 
 locale: fr
 
@@ -46,6 +50,8 @@ collections:
     label: "Pages"
     label_singular: "Page"
     folder: src/content/pages
+    media_folder: ../../assets/uploads
+    public_folder: ../../assets/uploads
     extension: md
     format: frontmatter
     create: true
@@ -63,6 +69,8 @@ collections:
     label: "Tutoriels"
     label_singular: "Tutoriel"
     folder: src/content/tutoriels
+    media_folder: ../../assets/uploads
+    public_folder: ../../assets/uploads
     extension: md
     format: frontmatter
     create: true
@@ -122,6 +130,8 @@ collections:
     label: "Actualités"
     label_singular: "Article"
     folder: src/content/actualites
+    media_folder: ../../assets/uploads
+    public_folder: ../../assets/uploads
     extension: md
     format: frontmatter
     create: true
@@ -147,6 +157,8 @@ collections:
     label: "Éditions"
     label_singular: "Édition"
     folder: src/content/editions
+    media_folder: ../../assets/uploads
+    public_folder: ../../assets/uploads
     extension: json
     format: json
     create: true
@@ -184,6 +196,8 @@ collections:
     label: "Partenaires"
     label_singular: "Partenaire"
     folder: src/content/sponsors
+    media_folder: ../../assets/uploads
+    public_folder: ../../assets/uploads
     extension: json
     format: json
     create: true

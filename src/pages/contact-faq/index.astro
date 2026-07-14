@@ -35,9 +35,12 @@ const breadcrumb = [
   { label: 'Contact & FAQ', href: '/contact-faq/' },
 ];
 
-// Google Calendar add link (13 June 2026, all day).
-const gcalStart = '20260613';
-const gcalEnd = '20260614';
+// Google Calendar add link (all day), derived from reglages so it follows any
+// CMS date change instead of drifting from the visible details.
+const gcalStart = r.dateISO.slice(0, 10).replace(/-/g, '');
+const gcalEndDate = new Date(r.dateISO.slice(0, 10) + 'T00:00:00Z');
+gcalEndDate.setUTCDate(gcalEndDate.getUTCDate() + 1);
+const gcalEnd = gcalEndDate.toISOString().slice(0, 10).replace(/-/g, '');
 const gcalDetails = encodeURIComponent(
   `Championnat du Monde de Lancer d’Avions en Papier — ${r.lieu}, ${r.ville}. Sélections ${r.horaireSelections}, finales ${r.horaireFinales}. Inscription : ${r.helloAssoUrl}`
 );
