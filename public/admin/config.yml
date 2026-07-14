@@ -2,7 +2,7 @@ backend:
   name: github
   repo: nicolasestrem/championnat-avion-papier
   branch: main
-  base_url: https://REPLACE_WITH_OAUTH_WORKER
+  base_url: https://sveltia-cms-auth.nicolas-estrem.workers.dev
 
 # Médias téléversés depuis le CMS. Chaque collection avec un champ image
 # redéfinit `media_folder`/`public_folder` en chemin RELATIF à l'entrée

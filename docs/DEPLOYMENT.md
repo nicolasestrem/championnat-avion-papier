@@ -12,25 +12,21 @@ Propriété **Cloudflare Web Analytics** créée pour l'hôte `championnatavionp
 2. Build command : `npm run build` · Output : `dist` · Branche de preview : `migrate-wordpress-to-astro`.
 3. Lancez un build. Vérifiez le site sur l'URL `*.workers.dev` : navigation, images, redirections (`public/_redirects` est servi automatiquement par Workers static assets), page `/admin/`.
 
-## 3. CMS Sveltia — OAuth GitHub
+## 3. CMS Sveltia — OAuth GitHub — ✅ déployé (14/07/2026)
 
 Le code du Worker d'auth est dans `workers/sveltia-cms-auth/` (aucun secret commité).
 
-1. **GitHub → Settings → Developer settings → OAuth Apps → New OAuth App** :
-   - Homepage URL : `https://championnatavionpapier.fr`
-   - Authorization callback URL : `https://<votre-worker>.workers.dev/callback`
-2. Déployez le Worker :
-   ```bash
-   cd workers/sveltia-cms-auth
-   npx wrangler secret put GITHUB_CLIENT_ID
-   npx wrangler secret put GITHUB_CLIENT_SECRET
-   npx wrangler deploy
-   ```
-3. Dans `public/admin/config.yml`, remplacez `base_url: https://REPLACE_WITH_OAUTH_WORKER` par l'URL du Worker déployé, puis rebuild/redeploy.
-4. Ajoutez les éditeurs (membres du Rotary) comme **collaborateurs** du dépôt GitHub. Ils se connectent sur `/admin/`, éditent, et chaque enregistrement crée un commit sur `main` → un nouveau build Cloudflare → en ligne en ~2 min.
+État actuel :
+1. OAuth App GitHub créée (callback `https://sveltia-cms-auth.nicolas-estrem.workers.dev/callback`) ; secrets `GITHUB_CLIENT_ID`/`GITHUB_CLIENT_SECRET` posés sur le Worker.
+2. Worker déployé : `https://sveltia-cms-auth.nicolas-estrem.workers.dev` (redeploy : `npx wrangler deploy --config workers/sveltia-cms-auth/wrangler.toml`).
+3. `base_url` renseigné dans `public/admin/config.yml`.
+4. **Reste à faire** : ajouter les éditeurs (membres du Rotary) comme **collaborateurs** du dépôt GitHub. Ils se connectent sur `/admin/`, éditent, et chaque enregistrement crée un commit sur `main` → un nouveau build Cloudflare → en ligne en ~2 min.
+
+⚠️ **Aucun enregistrement CMS avant la fusion de la PR #1** : le CMS écrit sur `main`, qui ne contient pas encore le site Astro. Test de connexion seul autorisé.
 
 ## 4. Checklist de bascule DNS (à faire APRÈS validation de la preview et revue du contenu)
 
+- [ ] **Aller-retour CMS complet juste après la fusion de la PR #1** : connexion sur `/admin/`, édition d'une entrée avec téléversement d'image, vérifier que le commit produit un chemin résolvable par `image()` et que le build Cloudflare passe (seule façon de confirmer les `media_folder` relatifs de `config.yml`).
 - [ ] Preview verte : Lighthouse mobile ≥ 95 sur `/`, un tutoriel, `/contact-faq/`.
 - [ ] Test des redirections en conditions réelles (301) sur la preview.
 - [ ] Validation des données structurées (Google Rich Results) : Event, HowTo, FAQPage.

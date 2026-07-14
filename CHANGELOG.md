@@ -29,6 +29,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   prompts for the matching `_redirects` line.
 
 ### Changed
+- Sveltia CMS auth is live: `sveltia-cms-auth` Worker deployed
+  (`https://sveltia-cms-auth.nicolas-estrem.workers.dev`, GitHub OAuth App + secrets in
+  place), `base_url` set in `public/admin/config.yml`. CMS still targets `main`, so no
+  CMS saves until PR #1 merges; the image-upload round-trip is a post-merge checklist
+  item in `docs/DEPLOYMENT.md`.
 - Cloudflare Web Analytics wired for real: property created for `championnatavionpapier.fr`
   and the beacon token replaced in `src/layouts/BaseLayout.astro` (was
   `REPLACE_WITH_CF_ANALYTICS_TOKEN`).
