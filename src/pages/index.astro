@@ -4,9 +4,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/ui/Hero.astro';
 import CtaBanner from '../components/ui/CtaBanner.astro';
 import FlightDivider from '../components/ui/FlightDivider.astro';
+import PhotoMosaic from '../components/ui/PhotoMosaic.astro';
 import SponsorGrid from '../components/ui/SponsorGrid.astro';
 import EventSchema from '../components/seo/EventSchema.astro';
 import OrganizationSchema from '../components/seo/OrganizationSchema.astro';
+import photoAtelier2023 from '../assets/editions/edition-2023-08.avif';
+import photoPliage2025 from '../assets/editions/edition-2025-04.avif';
+import photoAlphajet2026 from '../assets/editions/edition-2026-05.avif';
+import photoAmbiance2025 from '../assets/editions/edition-2025-05.avif';
+import photoFinales2026 from '../assets/editions/edition-2026-06.avif';
 
 const reglages = await getEntry('reglages', 'reglages');
 const r = reglages!.data;
@@ -17,6 +23,14 @@ const { Content } = await render(page!);
 const sponsors = (await getCollection('sponsors'))
   .sort((a, b) => a.data.ordre - b.data.ordre)
   .map((s) => ({ nom: s.data.nom, url: s.data.url, logo: s.data.logo, descriptif: s.data.descriptif }));
+
+const mosaicItems = [
+  { image: photoAtelier2023, alt: 'Atelier de pliage pour les enfants sur la zone de lancer, édition 2023', href: '/editions/2023/' },
+  { image: photoPliage2025, alt: 'Pliage d’un avion en papier sur les gabarits, édition 2025', href: '/editions/2025/' },
+  { image: photoAlphajet2026, alt: 'Visite du cockpit de l’Alphajet, édition 2026', href: '/editions/2026/' },
+  { image: photoAmbiance2025, alt: 'Le public sous les drapeaux des nations, édition 2025', href: '/editions/2025/' },
+  { image: photoFinales2026, alt: 'Le public dans le gymnase pour les finales, édition 2026', href: '/editions/2026/' },
+];
 
 const eventInput = {
   dateISO: r.dateISO,
@@ -49,6 +63,21 @@ const eventInput = {
       <Content />
     </div>
   </article>
+
+  <section class="mx-auto max-w-6xl px-4 py-10">
+    <div class="text-center">
+      <h2 class="font-brand text-2xl font-bold text-sky-deep sm:text-3xl">Le Championnat en images</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-ink/70">
+        Ateliers de pliage, cockpit d’Alphajet, drapeaux des nations et finales en gymnase : quelques instantanés des éditions précédentes à Mérignac.
+      </p>
+    </div>
+    <div class="mt-8">
+      <PhotoMosaic items={mosaicItems} />
+    </div>
+    <div class="mt-6 text-center">
+      <a href="/editions/2026/" class="font-semibold text-sky-deep underline hover:text-orange">Revivre les éditions précédentes</a>
+    </div>
+  </section>
 
   <FlightDivider />
 

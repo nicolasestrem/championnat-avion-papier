@@ -54,6 +54,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   remaining WhatsApp photos converted as `edition-2026-05..07.avif`.
 - Histoire timeline rows now link to each `/editions/<annee>/` page (2023–2026 were
   previously orphan pages) and the nav "Éditions" entry points to `/editions/2026/`.
+- Homepage photo mosaic: new « Le Championnat en images » section between the editorial
+  content and the partners block — a 5-photo mosaic (one 2×2 feature tile + four squares,
+  new `src/components/ui/PhotoMosaic.astro`, zero JS) of curated édition shots (2023 atelier
+  de pliage as feature; pliage sur gabarits 2025, Alphajet 2026, drapeaux des nations 2025,
+  finales en gymnase 2026), each tile linking to its `/editions/<annee>/` page. Verified
+  visually at 1280 px and 390 px via Playwright against the built site.
 
 ### Fixed (content fact-check pass, 14/07/2026)
 - Flèche Classique tutorial: step images were scrambled (step 1 showed the nose fold,

@@ -61,6 +61,14 @@ Source images `etape_1..8_result.avif`. In the post body: `etape_1` = image d'in
 | `src/assets/editions/edition-2025-01.avif` … `edition-2025-06.avif` | Photos de la compétition du 17 mai 2025 à Mérignac (lancers, participants, ambiance) — 6 clichés (ex-`PXL_20250517_*_result`) | `/editions/2025/` |
 | `src/assets/editions/edition-2026-01.avif` … `edition-2026-07.avif` | Photos de l'édition du 13 juin 2026 (ex-`WhatsApp-Image-2026-06-13-*_result`) — 7 clichés dont stand Pompiers Solidaires, Alphajet, finales et cérémonie au gymnase | `/editions/2026/` |
 
+**Réutilisation accueil** : la mosaïque « Le Championnat en images » (`src/pages/index.astro`,
+composant `PhotoMosaic.astro`) importe directement 5 de ces clichés : `edition-2023-08`
+(vignette principale), `edition-2025-04`, `edition-2026-05`, `edition-2025-05`,
+`edition-2026-06`. Si l'un d'eux est retiré d'une galerie lors du tri, mettre aussi à jour
+l'accueil. À noter : `edition-2023-09` (selfie) et `edition-2023-10` sont des captures de
+story Instagram avec texte incrusté (« la présidente du @rotarymerignac en action ») —
+écartées de l'accueil pour cette raison, à trancher lors du tri des galeries.
+
 ## Presse — `src/assets/press/`
 
 | Asset path | Description FR | Page |

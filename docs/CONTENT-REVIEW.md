@@ -17,7 +17,8 @@ Tout le contenu français ci-dessous a été **rédigé/réécrit pour la migrat
 | FAQ (21 questions) | `/contact-faq/` | **Élargi** ~200 mots → 21 Q/R | Exactitude des infos pratiques (tarifs, horaires, accès). |
 | Records | `/records-avion-en-papier/` | Nouveau | Exactitude des records/années/détenteurs. |
 | À imprimer | `/avion-papier-a-imprimer/` | Nouveau | Le PDF proposé est le bon. |
-| Éditions 2023/24/25/26 | `/editions/2026/` etc. | Nouveau | Participants, nations, faits marquants. **Galeries photos ajoutées le 14/07/2026** (2023 : 11 clichés, 2024 : 5, 2025 : 6, 2026 : 7) — trier sur la preview les photos à retirer (visages identifiables, selfie 2023). |
+| Éditions 2023/24/25/26 | `/editions/2026/` etc. | Nouveau | Participants, nations, faits marquants. **Galeries photos ajoutées le 14/07/2026** (2023 : 11 clichés, 2024 : 5, 2025 : 6, 2026 : 7) — trier sur la preview les photos à retirer (visages identifiables, selfie 2023 ; noter que `edition-2023-09/10` sont des captures Instagram avec texte incrusté). |
+| Accueil — mosaïque photos | `/` | **Nouveau (14/07/2026)** | Section « Le Championnat en images » : 5 clichés (atelier 2023 en grand, pliage 2025, Alphajet 2026, drapeaux 2025, finales 2026), chacun cliquable vers sa page édition. Valider le choix des photos ; si un cliché est retiré d'une galerie, l'accueil doit suivre (voir `src/assets/ASSET-MANIFEST.md`). |
 | Mentions légales | `/mentions-legales/` | Nouveau | **Entité juridique / adresse / directeur de publication à confirmer** (marqué d'un TODO dans le fichier). |
 | Presse / Sponsors | `/presse/`, `/sponsors/` | Migré | Citations, liens et descriptifs des 13 partenaires. |
 
