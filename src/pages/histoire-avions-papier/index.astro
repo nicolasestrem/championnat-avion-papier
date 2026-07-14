@@ -4,7 +4,9 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 // The STEM history piece keeps its legacy flat URL /histoire-avions-papier/
 // rather than living under /blog/. It is excluded from the /blog/[slug]/ route.
+// Drafts are hidden here too, like on the blog index, RSS and /blog/[slug]/.
 const entry = await getEntry('actualites', 'histoire-avions-papier');
+if (!entry || entry.data.draft) return Astro.redirect('/blog/');
 ---
 
 <ArticleLayout entry={entry!} />

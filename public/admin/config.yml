@@ -46,6 +46,8 @@ collections:
               - { name: facebook, label: "Facebook", widget: string, required: false }
 
   # --- Pages éditoriales (accueil, histoire, activités, presse, légal…) ---
+  # create/delete désactivés : chaque page a une route codée en dur dans
+  # src/pages/ — une page créée depuis le CMS ne serait jamais publiée (404).
   - name: pages
     label: "Pages"
     label_singular: "Page"
@@ -54,7 +56,8 @@ collections:
     public_folder: ../../assets/uploads
     extension: md
     format: frontmatter
-    create: true
+    create: false
+    delete: false
     identifier_field: title
     fields:
       - { name: title, label: "Titre", widget: string }

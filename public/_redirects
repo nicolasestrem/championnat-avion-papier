@@ -1,8 +1,9 @@
 # 301 redirect map — WordPress → Astro migration
 # Format: FROM  TO  301  (served by Cloudflare Workers static assets)
 
-# --- Artifact / duplicate page slugs (Elementor "contact-faq-2*" copies) ---
-/contact-faq-2/              /activites/                                  301
+# --- Old internal page slugs (WP id 12 "contact-faq-2" was the HOME page;
+# --- only the "contact-faq-2-2" copy was the activities page) ---
+/contact-faq-2/              /                                            301
 /contact-faq-2-2/            /activites/                                  301
 
 # --- English privacy policy → French policy ---

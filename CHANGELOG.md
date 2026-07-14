@@ -89,6 +89,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Reviewed and dismissed two false-positive bot findings: `astro@^7.0.9` is the current latest,
   and the `{"reglages": {…}}` nesting is the correct `file()`-loader singleton shape.
 
+### Fixed (PR review pass 2, 14/07/2026)
+- **OAuth worker security (P1)**: the callback popup accepted the first `postMessage` from any
+  window and replied with the repo-scoped token to `e.origin`. The CMS origin is now captured
+  from the Referer on `/auth`, persisted in an HttpOnly cookie next to the CSRF state,
+  re-validated against the allowlist on `/callback` (the GitHub redirect carries no CMS
+  Referer — this also fixes login from localhost/preview deploys, which previously fell back
+  to the production origin), and the token is only ever posted to that validated origin; the
+  callback page ignores messages from any other source/origin. **The worker still needs a
+  redeploy** (`npx wrangler deploy --config workers/sveltia-cms-auth/wrangler.toml`) — the
+  deploy was not run in this pass.
+- `/contact-faq-2/` now 301s to `/` instead of `/activites/`: per the WordPress export, page
+  id 12 (internal slug `contact-faq-2`) was the *home* page; only `contact-faq-2-2` was the
+  activities page.
+- `/histoire-avions-papier/` (flat legacy route) now honors `draft: true` like the blog
+  index, RSS and `/blog/[slug]/` — a draft emits a `noindex` meta-refresh redirect to
+  `/blog/` (verified by building with the flag set, then reverted).
+- Sveltia CMS "Pages" collection set to `create: false` / `delete: false`: every page route
+  is a hard-coded `getEntry()`, so a CMS-created page would never be published (404).
+- Not applied (pending user decisions, both already tracked): the "expired 2026 event date"
+  comment (CONTENT-REVIEW-FINDINGS item 12 — hero/reglages next-edition decision) and the
+  mentions-légales placeholder comment (entity details must come from the user).
+
 ### Notes / outstanding before go-live
 - No tutorial has per-step photos except Nakamura & Flèche (real WordPress photos). The 4
   tutorials on the generic illustration still need real folding photos or commissioned art —

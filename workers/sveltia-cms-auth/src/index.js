@@ -8,6 +8,13 @@
  *
  * Set `base_url` in public/admin/config.yml to this Worker's deployed URL.
  * Requires secrets GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET and var ALLOWED_DOMAINS.
+ *
+ * The CMS origin is captured from the Referer on /auth (the only request that
+ * carries it), persisted in a cookie next to the CSRF state, and re-validated
+ * on /callback — the GitHub redirect has no CMS Referer, so recomputing it
+ * there would silently fall back to the production domain and break login
+ * from localhost / preview deploys. The token is only ever posted to that
+ * validated origin, and the callback page ignores messages from any other.
  */
 
 const GITHUB_AUTHORIZE = 'https://github.com/login/oauth/authorize';
@@ -20,20 +27,54 @@ function randomState() {
   return [...bytes].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
+/**
+ * Normalize a URL/origin string and return its origin if the host is an
+ * allowed domain (or a local/preview host), otherwise null.
+ */
+function validateOrigin(value, allowed) {
+  try {
+    const { protocol, hostname, origin } = new URL(value);
+    const local = hostname === 'localhost' || hostname === '127.0.0.1';
+    if (protocol !== 'https:' && !local) return null;
+    const ok =
+      local ||
+      hostname.endsWith('.workers.dev') ||
+      hostname.endsWith('.pages.dev') ||
+      allowed.some((d) => hostname === d || hostname.endsWith(`.${d}`));
+    return ok ? origin : null;
+  } catch {
+    return null;
+  }
+}
+
 /** HTML that posts the auth result back to the CMS window and closes. */
 function callbackPage(status, payload, allowedOrigin) {
   const message = `authorization:github:${status}:${JSON.stringify(payload)}`;
   return `<!doctype html><html><body><script>
     (function () {
+      var origin = ${JSON.stringify(allowedOrigin)};
       function receive(e) {
+        if (e.source !== window.opener || e.origin !== origin) return;
         window.removeEventListener('message', receive, false);
-        window.opener && window.opener.postMessage(${JSON.stringify(message)}, e.origin);
+        window.opener.postMessage(${JSON.stringify(message)}, origin);
       }
       window.addEventListener('message', receive, false);
-      window.opener && window.opener.postMessage('authorizing:github', ${JSON.stringify(allowedOrigin)});
+      window.opener && window.opener.postMessage('authorizing:github', origin);
     })();
   </script><p>Authentification en cours… vous pouvez fermer cette fenêtre.</p></body></html>`;
 }
+
+function htmlResponse(body, status, extraHeaders = []) {
+  const headers = new Headers({ 'Content-Type': 'text/html; charset=utf-8' });
+  for (const [k, v] of extraHeaders) headers.append(k, v);
+  return new Response(body, { status, headers });
+}
+
+const COOKIE_ATTRS = 'HttpOnly; Secure; SameSite=Lax; Path=/';
+const CLEAR_COOKIES = [
+  ['Set-Cookie', `sveltia_state=; ${COOKIE_ATTRS}; Max-Age=0`],
+  ['Set-Cookie', `sveltia_origin=; ${COOKIE_ATTRS}; Max-Age=0`],
+];
 
 export default {
   async fetch(request, env) {
@@ -42,39 +83,30 @@ export default {
       .split(',')
       .map((d) => d.trim())
       .filter(Boolean);
-    // Reflect the caller's origin when it matches an allowed domain (or is a
-    // local/preview host), so postMessage also works on localhost, *.workers.dev
-    // and preview deploys — not just the primary production domain.
-    let allowedOrigin = allowed[0] ? `https://${allowed[0]}` : '*';
-    const referer = request.headers.get('Referer');
-    if (referer) {
-      try {
-        const refUrl = new URL(referer);
-        const host = refUrl.hostname;
-        const ok =
-          host === 'localhost' ||
-          host === '127.0.0.1' ||
-          host.endsWith('.workers.dev') ||
-          host.endsWith('.pages.dev') ||
-          allowed.some((d) => host === d || host.endsWith(`.${d}`));
-        if (ok) allowedOrigin = refUrl.origin;
-      } catch {}
-    }
+    const productionOrigin = allowed[0] ? `https://${allowed[0]}` : null;
 
     if (url.pathname === '/auth') {
+      // The CMS page is the Referer here; reflect it when it matches an
+      // allowed domain (or a local/preview host) so login also works on
+      // localhost, *.workers.dev and preview deploys.
+      const referer = request.headers.get('Referer');
+      const cmsOrigin = (referer && validateOrigin(referer, allowed)) || productionOrigin;
+      if (!cmsOrigin) {
+        return new Response('Origine non autorisée.', { status: 403 });
+      }
       const state = randomState();
       const authorize = new URL(GITHUB_AUTHORIZE);
       authorize.searchParams.set('client_id', env.GITHUB_CLIENT_ID);
       authorize.searchParams.set('redirect_uri', `${url.origin}/callback`);
       authorize.searchParams.set('scope', 'repo,user');
       authorize.searchParams.set('state', state);
-      return new Response(null, {
-        status: 302,
-        headers: {
-          Location: authorize.href,
-          'Set-Cookie': `sveltia_state=${state}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=600`,
-        },
-      });
+      const headers = new Headers({ Location: authorize.href });
+      headers.append('Set-Cookie', `sveltia_state=${state}; ${COOKIE_ATTRS}; Max-Age=600`);
+      headers.append(
+        'Set-Cookie',
+        `sveltia_origin=${encodeURIComponent(cmsOrigin)}; ${COOKIE_ATTRS}; Max-Age=600`,
+      );
+      return new Response(null, { status: 302, headers });
     }
 
     if (url.pathname === '/callback') {
@@ -82,11 +114,22 @@ export default {
       const state = url.searchParams.get('state');
       const cookie = request.headers.get('Cookie') || '';
       const savedState = /(?:^|;\s*)sveltia_state=([^;]+)/.exec(cookie)?.[1];
+      const savedOrigin = /(?:^|;\s*)sveltia_origin=([^;]+)/.exec(cookie)?.[1];
+
+      // Re-validate the persisted origin instead of trusting the cookie blindly;
+      // the GitHub redirect carries no usable Referer.
+      const cmsOrigin = savedOrigin
+        ? validateOrigin(decodeURIComponent(savedOrigin), allowed)
+        : null;
+      if (!cmsOrigin) {
+        return htmlResponse('<p>Session d’authentification invalide ou expirée.</p>', 400, CLEAR_COOKIES);
+      }
 
       if (!code || !state || state !== savedState) {
-        return new Response(
-          callbackPage('error', { error: 'invalid_state' }, allowedOrigin),
-          { status: 400, headers: { 'Content-Type': 'text/html; charset=utf-8' } },
+        return htmlResponse(
+          callbackPage('error', { error: 'invalid_state' }, cmsOrigin),
+          400,
+          CLEAR_COOKIES,
         );
       }
 
@@ -103,21 +146,17 @@ export default {
       const data = await tokenRes.json();
 
       if (data.error || !data.access_token) {
-        return new Response(
-          callbackPage('error', { error: data.error || 'no_token' }, allowedOrigin),
-          { status: 401, headers: { 'Content-Type': 'text/html; charset=utf-8' } },
+        return htmlResponse(
+          callbackPage('error', { error: data.error || 'no_token' }, cmsOrigin),
+          401,
+          CLEAR_COOKIES,
         );
       }
 
-      return new Response(
-        callbackPage('success', { token: data.access_token, provider: 'github' }, allowedOrigin),
-        {
-          status: 200,
-          headers: {
-            'Content-Type': 'text/html; charset=utf-8',
-            'Set-Cookie': 'sveltia_state=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0',
-          },
-        },
+      return htmlResponse(
+        callbackPage('success', { token: data.access_token, provider: 'github' }, cmsOrigin),
+        200,
+        CLEAR_COOKIES,
       );
     }
 
