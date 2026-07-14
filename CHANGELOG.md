@@ -96,9 +96,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   re-validated against the allowlist on `/callback` (the GitHub redirect carries no CMS
   Referer — this also fixes login from localhost/preview deploys, which previously fell back
   to the production origin), and the token is only ever posted to that validated origin; the
-  callback page ignores messages from any other source/origin. **The worker still needs a
-  redeploy** (`npx wrangler deploy --config workers/sveltia-cms-auth/wrangler.toml`) — the
-  deploy was not run in this pass.
+  callback page ignores messages from any other source/origin. Deployed 14/07/2026
+  (`npx wrangler deploy`, version `04986378`); the CMS login smoke test still needs to be
+  re-run against the new worker code.
 - `/contact-faq-2/` now 301s to `/` instead of `/activites/`: per the WordPress export, page
   id 12 (internal slug `contact-faq-2`) was the *home* page; only `contact-faq-2-2` was the
   activities page.

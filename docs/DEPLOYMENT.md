@@ -19,7 +19,7 @@ Le code du Worker d'auth est dans `workers/sveltia-cms-auth/` (aucun secret comm
 État actuel :
 1. OAuth App GitHub créée (callback `https://sveltia-cms-auth.nicolas-estrem.workers.dev/callback`) ; secrets `GITHUB_CLIENT_ID`/`GITHUB_CLIENT_SECRET` posés sur le Worker.
 2. Worker déployé : `https://sveltia-cms-auth.nicolas-estrem.workers.dev` (redeploy : `npx wrangler deploy --config workers/sveltia-cms-auth/wrangler.toml`).
-   ⚠️ **Redeploy requis (14/07/2026)** : le correctif de sécurité OAuth (origine CMS persistée en cookie et validée avant tout `postMessage` du token — revue PR #1, P1) est commité mais **pas encore déployé** ; relancer la commande de redeploy ci-dessus, puis refaire le test de connexion.
+   ✅ **Correctif de sécurité OAuth déployé (14/07/2026, version `04986378`)** : origine CMS persistée en cookie HttpOnly et validée avant tout `postMessage` du token (revue PR #1, P1). **Reste à refaire le test de connexion** sur la preview `/admin/` pour confirmer que le handshake fonctionne toujours avec le nouveau code.
 3. `base_url` renseigné dans `public/admin/config.yml`.
 4. **Reste à faire** : ajouter les éditeurs (membres du Rotary) comme **collaborateurs** du dépôt GitHub. Ils se connectent sur `/admin/`, éditent, et chaque enregistrement crée un commit sur `main` → un nouveau build Cloudflare → en ligne en ~2 min.
 
