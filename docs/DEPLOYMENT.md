@@ -2,9 +2,9 @@
 
 Ce guide couvre les étapes qui nécessitent **vos comptes GitHub et Cloudflare**. Le site Astro est déjà construit et validé (`npm run build` → 26 pages). Rien n'est mis en ligne tant que vous n'avez pas exécuté ces étapes.
 
-## 1. Analytics Cloudflare (avant le premier déploiement)
+## 1. Analytics Cloudflare — ✅ fait (14/07/2026)
 
-Dans `src/layouts/BaseLayout.astro`, le beacon d'analytics contient `REPLACE_WITH_CF_ANALYTICS_TOKEN`. Créez une propriété **Cloudflare Web Analytics** (gratuit, sans cookie) et remplacez ce jeton. Sinon, retirez la ligne `<script ... beacon.min.js ...>`.
+Propriété **Cloudflare Web Analytics** créée pour l'hôte `championnatavionpapier.fr` (compte Estrem, sans cookie). Le jeton du beacon est en place dans `src/layouts/BaseLayout.astro`. Les statistiques n'apparaîtront qu'une fois le domaine servi (les visites sur `*.workers.dev` sont comptées sous la même propriété si le beacon est chargé).
 
 ## 2. Déploiement (preview) via Cloudflare Workers Builds
 

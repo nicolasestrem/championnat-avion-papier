@@ -29,6 +29,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   prompts for the matching `_redirects` line.
 
 ### Changed
+- Cloudflare Web Analytics wired for real: property created for `championnatavionpapier.fr`
+  and the beacon token replaced in `src/layouts/BaseLayout.astro` (was
+  `REPLACE_WITH_CF_ANALYTICS_TOKEN`).
 - Font resolved to self-hosted Fira Sans after confirming Frutiger is not web-licensed.
 - Tutorial featured images (first pass): wired real WordPress-sourced images for the planeur
   (folding diagram) and classique (model render) tutorials; the faucon, rond, lanceur, and
