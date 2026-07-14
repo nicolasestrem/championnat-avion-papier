@@ -5,7 +5,7 @@
     "Troisième édition mérignacaise, organisée le 17 mai 2025 au Complexe sportif Daniel Colombier, dans la continuité des éditions précédentes.",
     "Une journée festive et familiale rythmée par les phases qualificatives, les finales de l'après-midi, des concerts et de nombreuses animations pour la jeunesse.",
     "Deux épreuves reines toujours au programme : la distance de vol et la durée de vol, avec un classement enfants distinct du classement général adultes.",
-    "L'édition marque le passage du soutien à la protection de l'environnement vers la cause des Pompiers Solidaires, désormais bénéficiaire de l'événement."
+    "L'édition conserve la vocation solidaire de l'événement au profit de la protection des forêts contre les incendies (DFCI), avant le passage à la cause des Pompiers Solidaires en 2026."
   ],
   "records": [],
   "galerie": [
@@ -16,5 +16,5 @@
     { "image": "../../assets/editions/edition-2025-05.avif", "alt": "Ambiance festive sur la zone de lancer, édition 2025" },
     { "image": "../../assets/editions/edition-2025-06.avif", "alt": "Remise des prix et participants du Championnat 2025 à Mérignac" }
   ],
-  "beneficiaire": "Pompiers Solidaires"
+  "beneficiaire": "Défense des Forêts Contre les Incendies (DFCI)"
 }

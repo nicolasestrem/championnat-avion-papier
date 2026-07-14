@@ -9,21 +9,21 @@ image: "../../assets/tutoriels/fleche-etape-1.avif"
 imageAlt: "La Flèche Classique en papier A4, le modèle préféré des débutants"
 etapes:
   - texte: "Le pli central (la colonne vertébrale). Plie la feuille en deux dans le sens de la longueur (le bord gauche rejoint le bord droit). Appuie bien sur toute la longueur du pli avec ton ongle, puis déplie. Ce pli central est la ligne de symétrie de tout l'avion. Plus il est net et au centre exact, plus ton avion volera droit. Si cette ligne est même légèrement décalée, l'avion tirera sur un côté."
-    image: "../../assets/tutoriels/fleche-etape-2.avif"
+    image: "../../assets/tutoriels/fleche-etape-3.avif"
     alt: "Étape 1 Flèche Classique — le pli central en longueur"
   - texte: "Les coins supérieurs (la naissance du nez). Replie le coin supérieur droit vers le bas et vers l'intérieur, en faisant coïncider le bord droit supérieur avec la ligne centrale. Appuie sur le pli. Répète à l'identique avec le coin supérieur gauche, en visant une symétrie parfaite. Résultat : le haut de ta feuille forme maintenant un triangle, la pointe dirigée vers le bas. C'est le début du nez de l'avion."
-    image: "../../assets/tutoriels/fleche-etape-3.avif"
-    alt: "Étape 2 Flèche Classique — coins supérieurs repliés vers la ligne centrale"
   - texte: "Le double pli du nez (la flèche prend forme). C'est l'étape qui fait toute la différence entre un avion qui vole et un avion qui vole bien. Replie les bords inclinés des triangles (les hypoténuses) vers la ligne centrale, une seconde fois. Le bord droit diagonal vient se coller sur la ligne centrale, même chose à gauche. Tu obtiens un nez deux fois plus pointu, plus long, et beaucoup plus aérodynamique. Le papier est déjà en double épaisseur : appuie fort avec l'ongle."
-    image: "../../assets/tutoriels/fleche-etape-4.avif"
+    image: "../../assets/tutoriels/fleche-etape-2.avif"
     alt: "Étape 3 Flèche Classique — double pli du nez, la flèche prend forme"
   - texte: "Le grand pli longitudinal (le fuselage). Replie l'ensemble de l'avion en deux sur la ligne centrale, les plis précédents restant à l'intérieur. Le bord droit rejoint le bord gauche (pli montagne). Tu tiens maintenant dans ta main le fuselage de l'avion : un profil élancé en forme de coin, avec le nez pointu à une extrémité."
     image: "../../assets/tutoriels/fleche-etape-5.avif"
     alt: "Étape 4 Flèche Classique — grand pli longitudinal, le fuselage"
   - texte: "La formation des ailes. Pose l'avion sur ta surface plane, le fuselage en bas. Replie l'aile supérieure (la couche du dessus) vers le bas, en laissant environ 2 à 2,5 cm de fuselage visible en dessous du pli d'aile. Ce rebord, c'est ce que tu tiendras lors du lancer. L'angle du pli d'aile doit être parallèle au bord inférieur du fuselage. Retourne l'avion et plie la seconde aile exactement de la même manière — la symétrie est critique."
-    image: "../../assets/tutoriels/fleche-etape-6.avif"
+    image: "../../assets/tutoriels/fleche-etape-4.avif"
     alt: "Étape 5 Flèche Classique — formation des ailes"
   - texte: "L'ouverture et le dièdre. Ouvre les deux ailes à l'horizontale. Observe ton avion de face : les ailes doivent former une ligne droite parfaitement symétrique. Si une aile est plus haute que l'autre, l'avion tournera inévitablement en vol. Pour une stabilité optimale, relève légèrement les deux ailes pour former un dièdre positif — un angle d'environ 5 à 8° par rapport à l'horizontale. Ce petit détail empêche les vrilles involontaires."
+    image: "../../assets/tutoriels/fleche-etape-7.avif"
+    alt: "Étape 6 Flèche Classique — ouverture des ailes et dièdre"
   - texte: "Les réglages fins (les élevons). Retrousse délicatement les extrémités arrière des ailes (les élevons) vers le haut, sur environ 5 mm. Ce petit coup de pouce aérodynamique crée de la portance et allonge le vol. Fais un vol test. Si l'avion plonge, relève un peu plus les élevons. S'il monte trop vite et s'écrase en chandelle, aplatis-les légèrement. S'il dévie à gauche ou à droite, vérifie la symétrie des ailes."
     image: "../../assets/tutoriels/fleche-etape-8.avif"
     alt: "Étape 7 Flèche Classique — réglages fins des élevons et vol test"
@@ -61,7 +61,7 @@ Quelques mots sur le papier, car il détermine la moitié du résultat. Évite l
 
 ## Comment plier la Flèche Classique : les 7 étapes
 
-Pose ta feuille A4 devant toi en **mode portrait** (côté long vertical, 297 mm de hauteur). On va progresser du nez vers les ailes. Les cinq étapes illustrées ci-dessus construisent la structure ; les deux dernières (le dièdre et les élevons) sont des réglages que tu ajusteras à l'œil, avion de face.
+Pose ta feuille A4 devant toi en **mode portrait** (côté long vertical, 297 mm de hauteur). On va progresser du nez vers les ailes. Les premières étapes construisent la structure ; les deux dernières (le dièdre et les élevons) sont des réglages que tu ajusteras à l'œil, avion de face.
 
 ## Les secrets d'un bon lancer
 

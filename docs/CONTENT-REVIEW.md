@@ -2,6 +2,8 @@
 
 Tout le contenu français ci-dessous a été **rédigé/réécrit pour la migration** et doit être relu par vous avant la bascule DNS. Prévisualisez avec `npm run dev` puis ouvrez les URL.
 
+> **14/07/2026** — une passe de vérification automatisée (faits, pliages, langue, dérive vs WordPress) a été effectuée : constats, corrections déjà appliquées et décisions en attente dans **[CONTENT-REVIEW-FINDINGS.md](./CONTENT-REVIEW-FINDINGS.md)**. À lire avant la relecture page par page.
+
 ## Pages à relire en priorité (contenu nouveau ou réécrit)
 
 | Page | URL | Nature | À vérifier |

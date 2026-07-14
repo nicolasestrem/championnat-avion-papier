@@ -24,6 +24,8 @@ Le code du Worker d'auth est dans `workers/sveltia-cms-auth/` (aucun secret comm
 
 ⚠️ **Aucun enregistrement CMS avant la fusion de la PR #1** : le CMS écrit sur `main`, qui ne contient pas encore le site Astro. Test de connexion seul autorisé.
 
+✅ **Test de connexion réussi (14/07/2026)** sur la preview `*.workers.dev/admin/` : OAuth GitHub complet, interface Sveltia chargée avec les 8 collections. (Les compteurs affichent 0 tant que `main` n'a pas le contenu — attendu.) Le beacon Web Analytics a également été vérifié sur la preview (requête `cdn-cgi/rum` → 204). NB : la preview `*.workers.dev` est protégée par Cloudflare Access (org `leophir`) — connexion Access requise avant toute QA navigateur.
+
 ## 4. Checklist de bascule DNS (à faire APRÈS validation de la preview et revue du contenu)
 
 - [ ] **Aller-retour CMS complet juste après la fusion de la PR #1** : connexion sur `/admin/`, édition d'une entrée avec téléversement d'image, vérifier que le commit produit un chemin résolvable par `image()` et que le build Cloudflare passe (seule façon de confirmer les `media_folder` relatifs de `config.yml`).

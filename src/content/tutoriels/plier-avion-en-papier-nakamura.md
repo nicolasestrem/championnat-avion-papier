@@ -67,7 +67,7 @@ Le Nakamura fonctionne avec le même papier que la Flèche Classique. En revanch
 
 ## Comment plier le Planeur Nakamura : les 9 étapes
 
-Pose ta feuille A4 en **mode portrait** (côté long vertical). Le Nakamura se plie de haut en bas : on commence par construire un nez épais et lourd qui donnera de la masse à l'avant, puis on forme les ailes larges et plates qui assurent le vol plané. Suis les neuf étapes illustrées ci-dessus, dans l'ordre — chacune prépare la suivante.
+Pose ta feuille A4 en **mode portrait** (côté long vertical). Le Nakamura se plie de haut en bas : on commence par construire un nez épais et lourd qui donnera de la masse à l'avant, puis on forme les ailes larges et plates qui assurent le vol plané. Suis les neuf étapes ci-dessus, dans l'ordre — chacune prépare la suivante.
 
 ## Lancer un Nakamura : la technique douce
 
