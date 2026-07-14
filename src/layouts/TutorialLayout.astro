@@ -1,0 +1,134 @@
+---
+import { getCollection, getEntry, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import Hero from '../components/ui/Hero.astro';
+import StepList from '../components/ui/StepList.astro';
+import FaqAccordion from '../components/ui/FaqAccordion.astro';
+import TutorialCard from '../components/ui/TutorialCard.astro';
+import CtaBanner from '../components/ui/CtaBanner.astro';
+import FlightDivider from '../components/ui/FlightDivider.astro';
+import BreadcrumbSchema from '../components/seo/BreadcrumbSchema.astro';
+import HowToSchema from '../components/seo/HowToSchema.astro';
+import FaqSchema from '../components/seo/FaqSchema.astro';
+
+interface Props {
+  entry: CollectionEntry<'tutoriels'>;
+}
+
+const { entry } = Astro.props;
+const t = entry.data;
+const { Content } = await render(entry);
+
+const reglages = await getEntry('reglages', 'reglages');
+const r = reglages?.data;
+
+const DIFFICULTE_LABEL = { facile: 'Facile', intermediaire: 'Intermédiaire', avance: 'Avancé' } as const;
+const TYPE_VOL_LABEL = { distance: 'Distance', duree: 'Durée de vol', polyvalent: 'Polyvalent' } as const;
+
+const metaLabel = `${TYPE_VOL_LABEL[t.typeVol]} · ${DIFFICULTE_LABEL[t.difficulte]} · ${t.dureePliage}`;
+
+// "10 min" -> "PT10M" for schema.org HowTo.totalTime (best-effort).
+const minMatch = t.dureePliage.match(/(\d+)\s*min/i);
+const totalTime = minMatch ? `PT${minMatch[1]}M` : undefined;
+
+const faqItems = t.faq.map((f) => ({ question: f.q, reponse: f.r }));
+
+const trail = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Tutoriels', href: '/ressources-avions-papier/' },
+  { label: t.title, href: `/${entry.id}/` },
+];
+
+// Related tutorials: same flight type first, then any, excluding self and drafts.
+const all = (await getCollection('tutoriels', (e) => !e.data.draft && e.id !== entry.id));
+const sameType = all.filter((e) => e.data.typeVol === t.typeVol);
+const related = [...sameType, ...all.filter((e) => !sameType.includes(e))].slice(0, 3);
+---
+
+<BaseLayout title={t.seoTitle} description={t.seoDescription}>
+  <Fragment slot="head">
+    <HowToSchema title={t.title} description={t.seoDescription} etapes={t.etapes} totalTime={totalTime} />
+    {faqItems.length > 0 && <FaqSchema items={faqItems} />}
+    <BreadcrumbSchema trail={trail} />
+  </Fragment>
+
+  <Breadcrumbs trail={trail} />
+
+  <Hero
+    title={t.title}
+    subtitle={t.seoDescription}
+    dateLabel={metaLabel}
+    ctaLabel="S’inscrire au Championnat"
+    ctaHref={r?.helloAssoUrl ?? '#'}
+    image={t.image}
+    imageAlt={t.imageAlt}
+  />
+
+  <article class="mx-auto max-w-3xl px-4 py-10">
+    <div class="prose-cap max-w-none text-lg leading-relaxed [&_a]:text-sky-deep [&_a]:underline [&_h2]:mt-8 [&_h2]:font-brand [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-sky-deep [&_p]:mt-4">
+      <Content />
+    </div>
+
+    {t.materiel.length > 0 && (
+      <section class="mt-10 rounded-2xl border border-sky/15 bg-white p-6">
+        <h2 class="font-brand text-xl font-bold text-sky-deep">Le matériel</h2>
+        <ul class="mt-3 space-y-2">
+          {t.materiel.map((m) => (
+            <li class="flex items-start gap-2 text-ink/85">
+              <svg aria-hidden="true" viewBox="0 0 24 24" class="mt-1 h-4 w-4 shrink-0 text-orange" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+              <span>{m}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <section class="mt-10">
+      <h2 class="font-brand text-2xl font-bold text-sky-deep">Les étapes du pliage</h2>
+      <div class="mt-6">
+        <StepList etapes={t.etapes} />
+      </div>
+    </section>
+
+    {faqItems.length > 0 && (
+      <section class="mt-12">
+        <h2 class="font-brand text-2xl font-bold text-sky-deep">Questions fréquentes</h2>
+        <div class="mt-6">
+          <FaqAccordion items={faqItems} />
+        </div>
+      </section>
+    )}
+  </article>
+
+  {related.length > 0 && (
+    <>
+      <FlightDivider />
+      <section class="mx-auto max-w-6xl px-4 py-6">
+        <h2 class="font-brand text-2xl font-bold text-sky-deep">À découvrir aussi</h2>
+        <ul class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {related.map((e) => (
+            <li>
+              <TutorialCard
+                title={e.data.title}
+                href={`/${e.id}/`}
+                image={e.data.image}
+                imageAlt={e.data.imageAlt}
+                difficulte={e.data.difficulte}
+                typeVol={e.data.typeVol}
+                dureePliage={e.data.dureePliage}
+              />
+            </li>
+          ))}
+        </ul>
+      </section>
+    </>
+  )}
+
+  <CtaBanner
+    heading="Prêt à faire décoller votre avion ?"
+    text={r ? `Rendez-vous le ${r.dateLabel} à ${r.ville}. Inscription ${r.tarifCompetiteur} par compétiteur.` : undefined}
+    href={r?.helloAssoUrl ?? '#'}
+    label="S’inscrire au Championnat"
+  />
+</BaseLayout>

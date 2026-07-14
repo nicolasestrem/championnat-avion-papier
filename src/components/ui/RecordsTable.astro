@@ -1,0 +1,44 @@
+---
+interface RecordRow {
+  categorie: string;
+  detenteur: string;
+  valeur: string;
+  annee: number;
+  actuel: boolean;
+}
+
+interface Props {
+  records: RecordRow[];
+}
+
+const { records } = Astro.props;
+---
+
+<div class="overflow-x-auto rounded-2xl bg-ink p-1 shadow-lg ring-1 ring-black/20">
+  <table class="w-full min-w-[36rem] border-collapse font-mono text-sm text-amber-100">
+    <caption class="sr-only">Records du monde de lancer d'avions en papier</caption>
+    <thead>
+      <tr class="text-left text-xs uppercase tracking-widest text-amber-300/70">
+        <th scope="col" class="px-4 py-3">Catégorie</th>
+        <th scope="col" class="px-4 py-3">Détenteur</th>
+        <th scope="col" class="px-4 py-3 text-right">Record</th>
+        <th scope="col" class="px-4 py-3 text-right">Année</th>
+      </tr>
+    </thead>
+    <tbody>
+      {records.map((rec) => (
+        <tr class="border-t border-white/10">
+          <td class="px-4 py-3 font-semibold tracking-wide text-white">
+            {rec.categorie}
+            {rec.actuel && (
+              <span class="ml-2 inline-block rounded bg-orange px-1.5 py-0.5 align-middle text-[0.6rem] font-bold uppercase tracking-wider text-white">Actuel</span>
+            )}
+          </td>
+          <td class="px-4 py-3 text-amber-100/90">{rec.detenteur}</td>
+          <td class="px-4 py-3 text-right text-lg font-bold tabular-nums text-amber-300">{rec.valeur}</td>
+          <td class="px-4 py-3 text-right tabular-nums text-amber-100/70">{rec.annee}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

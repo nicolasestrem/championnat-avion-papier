@@ -1,0 +1,19 @@
+{
+  "annee": 2026,
+  "lieu": "Complexe sportif Daniel Colombier, Mérignac",
+  "faitsMarquants": [
+    "Quatrième édition mérignacaise, organisée le samedi 13 juin 2026 au Complexe sportif Daniel Colombier.",
+    "Première édition au profit des Pompiers Solidaires, après trois années de soutien à la défense des forêts contre les incendies (DFCI)."
+  ],
+  "records": [],
+  "galerie": [
+    { "image": "../../assets/editions/edition-2026-01.avif", "alt": "Bénévole du Rotary au stand du Championnat, édition 2026" },
+    { "image": "../../assets/editions/edition-2026-02.avif", "alt": "Stand de confiseries et boissons à l'entrée de l'événement, édition 2026" },
+    { "image": "../../assets/editions/edition-2026-03.avif", "alt": "Table d'accueil et d'inscription des participants, édition 2026" },
+    { "image": "../../assets/editions/edition-2026-04.avif", "alt": "Le stand des Pompiers Solidaires, bénéficiaires de l'édition 2026" },
+    { "image": "../../assets/editions/edition-2026-05.avif", "alt": "Visite du cockpit de l'Alphajet, édition 2026" },
+    { "image": "../../assets/editions/edition-2026-06.avif", "alt": "Le public dans le gymnase pour les finales, édition 2026" },
+    { "image": "../../assets/editions/edition-2026-07.avif", "alt": "Photo de groupe de la cérémonie de clôture dans le gymnase, édition 2026" }
+  ],
+  "beneficiaire": "Pompiers Solidaires"
+}

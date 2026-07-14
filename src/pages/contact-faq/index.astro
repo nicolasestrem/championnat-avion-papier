@@ -1,0 +1,118 @@
+---
+import { getEntry, getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import FaqAccordion from '../../components/ui/FaqAccordion.astro';
+import FaqSchema from '../../components/seo/FaqSchema.astro';
+
+const reglages = await getEntry('reglages', 'reglages');
+const r = reglages!.data;
+
+const faqEntries = (await getCollection('faq')).sort((a, b) => a.data.ordre - b.data.ordre);
+
+const CATEGORIES = [
+  { key: 'pratique', label: 'Infos pratiques' },
+  { key: 'inscription', label: 'Inscription & tarifs' },
+  { key: 'sur-place', label: 'Sur place' },
+  { key: 'general', label: 'Questions générales' },
+] as const;
+
+const grouped = CATEGORIES.map((c) => ({
+  ...c,
+  items: faqEntries
+    .filter((e) => e.data.categorie === c.key)
+    .map((e) => ({ question: e.data.question, reponse: e.data.reponse })),
+})).filter((g) => g.items.length > 0);
+
+// All FAQ items feed a single FAQPage schema.
+const allFaqItems = faqEntries.map((e) => ({ question: e.data.question, reponse: e.data.reponse }));
+
+const seoTitle = 'Contact & FAQ — Championnat du Monde de Lancer d’Avions en Papier à Mérignac';
+const seoDescription =
+  'Toutes les réponses pratiques sur le Championnat du Monde de lancer d’avions en papier à Mérignac : date, lieu, horaires, tarif, inscription, animations, restauration. Contactez l’organisation.';
+
+const breadcrumb = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Contact & FAQ', href: '/contact-faq/' },
+];
+
+// Google Calendar add link (all day), derived from reglages so it follows any
+// CMS date change instead of drifting from the visible details.
+const gcalStart = r.dateISO.slice(0, 10).replace(/-/g, '');
+const gcalEndDate = new Date(r.dateISO.slice(0, 10) + 'T00:00:00Z');
+gcalEndDate.setUTCDate(gcalEndDate.getUTCDate() + 1);
+const gcalEnd = gcalEndDate.toISOString().slice(0, 10).replace(/-/g, '');
+const gcalDetails = encodeURIComponent(
+  `Championnat du Monde de Lancer d’Avions en Papier — ${r.lieu}, ${r.ville}. Sélections ${r.horaireSelections}, finales ${r.horaireFinales}. Inscription : ${r.helloAssoUrl}`
+);
+const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+  'Championnat du Monde de Lancer d’Avions en Papier'
+)}&dates=${gcalStart}/${gcalEnd}&details=${gcalDetails}&location=${encodeURIComponent(`${r.lieu}, ${r.ville}`)}`;
+---
+
+<PageLayout title="Contact & FAQ" seoTitle={seoTitle} seoDescription={seoDescription} breadcrumb={breadcrumb}>
+  <Fragment slot="head">
+    {allFaqItems.length > 0 && <FaqSchema items={allFaqItems} />}
+  </Fragment>
+
+  <p class="text-lg text-ink/80">
+    Une question sur le Championnat ? Retrouvez ci-dessous l’essentiel à savoir pour préparer votre venue,
+    puis les réponses aux questions les plus fréquentes. Vous ne trouvez pas votre réponse ? Écrivez-nous.
+  </p>
+
+  <section class="mt-8 grid gap-4 sm:grid-cols-2">
+    <div class="rounded-2xl border border-sky/15 bg-white p-6">
+      <h2 class="font-brand text-xl font-bold text-sky-deep">Infos pratiques</h2>
+      <dl class="mt-4 space-y-3 text-ink/85">
+        <div><dt class="inline font-semibold">Date :</dt> <dd class="inline">{r.dateLabel}</dd></div>
+        <div><dt class="inline font-semibold">Lieu :</dt> <dd class="inline">{r.lieu}, {r.ville}</dd></div>
+        <div><dt class="inline font-semibold">Sélections :</dt> <dd class="inline">{r.horaireSelections}</dd></div>
+        <div><dt class="inline font-semibold">Finales :</dt> <dd class="inline">à partir de {r.horaireFinales}</dd></div>
+        <div><dt class="inline font-semibold">Tarif compétiteur :</dt> <dd class="inline">{r.tarifCompetiteur}</dd></div>
+        <div><dt class="inline font-semibold">Visiteurs :</dt> <dd class="inline">{r.entreeVisiteur}</dd></div>
+        <div><dt class="inline font-semibold">Au profit de :</dt> <dd class="inline">{r.beneficiaire}</dd></div>
+      </dl>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a
+          href={r.helloAssoUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center rounded-full bg-orange px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-orange/90"
+        >
+          S’inscrire sur HelloAsso
+        </a>
+        <a
+          href={gcalUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center rounded-full border border-sky/30 px-5 py-2.5 text-sm font-semibold text-sky-deep transition-colors hover:border-orange hover:text-orange"
+        >
+          Ajouter à Google Agenda
+        </a>
+      </div>
+    </div>
+
+    <div class="rounded-2xl border border-sky/15 bg-white p-6">
+      <h2 class="font-brand text-xl font-bold text-sky-deep">Nous contacter</h2>
+      <p class="mt-4 text-ink/85">
+        Une question, une demande de partenariat ou d’accréditation presse ? L’équipe d’organisation vous répond avec plaisir.
+      </p>
+      <p class="mt-4">
+        <a href={`mailto:${r.emailContact}`} class="font-semibold text-sky-deep underline hover:text-orange">{r.emailContact}</a>
+      </p>
+      <h3 class="mt-6 font-brand text-lg font-semibold text-sky-deep">Espace presse</h3>
+      <ul class="mt-2 space-y-1">
+        <li><a href="/presse/" class="text-sky-deep underline hover:text-orange">Dossier & revue de presse</a></li>
+        <li><a href="/files/communique-presse-2026.pdf" class="text-sky-deep underline hover:text-orange">Communiqué de presse 2026 (PDF)</a></li>
+      </ul>
+    </div>
+  </section>
+
+  {grouped.map((group) => (
+    <section class="mt-10">
+      <h2 class="font-brand text-2xl font-bold text-sky-deep">{group.label}</h2>
+      <div class="mt-4">
+        <FaqAccordion items={group.items} />
+      </div>
+    </section>
+  ))}
+</PageLayout>

@@ -1,0 +1,101 @@
+---
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import { NAV_ITEMS } from '../../lib/nav';
+import logo from '../../assets/event/logo-championnat.png';
+
+const reglages = await getEntry('reglages', 'reglages');
+const r = reglages?.data;
+const email = r?.emailContact ?? 'contact@championnatavionpapier.fr';
+const instagram = r?.instagram;
+const facebook = r?.facebook;
+const annee = new Date().getFullYear();
+
+const ROTARY_URL = 'https://www.rotary-merignac.fr/';
+const POMPIERS_URL = 'https://www.pompiers-solidaires.org/';
+---
+
+<footer class="mt-20 border-t border-sky/20 bg-white">
+  <div class="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="col-span-2 lg:col-span-1">
+      <Image
+        src={logo}
+        alt="Championnat du Monde de lancer d'avions en papier"
+        widths={[140, 220]}
+        sizes="180px"
+        class="h-11 w-auto"
+        loading="lazy"
+      />
+      {r && (
+        <p class="mt-4 text-sm text-ink/70">
+          {r.dateLabel}<br />
+          {r.lieu}, {r.ville}
+        </p>
+      )}
+      <p class="mt-3 text-sm text-ink/70">
+        Au profit des <strong class="font-semibold text-ink">{r?.beneficiaire ?? 'Pompiers Solidaires'}</strong>.
+      </p>
+    </div>
+
+    <nav aria-label="Navigation du pied de page">
+      <h2 class="font-brand text-sm font-bold uppercase tracking-wide text-sky-deep">Navigation</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        {NAV_ITEMS.map((item) => (
+          <li>
+            <a href={item.href} class="text-ink/75 transition-colors hover:text-orange">{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="font-brand text-sm font-bold uppercase tracking-wide text-sky-deep">Partenaires</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="/sponsors/" class="text-ink/75 transition-colors hover:text-orange">Nos partenaires</a></li>
+        <li>
+          <a href={ROTARY_URL} target="_blank" rel="noopener" class="text-ink/75 transition-colors hover:text-orange">Rotary Club de Mérignac</a>
+        </li>
+        <li>
+          <a href={POMPIERS_URL} target="_blank" rel="noopener" class="text-ink/75 transition-colors hover:text-orange">Pompiers Solidaires</a>
+        </li>
+        <li><a href="/presse/" class="text-ink/75 transition-colors hover:text-orange">Espace presse</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="font-brand text-sm font-bold uppercase tracking-wide text-sky-deep">Contact &amp; légal</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li>
+          <a href={`mailto:${email}`} class="text-ink/75 transition-colors hover:text-orange">{email}</a>
+        </li>
+        <li><a href="/mentions-legales/" class="text-ink/75 transition-colors hover:text-orange">Mentions légales</a></li>
+        <li><a href="/politique-de-confidentialite/" class="text-ink/75 transition-colors hover:text-orange">Politique de confidentialité</a></li>
+      </ul>
+
+      {(instagram || facebook) && (
+        <div class="mt-4 flex items-center gap-3">
+          {instagram && (
+            <a href={instagram} target="_blank" rel="noopener" aria-label="Instagram" class="text-sky-deep transition-colors hover:text-orange">
+              <svg aria-hidden="true" viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor">
+                <path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2Zm0 3.13A6.67 6.67 0 1 0 18.67 12 6.67 6.67 0 0 0 12 5.33Zm0 11a4.33 4.33 0 1 1 4.33-4.33A4.33 4.33 0 0 1 12 16.33Zm6.9-11.24a1.56 1.56 0 1 1-1.55-1.56 1.56 1.56 0 0 1 1.56 1.56Z" />
+              </svg>
+            </a>
+          )}
+          {facebook && (
+            <a href={facebook} target="_blank" rel="noopener" aria-label="Facebook" class="text-sky-deep transition-colors hover:text-orange">
+              <svg aria-hidden="true" viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor">
+                <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z" />
+              </svg>
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+
+  <div class="border-t border-sky/10">
+    <div class="mx-auto max-w-6xl px-4 py-4 text-xs text-ink/60">
+      © {annee} Championnat du Monde de lancer d’avions en papier — Organisé par le Rotary Club de Mérignac.
+    </div>
+  </div>
+</footer>

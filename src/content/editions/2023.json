@@ -1,0 +1,26 @@
+{
+  "annee": 2023,
+  "lieu": "Complexe sportif Daniel Colombier, Mérignac",
+  "parrain": "Julien Mathieu",
+  "faitsMarquants": [
+    "Première édition mérignacaise du Championnat du Monde de Lancer d'Avions en Papier, après cinq années d'existence à Gastes, dans les Landes.",
+    "Reprise de l'organisation par le Rotary Club de Mérignac, avec le soutien du Rotaract Bordeaux Lys, qui installe durablement l'événement dans la capitale aéronautique de Nouvelle-Aquitaine.",
+    "Parrainage de Julien Mathieu, champion de France de lancer d'avions en papier, venu encourager les compétiteurs et partager ses techniques.",
+    "Lancement de nouveaux ateliers pédagogiques et arrivée de partenaires locaux, qui donnent à la journée sa dimension festive et intergénérationnelle."
+  ],
+  "records": [],
+  "galerie": [
+    { "image": "../../assets/editions/edition-2023-01.avif", "alt": "Briefing des bénévoles du Rotary sur la zone de lancer, édition 2023" },
+    { "image": "../../assets/editions/edition-2023-02.avif", "alt": "Démonstration de lancer d'avion en papier sur le terrain, édition 2023" },
+    { "image": "../../assets/editions/edition-2023-03.avif", "alt": "Un pilote présente le cockpit de l'Alphajet à un jeune visiteur, édition 2023" },
+    { "image": "../../assets/editions/edition-2023-04.avif", "alt": "Un enfant installé dans le cockpit de l'Alphajet, édition 2023" },
+    { "image": "../../assets/editions/edition-2023-05.avif", "alt": "Table d'inscription avec avion en papier, édition 2023" },
+    { "image": "../../assets/editions/edition-2023-06.avif", "alt": "Le stand d'accueil et d'inscription sous le barnum, édition 2023" },
+    { "image": "../../assets/editions/edition-2023-07.avif", "alt": "Bénévole du Rotary près du repère des 10 mètres sur la zone de lancer, édition 2023" },
+    { "image": "../../assets/editions/edition-2023-08.avif", "alt": "Atelier de pliage pour les enfants autour du tableau, édition 2023" },
+    { "image": "../../assets/editions/edition-2023-09.avif", "alt": "Selfie de bénévoles et participants du Championnat, édition 2023" },
+    { "image": "../../assets/editions/edition-2023-10.avif", "alt": "Lancer d'avion en papier en pleine action, édition 2023" },
+    { "image": "../../assets/editions/edition-2023-11.avif", "alt": "Jeune participant au Championnat, édition 2023" }
+  ],
+  "beneficiaire": "Défense des Forêts Contre les Incendies (DFCI)"
+}

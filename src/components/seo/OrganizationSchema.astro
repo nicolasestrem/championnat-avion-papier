@@ -1,0 +1,19 @@
+---
+import JsonLd from './JsonLd.astro';
+import { getEntry } from 'astro:content';
+import { buildOrganization } from '../../lib/schema';
+import { SITE, absolute } from '../../lib/seo';
+
+const reglages = await getEntry('reglages', 'reglages');
+const sameAs = [reglages?.data.instagram, reglages?.data.facebook].filter(
+  (v): v is string => typeof v === 'string' && v.length > 0
+);
+
+const data = buildOrganization({
+  url: SITE.url,
+  logo: absolute(SITE.defaultImage),
+  sameAs,
+});
+---
+
+<JsonLd data={data} />

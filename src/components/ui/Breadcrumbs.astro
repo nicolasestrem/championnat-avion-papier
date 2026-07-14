@@ -1,0 +1,36 @@
+---
+interface Crumb {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  trail: Crumb[];
+}
+
+const { trail } = Astro.props;
+---
+
+{trail.length > 0 && (
+  <nav aria-label="Fil d'Ariane" class="mx-auto max-w-6xl px-4 py-4">
+    <ol class="flex flex-wrap items-center gap-1 text-sm text-ink/60">
+      {trail.map((crumb, i) => {
+        const last = i === trail.length - 1;
+        return (
+          <li class="flex items-center gap-1">
+            {last ? (
+              <span aria-current="page" class="font-medium text-ink/80">{crumb.label}</span>
+            ) : (
+              <>
+                <a href={crumb.href} class="transition-colors hover:text-orange">{crumb.label}</a>
+                <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 opacity-50" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 6l6 6-6 6" />
+                </svg>
+              </>
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  </nav>
+)}

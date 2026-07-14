@@ -1,0 +1,16 @@
+---
+import JsonLd from './JsonLd.astro';
+import { buildHowTo } from '../../lib/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  etapes: { texte: string }[];
+  totalTime?: string;
+}
+
+const { title, description, etapes, totalTime } = Astro.props;
+const data = buildHowTo(title, description, etapes, totalTime);
+---
+
+<JsonLd data={data} />

@@ -1,0 +1,24 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import TutorialLayout from '../../layouts/TutorialLayout.astro';
+
+// Flat legacy URLs: each tutorial renders at its top-level slug
+// (e.g. /plier-avion-en-papier-nakamura/). Only non-draft tutoriels are
+// emitted — an explicit allow-list that cannot collide with other
+// top-level pages because their slugs are distinct from every page directory.
+export async function getStaticPaths() {
+  const tutoriels = await getCollection('tutoriels', (e) => !e.data.draft);
+  return tutoriels.map((entry) => ({
+    params: { tutoriel: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'tutoriels'>;
+}
+
+const { entry } = Astro.props;
+---
+
+<TutorialLayout entry={entry} />

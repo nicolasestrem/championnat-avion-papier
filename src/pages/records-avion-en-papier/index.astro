@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import RecordsTable from '../../components/ui/RecordsTable.astro';
+import CtaBanner from '../../components/ui/CtaBanner.astro';
+import { getEntry } from 'astro:content';
+
+const reglages = await getEntry('reglages', 'reglages');
+const r = reglages!.data;
+
+const records = (await getCollection('records'))
+  .map((e) => e.data)
+  .sort((a, b) => {
+    if (a.actuel !== b.actuel) return a.actuel ? -1 : 1;
+    return b.annee - a.annee;
+  });
+
+const seoTitle = 'Record du monde d’avion en papier : distance et durée de vol';
+const seoDescription =
+  'Quel est le record du monde de l’avion en papier ? Distance (88,31 m en 2022), durée de vol, meilleurs lancers… Découvrez les records officiels et ceux à battre au Championnat de Mérignac.';
+
+const breadcrumb = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Le Championnat', href: '/histoire-championnat-avion-papier/' },
+  { label: 'Records', href: '/records-avion-en-papier/' },
+];
+---
+
+<PageLayout title="Records du monde d’avion en papier" seoTitle={seoTitle} seoDescription={seoDescription} breadcrumb={breadcrumb}>
+  <p class="text-lg text-ink/80">
+    Jusqu’où, et combien de temps, un avion en papier peut-il voler ? La discipline tient deux grands records :
+    la <strong>distance de vol</strong> et la <strong>durée de vol</strong>. Voici les références mondiales et les
+    performances marquantes du Championnat — autant de défis à relever le jour J.
+  </p>
+
+  <div class="mt-8">
+    <RecordsTable records={records} />
+  </div>
+
+  <p class="mt-6 text-sm text-ink/60">
+    Les records marqués « Actuel » constituent aujourd’hui la référence dans leur catégorie. Certaines valeurs
+    historiques (éditions passées) sont conservées à titre de repère.
+  </p>
+
+  <CtaBanner
+    heading="À vous de viser le record"
+    text={`Rendez-vous le ${r.dateLabel} à ${r.ville}. Inscription ${r.tarifCompetiteur} par compétiteur.`}
+    href={r.helloAssoUrl}
+    label="S’inscrire au Championnat"
+  />
+</PageLayout>

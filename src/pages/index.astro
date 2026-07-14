@@ -1,0 +1,105 @@
+---
+import { getEntry, getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/ui/Hero.astro';
+import CtaBanner from '../components/ui/CtaBanner.astro';
+import FlightDivider from '../components/ui/FlightDivider.astro';
+import PhotoMosaic from '../components/ui/PhotoMosaic.astro';
+import SponsorGrid from '../components/ui/SponsorGrid.astro';
+import EventSchema from '../components/seo/EventSchema.astro';
+import OrganizationSchema from '../components/seo/OrganizationSchema.astro';
+import photoAtelier2023 from '../assets/editions/edition-2023-08.avif';
+import photoPliage2025 from '../assets/editions/edition-2025-04.avif';
+import photoAlphajet2026 from '../assets/editions/edition-2026-05.avif';
+import photoAmbiance2025 from '../assets/editions/edition-2025-05.avif';
+import photoFinales2026 from '../assets/editions/edition-2026-06.avif';
+
+const reglages = await getEntry('reglages', 'reglages');
+const r = reglages!.data;
+
+const page = await getEntry('pages', 'accueil');
+const { Content } = await render(page!);
+
+const sponsors = (await getCollection('sponsors'))
+  .sort((a, b) => a.data.ordre - b.data.ordre)
+  .map((s) => ({ nom: s.data.nom, url: s.data.url, logo: s.data.logo, descriptif: s.data.descriptif }));
+
+const mosaicItems = [
+  { image: photoAtelier2023, alt: 'Atelier de pliage pour les enfants sur la zone de lancer, édition 2023', href: '/editions/2023/' },
+  { image: photoPliage2025, alt: 'Pliage d’un avion en papier sur les gabarits, édition 2025', href: '/editions/2025/' },
+  { image: photoAlphajet2026, alt: 'Visite du cockpit de l’Alphajet, édition 2026', href: '/editions/2026/' },
+  { image: photoAmbiance2025, alt: 'Le public sous les drapeaux des nations, édition 2025', href: '/editions/2025/' },
+  { image: photoFinales2026, alt: 'Le public dans le gymnase pour les finales, édition 2026', href: '/editions/2026/' },
+];
+
+const eventInput = {
+  dateISO: r.dateISO,
+  lieu: r.lieu,
+  ville: r.ville,
+  tarifCompetiteur: r.tarifCompetiteur,
+  helloAssoUrl: r.helloAssoUrl,
+  beneficiaire: r.beneficiaire,
+};
+---
+
+<BaseLayout title={page!.data.seoTitle} description={page!.data.seoDescription} image={page!.data.image?.src}>
+  <Fragment slot="head">
+    <EventSchema reglages={eventInput} />
+    <OrganizationSchema />
+  </Fragment>
+
+  <Hero
+    title="Championnat du Monde de Lancer d’Avions en Papier"
+    subtitle={`Pliez, lancez, visez le record du monde — au profit des ${r.beneficiaire}. Une journée festive et familiale à ${r.ville}.`}
+    dateLabel={`${r.dateLabel} · ${r.lieu}, ${r.ville}`}
+    ctaLabel="S’inscrire"
+    ctaHref={r.helloAssoUrl}
+    image={page!.data.image}
+    imageAlt={page!.data.imageAlt}
+  />
+
+  <article class="mx-auto max-w-3xl px-4 py-10">
+    <div class="prose-cap text-lg leading-relaxed [&_a]:text-sky-deep [&_a]:underline [&_blockquote]:mt-6 [&_blockquote]:border-l-4 [&_blockquote]:border-sky/40 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-ink/70 [&_h2]:mt-10 [&_h2]:font-brand [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-sky-deep [&_li]:mt-1 [&_p]:mt-4 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-6">
+      <Content />
+    </div>
+  </article>
+
+  <section class="mx-auto max-w-6xl px-4 py-10">
+    <div class="text-center">
+      <h2 class="font-brand text-2xl font-bold text-sky-deep sm:text-3xl">Le Championnat en images</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-ink/70">
+        Ateliers de pliage, cockpit d’Alphajet, drapeaux des nations et finales en gymnase : quelques instantanés des éditions précédentes à Mérignac.
+      </p>
+    </div>
+    <div class="mt-8">
+      <PhotoMosaic items={mosaicItems} />
+    </div>
+    <div class="mt-6 text-center">
+      <a href="/editions/2026/" class="font-semibold text-sky-deep underline hover:text-orange">Revivre les éditions précédentes</a>
+    </div>
+  </section>
+
+  <FlightDivider />
+
+  <section class="mx-auto max-w-6xl px-4 py-10">
+    <div class="text-center">
+      <h2 class="font-brand text-2xl font-bold text-sky-deep sm:text-3xl">Nos partenaires</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-ink/70">
+        Le Championnat prend son envol grâce à la générosité des entreprises, institutions et associations de la métropole bordelaise.
+      </p>
+    </div>
+    <div class="mt-8">
+      <SponsorGrid sponsors={sponsors} />
+    </div>
+    <div class="mt-6 text-center">
+      <a href="/sponsors/" class="font-semibold text-sky-deep underline hover:text-orange">Découvrir tous nos partenaires</a>
+    </div>
+  </section>
+
+  <CtaBanner
+    heading={`Rendez-vous le ${r.dateLabel}`}
+    text={`${r.lieu}, ${r.ville}. Compétiteur ${r.tarifCompetiteur}, ${r.entreeVisiteur.toLowerCase()} pour les visiteurs. Au profit des ${r.beneficiaire}.`}
+    href={r.helloAssoUrl}
+    label="S’inscrire au Championnat"
+  />
+</BaseLayout>

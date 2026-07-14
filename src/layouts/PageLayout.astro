@@ -1,0 +1,39 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import BreadcrumbSchema from '../components/seo/BreadcrumbSchema.astro';
+
+interface Crumb {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  seoTitle: string;
+  seoDescription: string;
+  breadcrumb?: Crumb[];
+  image?: string;
+  noindex?: boolean;
+}
+
+const { title, seoTitle, seoDescription, breadcrumb = [], image, noindex } = Astro.props;
+---
+
+<BaseLayout title={seoTitle} description={seoDescription} image={image} noindex={noindex}>
+  <Fragment slot="head">
+    {breadcrumb.length > 0 && <BreadcrumbSchema trail={breadcrumb} />}
+    <slot name="head" />
+  </Fragment>
+
+  {breadcrumb.length > 0 && <Breadcrumbs trail={breadcrumb} />}
+
+  <div class="mx-auto max-w-6xl px-4 pb-16">
+    <header class="pt-2">
+      <h1 class="font-brand text-3xl font-bold text-sky-deep sm:text-4xl">{title}</h1>
+    </header>
+    <div class="mt-6 text-lg leading-relaxed text-ink/90 [&_a]:text-sky-deep [&_a]:underline [&_h2]:mt-8 [&_h2]:font-brand [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-sky-deep [&_h3]:mt-6 [&_h3]:font-brand [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-sky-deep [&_p]:mt-4 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:mt-4 [&_ol]:list-decimal [&_ol]:pl-6">
+      <slot />
+    </div>
+  </div>
+</BaseLayout>

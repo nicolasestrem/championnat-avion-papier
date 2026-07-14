@@ -1,0 +1,24 @@
+{
+  "annee": 2024,
+  "lieu": "Complexe sportif Daniel Colombier, Mérignac",
+  "participants": 300,
+  "nations": 14,
+  "faitsMarquants": [
+    "Deuxième édition mérignacaise et véritable tournant international : 300 participants venus de 14 pays se sont retrouvés sur la zone de lancer.",
+    "Des délégations de lycéens du Brésil, d'Argentine, de Taïwan et de Thaïlande ont fait le déplacement, donnant à la compétition une ampleur mondiale.",
+    "Kevin Cernik établit un nouveau record de distance adulte à 47 mètres, tandis que Benoît Maury remporte le prix du meilleur temps de vol avec plus de 7 secondes en l'air.",
+    "Un don de 5 000 € a été reversé à l'association DFCI (Défense des Forêts Contre les Incendies), fidèle à la vocation solidaire de l'événement."
+  ],
+  "records": [
+    { "categorie": "Distance adulte", "detenteur": "Kevin Cernik", "valeur": "47 m" },
+    { "categorie": "Durée de vol", "detenteur": "Benoît Maury", "valeur": "plus de 7 secondes" }
+  ],
+  "galerie": [
+    { "image": "../../assets/editions/edition-2024-01.avif", "alt": "Hélice d'avion en bois exposée au stand du chocolatier Cadiot-Badie, édition 2024" },
+    { "image": "../../assets/editions/edition-2024-02.avif", "alt": "Bénévole du Rotary Club de Mérignac sur la zone de lancer, édition 2024" },
+    { "image": "../../assets/editions/edition-2024-03.avif", "alt": "Tirage de la tombola avec les enfants, édition 2024" },
+    { "image": "../../assets/editions/edition-2024-04.avif", "alt": "Remise d'un ticket de tombola à un jeune participant, édition 2024" },
+    { "image": "../../assets/editions/edition-2024-05.avif", "alt": "Remise des prix devant le mur des partenaires, édition 2024" }
+  ],
+  "beneficiaire": "Défense des Forêts Contre les Incendies (DFCI)"
+}

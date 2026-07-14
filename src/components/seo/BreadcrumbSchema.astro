@@ -1,0 +1,14 @@
+---
+import JsonLd from './JsonLd.astro';
+import { buildBreadcrumb } from '../../lib/schema';
+import { absolute } from '../../lib/seo';
+
+interface Props {
+  trail: { label: string; href: string }[];
+}
+
+const { trail } = Astro.props;
+const data = buildBreadcrumb(trail.map((t) => ({ label: t.label, url: absolute(t.href) })));
+---
+
+<JsonLd data={data} />

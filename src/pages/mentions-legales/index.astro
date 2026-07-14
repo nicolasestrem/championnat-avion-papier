@@ -1,0 +1,21 @@
+---
+import { getEntry, render } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const page = await getEntry('pages', 'mentions-legales');
+const { Content } = await render(page!);
+
+const breadcrumb = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Mentions légales', href: '/mentions-legales/' },
+];
+---
+
+<PageLayout
+  title={page!.data.title}
+  seoTitle={page!.data.seoTitle}
+  seoDescription={page!.data.seoDescription}
+  breadcrumb={breadcrumb}
+>
+  <Content />
+</PageLayout>

@@ -1,0 +1,85 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import TutorialCard from '../../components/ui/TutorialCard.astro';
+import FlightDivider from '../../components/ui/FlightDivider.astro';
+
+const tutoriels = (await getCollection('tutoriels', (e) => !e.data.draft)).sort(
+  (a, b) => b.data.datePublication.getTime() - a.data.datePublication.getTime()
+);
+
+const GROUPS = [
+  {
+    key: 'distance',
+    label: 'Voler loin — épreuve de distance',
+    intro: 'Des avions fins et rapides, taillés pour fendre l’air et parcourir la plus grande distance.',
+  },
+  {
+    key: 'duree',
+    label: 'Voler longtemps — épreuve de durée',
+    intro: 'Des planeurs aux ailes larges, conçus pour rester le plus longtemps possible en l’air.',
+  },
+  {
+    key: 'polyvalent',
+    label: 'Polyvalents & accessoires',
+    intro: 'Des modèles équilibrés et des astuces, comme le lanceur, pour aller plus loin.',
+  },
+] as const;
+
+const grouped = GROUPS.map((g) => ({
+  ...g,
+  items: tutoriels.filter((t) => t.data.typeVol === g.key),
+})).filter((g) => g.items.length > 0);
+
+const seoTitle = 'Tutoriels avion en papier : plier un planeur, une flèche et plus';
+const seoDescription =
+  'Nos tutoriels pas à pas pour plier un avion en papier qui vole vraiment : planeur longue durée, flèche de distance, Nakamura, Intercepteur… Modèles faciles et avancés, avec photos et schéma HowTo.';
+
+const breadcrumb = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Tutoriels', href: '/ressources-avions-papier/' },
+];
+---
+
+<PageLayout title="Tutoriels d’avions en papier" seoTitle={seoTitle} seoDescription={seoDescription} breadcrumb={breadcrumb}>
+  <p class="text-lg text-ink/80">
+    Envie de plier un <strong>avion en papier qui vole vraiment</strong> ? Que vous cherchiez un
+    <strong>planeur</strong> qui reste longtemps en l’air ou une <strong>flèche</strong> qui file droit et loin,
+    nos tutoriels vous guident pli après pli. Choisissez votre modèle selon l’épreuve visée, entraînez-vous,
+    puis venez tenter votre chance au Championnat.
+  </p>
+
+  <div class="mt-4 flex flex-wrap gap-3 text-sm">
+    <a href="/avion-papier-a-imprimer/" class="inline-flex items-center rounded-full border border-sky/30 px-4 py-2 font-semibold text-sky-deep transition-colors hover:border-orange hover:text-orange">
+      Gabarits à imprimer
+    </a>
+    <a href="/records-avion-en-papier/" class="inline-flex items-center rounded-full border border-sky/30 px-4 py-2 font-semibold text-sky-deep transition-colors hover:border-orange hover:text-orange">
+      Records du monde à battre
+    </a>
+  </div>
+
+  {grouped.map((group, i) => (
+    <>
+      {i > 0 && <FlightDivider />}
+      <section class="mt-8">
+        <h2 class="font-brand text-2xl font-bold text-sky-deep">{group.label}</h2>
+        <p class="mt-2 text-ink/70">{group.intro}</p>
+        <ul class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {group.items.map((t) => (
+            <li>
+              <TutorialCard
+                title={t.data.title}
+                href={`/${t.id}/`}
+                image={t.data.image}
+                imageAlt={t.data.imageAlt}
+                difficulte={t.data.difficulte}
+                typeVol={t.data.typeVol}
+                dureePliage={t.data.dureePliage}
+              />
+            </li>
+          ))}
+        </ul>
+      </section>
+    </>
+  ))}
+</PageLayout>

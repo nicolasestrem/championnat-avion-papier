@@ -1,0 +1,20 @@
+{
+  "annee": 2025,
+  "lieu": "Complexe sportif Daniel Colombier, Mérignac",
+  "faitsMarquants": [
+    "Troisième édition mérignacaise, organisée le 17 mai 2025 au Complexe sportif Daniel Colombier, dans la continuité des éditions précédentes.",
+    "Une journée festive et familiale rythmée par les phases qualificatives, les finales de l'après-midi, des concerts et de nombreuses animations pour la jeunesse.",
+    "Deux épreuves reines toujours au programme : la distance de vol et la durée de vol, avec un classement enfants distinct du classement général adultes.",
+    "L'édition conserve la vocation solidaire de l'événement au profit de la protection des forêts contre les incendies (DFCI), avant le passage à la cause des Pompiers Solidaires en 2026."
+  ],
+  "records": [],
+  "galerie": [
+    { "image": "../../assets/editions/edition-2025-01.avif", "alt": "Lancer d'avion en papier lors de l'édition 2025 à Mérignac" },
+    { "image": "../../assets/editions/edition-2025-02.avif", "alt": "Compétiteurs concentrés avant leur lancer, édition 2025" },
+    { "image": "../../assets/editions/edition-2025-03.avif", "alt": "Public et familles réunis au Championnat 2025 à Mérignac" },
+    { "image": "../../assets/editions/edition-2025-04.avif", "alt": "Avion en papier en plein vol pendant les qualifications 2025" },
+    { "image": "../../assets/editions/edition-2025-05.avif", "alt": "Ambiance festive sur la zone de lancer, édition 2025" },
+    { "image": "../../assets/editions/edition-2025-06.avif", "alt": "Remise des prix et participants du Championnat 2025 à Mérignac" }
+  ],
+  "beneficiaire": "Défense des Forêts Contre les Incendies (DFCI)"
+}

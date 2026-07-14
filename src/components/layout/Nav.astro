@@ -1,0 +1,115 @@
+---
+import { NAV_ITEMS, isActive } from '../../lib/nav';
+
+interface Props {
+  variant: 'desktop' | 'mobile';
+  pathname: string;
+}
+
+const { variant, pathname } = Astro.props;
+---
+
+{variant === 'desktop' ? (
+  <ul class="flex items-center gap-1">
+    {NAV_ITEMS.map((item) => {
+      const active = isActive(item.href, pathname, item.children);
+      return (
+        <li class="group relative">
+          <a
+            href={item.href}
+            aria-current={active ? 'page' : undefined}
+            class:list={[
+              'inline-flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-orange',
+              active ? 'text-orange' : 'text-sky-deep',
+            ]}
+          >
+            {item.label}
+            {item.children && (
+              <svg aria-hidden="true" viewBox="0 0 12 12" class="ml-1 h-2.5 w-2.5 fill-current opacity-70">
+                <path d="M6 8 1.5 3.5 2.9 2 6 5.2 9.1 2l1.4 1.5z" />
+              </svg>
+            )}
+          </a>
+          {item.children && (
+            <ul
+              class="invisible absolute left-0 top-full z-50 min-w-52 rounded-lg border border-sky/20 bg-white p-1 opacity-0 shadow-lg transition-all group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+            >
+              {item.children.map((child) => {
+                const childActive = isActive(child.href, pathname);
+                return (
+                  <li>
+                    <a
+                      href={child.href}
+                      aria-current={childActive ? 'page' : undefined}
+                      class:list={[
+                        'block rounded-md px-3 py-2 text-sm transition-colors hover:bg-paper hover:text-orange',
+                        childActive ? 'text-orange' : 'text-ink/80',
+                      ]}
+                    >
+                      {child.label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </li>
+      );
+    })}
+  </ul>
+) : (
+  <ul class="flex flex-col gap-1">
+    {NAV_ITEMS.map((item) => {
+      const active = isActive(item.href, pathname, item.children);
+      return item.children ? (
+        <li>
+          <details open={active}>
+            <summary
+              class:list={[
+                'flex cursor-pointer list-none items-center justify-between rounded-md px-3 py-3 text-base font-medium marker:content-none',
+                active ? 'text-orange' : 'text-sky-deep',
+              ]}
+            >
+              {item.label}
+              <svg aria-hidden="true" viewBox="0 0 12 12" class="h-3 w-3 fill-current opacity-70 transition-transform">
+                <path d="M6 8 1.5 3.5 2.9 2 6 5.2 9.1 2l1.4 1.5z" />
+              </svg>
+            </summary>
+            <ul class="flex flex-col gap-0.5 pb-2 pl-4">
+              {item.children.map((child) => {
+                const childActive = isActive(child.href, pathname);
+                return (
+                  <li>
+                    <a
+                      href={child.href}
+                      aria-current={childActive ? 'page' : undefined}
+                      class:list={[
+                        'block rounded-md px-3 py-2 text-sm transition-colors hover:text-orange',
+                        childActive ? 'text-orange' : 'text-ink/80',
+                      ]}
+                    >
+                      {child.label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </details>
+        </li>
+      ) : (
+        <li>
+          <a
+            href={item.href}
+            aria-current={active ? 'page' : undefined}
+            class:list={[
+              'block rounded-md px-3 py-3 text-base font-medium transition-colors hover:text-orange',
+              active ? 'text-orange' : 'text-sky-deep',
+            ]}
+          >
+            {item.label}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+)}

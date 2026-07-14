@@ -1,0 +1,21 @@
+---
+import BaseHead from '../components/seo/BaseHead.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import '../styles/global.css';
+interface Props { title: string; description: string; image?: string; canonical?: string; noindex?: boolean; }
+const { title, description, image, canonical, noindex } = Astro.props;
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <BaseHead {title} {description} {image} {canonical} {noindex} />
+    <slot name="head" />
+  </head>
+  <body>
+    <Header />
+    <main><slot /></main>
+    <Footer />
+    <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token":"9639d2620d9c47999f9498cf338a5330"}`}></script>
+  </body>
+</html>
