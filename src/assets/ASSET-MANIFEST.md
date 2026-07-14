@@ -56,8 +56,10 @@ Source images `etape_1..8_result.avif`. In the post body: `etape_1` = image d'in
 
 | Asset path | Description FR | Édition |
 | --- | --- | --- |
+| `src/assets/editions/edition-2023-01.avif` … `edition-2023-11.avif` | Photos de l'édition du 27 mai 2023 (ex-`IMG_59xx`, dates EXIF vérifiées ; les clichés 04 et 11 sont les variantes `_censored` avec visages d'enfants floutés) | `/editions/2023/` |
+| `src/assets/editions/edition-2024-01.avif` … `edition-2024-05.avif` | Photos de l'édition du 1ᵉʳ juin 2024 (ex-`IMG_82xx/83xx`, dates EXIF vérifiées ; 03/04/05 sont les variantes `_censored`). Écartés : IMG_8304–8307 (cadrages têtes coupées), doublons de rafale | `/editions/2024/` |
 | `src/assets/editions/edition-2025-01.avif` … `edition-2025-06.avif` | Photos de la compétition du 17 mai 2025 à Mérignac (lancers, participants, ambiance) — 6 clichés (ex-`PXL_20250517_*_result`) | `/editions/2025/` |
-| `src/assets/editions/edition-2026-01.avif` … `edition-2026-04.avif` | Photos de l'édition du 13 juin 2026 (ex-`WhatsApp-Image-2026-06-13-*_result`) — 4 clichés | `/editions/2026/` (si créée) |
+| `src/assets/editions/edition-2026-01.avif` … `edition-2026-07.avif` | Photos de l'édition du 13 juin 2026 (ex-`WhatsApp-Image-2026-06-13-*_result`) — 7 clichés dont stand Pompiers Solidaires, Alphajet, finales et cérémonie au gymnase | `/editions/2026/` |
 
 ## Presse — `src/assets/press/`
 

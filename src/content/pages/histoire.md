@@ -29,10 +29,10 @@ Chaque édition est l'occasion de tenter de nouvelles performances. La référen
 | 2020 – Aucune | — | Édition annulée en raison de la pandémie de COVID-19. |
 | 2021 – Gastes (Landes) | 3ᵉ édition | Reprise post-pandémie, dans un format restreint. |
 | 2022 – Gastes (Landes) | 4ᵉ édition | Dernière édition à Gastes avant le transfert. Record du monde de distance : 88,31 m (équipe américaine). |
-| 2023 – Mérignac (Gironde) | 1ʳᵉ éd. Mérignac | Reprise par le Rotary Club de Mérignac. Parrain : Julien Mathieu. Nouveaux ateliers et partenaires. |
-| 2024 – Mérignac (Gironde) | 2ᵉ éd. Mérignac | 300 participants, 14 pays représentés. Records : Kevin Cernik (47 m) et Benoît Maury (> 7 s). Don de 5 000 € à la DFCI (Défense des Forêts Contre les Incendies). |
-| 2025 – Mérignac (Gironde) | 3ᵉ éd. Mérignac | Édition tenue le 17 mai 2025, dans la continuité festive et familiale des précédentes. |
-| 2026 – Mérignac (Gironde) | 4ᵉ éd. Mérignac | Samedi 13 juin 2026, au Complexe sportif Daniel Colombier, au profit des Pompiers Solidaires. |
+| [2023 – Mérignac (Gironde)](/editions/2023/) | 1ʳᵉ éd. Mérignac | Reprise par le Rotary Club de Mérignac. Parrain : Julien Mathieu. Nouveaux ateliers et partenaires. |
+| [2024 – Mérignac (Gironde)](/editions/2024/) | 2ᵉ éd. Mérignac | 300 participants, 14 pays représentés. Records : Kevin Cernik (47 m) et Benoît Maury (> 7 s). Don de 5 000 € à la DFCI (Défense des Forêts Contre les Incendies). |
+| [2025 – Mérignac (Gironde)](/editions/2025/) | 3ᵉ éd. Mérignac | Édition tenue le 17 mai 2025, dans la continuité festive et familiale des précédentes. |
+| [2026 – Mérignac (Gironde)](/editions/2026/) | 4ᵉ éd. Mérignac | Samedi 13 juin 2026, au Complexe sportif Daniel Colombier, au profit des Pompiers Solidaires. |
 
 ## Le Rotary Club de Mérignac aux commandes
 

@@ -13,5 +13,12 @@
     { "categorie": "Distance adulte", "detenteur": "Kevin Cernik", "valeur": "47 m" },
     { "categorie": "Durée de vol", "detenteur": "Benoît Maury", "valeur": "plus de 7 secondes" }
   ],
+  "galerie": [
+    { "image": "../../assets/editions/edition-2024-01.avif", "alt": "Hélice d'avion en bois exposée au stand du chocolatier Cadiot-Badie, édition 2024" },
+    { "image": "../../assets/editions/edition-2024-02.avif", "alt": "Bénévole du Rotary Club de Mérignac sur la zone de lancer, édition 2024" },
+    { "image": "../../assets/editions/edition-2024-03.avif", "alt": "Tirage de la tombola avec les enfants, édition 2024" },
+    { "image": "../../assets/editions/edition-2024-04.avif", "alt": "Remise d'un ticket de tombola à un jeune participant, édition 2024" },
+    { "image": "../../assets/editions/edition-2024-05.avif", "alt": "Remise des prix devant le mur des partenaires, édition 2024" }
+  ],
   "beneficiaire": "Défense des Forêts Contre les Incendies (DFCI)"
 }

@@ -17,7 +17,7 @@ export const NAV_ITEMS: NavItem[] = [
     children: [
       { label: 'Histoire', href: '/histoire-championnat-avion-papier/' },
       { label: 'Activités', href: '/activites/' },
-      { label: 'Éditions', href: '/editions/2025/' },
+      { label: 'Éditions', href: '/editions/2026/' },
       { label: 'Records', href: '/records-avion-en-papier/' },
     ],
   },

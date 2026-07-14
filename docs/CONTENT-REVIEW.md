@@ -17,7 +17,7 @@ Tout le contenu français ci-dessous a été **rédigé/réécrit pour la migrat
 | FAQ (21 questions) | `/contact-faq/` | **Élargi** ~200 mots → 21 Q/R | Exactitude des infos pratiques (tarifs, horaires, accès). |
 | Records | `/records-avion-en-papier/` | Nouveau | Exactitude des records/années/détenteurs. |
 | À imprimer | `/avion-papier-a-imprimer/` | Nouveau | Le PDF proposé est le bon. |
-| Éditions 2023/24/25 | `/editions/2025/` etc. | Nouveau | Participants, nations, faits marquants. |
+| Éditions 2023/24/25/26 | `/editions/2026/` etc. | Nouveau | Participants, nations, faits marquants. **Galeries photos ajoutées le 14/07/2026** (2023 : 11 clichés, 2024 : 5, 2025 : 6, 2026 : 7) — trier sur la preview les photos à retirer (visages identifiables, selfie 2023). |
 | Mentions légales | `/mentions-legales/` | Nouveau | **Entité juridique / adresse / directeur de publication à confirmer** (marqué d'un TODO dans le fichier). |
 | Presse / Sponsors | `/presse/`, `/sponsors/` | Migré | Citations, liens et descriptifs des 13 partenaires. |
 
