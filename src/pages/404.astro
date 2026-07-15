@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Page introuvable — Championnat du Monde de Lancer d’Avions en Papier';
+const description =
+  'Cette page n’existe pas ou a été déplacée. Retrouvez le programme du Championnat, les tutoriels de pliage et toutes les infos pratiques.';
+---
+
+<BaseLayout {title} {description} noindex>
+  <section class="mx-auto max-w-3xl px-4 py-16 text-center sm:py-24">
+    <p class="font-brand text-7xl font-bold text-sky sm:text-8xl" aria-hidden="true">404</p>
+    <h1 class="mt-4 font-brand text-3xl font-bold text-sky-deep sm:text-4xl">
+      Cet avion s’est posé ailleurs&nbsp;✈️
+    </h1>
+    <p class="mt-4 text-lg text-ink/80">
+      La page que vous cherchez n’existe pas ou a été déplacée lors de la refonte du site.
+      Pas de panique&nbsp;: tout le contenu est toujours là.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a
+        href="/"
+        class="inline-flex items-center rounded-full bg-orange px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-orange/90"
+      >
+        Retour à l’accueil
+      </a>
+      <a
+        href="/ressources-avions-papier/"
+        class="inline-flex items-center rounded-full border border-sky/30 px-5 py-2.5 text-sm font-semibold text-sky-deep transition-colors hover:border-orange hover:text-orange"
+      >
+        Tutoriels de pliage
+      </a>
+      <a
+        href="/contact-faq/"
+        class="inline-flex items-center rounded-full border border-sky/30 px-5 py-2.5 text-sm font-semibold text-sky-deep transition-colors hover:border-orange hover:text-orange"
+      >
+        Contact & FAQ
+      </a>
+    </div>
+    <ul class="mt-10 space-y-2 text-ink/75">
+      <li><a href="/activites/" class="text-sky-deep underline hover:text-orange">Les activités du Championnat</a></li>
+      <li><a href="/blog/" class="text-sky-deep underline hover:text-orange">Le blog</a></li>
+      <li><a href="/records-avion-en-papier/" class="text-sky-deep underline hover:text-orange">Les records du monde</a></li>
+    </ul>
+  </section>
+</BaseLayout>

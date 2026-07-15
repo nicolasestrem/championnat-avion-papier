@@ -11,6 +11,7 @@ import FlightDivider from '../components/ui/FlightDivider.astro';
 import BreadcrumbSchema from '../components/seo/BreadcrumbSchema.astro';
 import HowToSchema from '../components/seo/HowToSchema.astro';
 import FaqSchema from '../components/seo/FaqSchema.astro';
+import { absolute } from '../lib/seo';
 
 interface Props {
   entry: CollectionEntry<'tutoriels'>;
@@ -34,12 +35,11 @@ const totalTime = minMatch ? `PT${minMatch[1]}M` : undefined;
 
 // Resolve tutorial images to absolute URLs for the HowTo JSON-LD (Google needs
 // absolute URLs). Steps without a per-step image simply omit it.
-const toAbsolute = (src: string) => new URL(src, Astro.site).href;
 const stepsForSchema = t.etapes.map((e) => ({
   texte: e.texte,
-  ...(e.image ? { image: toAbsolute(e.image.src) } : {}),
+  ...(e.image ? { image: absolute(e.image.src) } : {}),
 }));
-const howToImage = t.image ? toAbsolute(t.image.src) : undefined;
+const howToImage = t.image ? absolute(t.image.src) : undefined;
 
 const faqItems = t.faq.map((f) => ({ question: f.q, reponse: f.r }));
 
