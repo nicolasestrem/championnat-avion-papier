@@ -41,6 +41,7 @@
 /sitemap.xml                 /sitemap-index.xml                           301
 /sitemap_index.xml           /sitemap-index.xml                           301
 /wp-sitemap.xml              /sitemap-index.xml                           301
+/wp-sitemap-*                /sitemap-index.xml                           301
 /post-sitemap.xml            /sitemap-index.xml                           301
 /page-sitemap.xml            /sitemap-index.xml                           301
 /category-sitemap.xml        /sitemap-index.xml                           301
