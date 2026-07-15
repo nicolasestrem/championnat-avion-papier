@@ -36,11 +36,15 @@ Le code du Worker d'auth est dans `workers/sveltia-cms-auth/` (aucun secret comm
 - [ ] Sauvegarde complète du WordPress actuel.
 - [ ] Abaisser le TTL DNS (ex. 300 s) 24 h avant.
 - [ ] Ajouter `championnatavionpapier.fr` comme **domaine personnalisé** du Worker.
-- [ ] Garder le WordPress accessible sur un sous-domaine temporaire (rollback).
-- [ ] Re-tester les redirections sur le domaine live.
-- [ ] Soumettre `https://championnatavionpapier.fr/sitemap-index.xml` dans Search Console.
+- [ ] **Règle de redirection zone Cloudflare** : `www.championnatavionpapier.fr/*` → apex, 301 (impossible à exprimer dans `public/_redirects`, qui ne matche que des chemins).
+- [ ] **Désactiver les règles Cloudflare héritées de WordPress** si présentes : APO, Page Rules, Cache Rules (elles serviraient du cache WordPress périmé sur le nouveau site).
+- [ ] Vérifier que la preview `*.workers.dev` reste protégée par Cloudflare Access et que le worker OAuth conserve la variable `ALLOWED_DOMAINS=championnatavionpapier.fr`.
+- [ ] Garder le serveur WordPress **allumé et son chemin d'origine restaurable** (tunnel / enregistrement DNS d'origine conservés, juste plus pointés par le domaine) pendant ~1 mois pour le rollback — mais **pas de sous-domaine public** vers WordPress (contenu dupliqué + surface d'attaque) ; l'accès de vérification se fait via le LAN.
+- [ ] Re-tester les redirections sur le domaine live (`curl -I` sur 2-3 anciennes URL → 301).
+- [ ] Soumettre `https://championnatavionpapier.fr/sitemap-index.xml` dans Search Console (les anciens sitemaps Rank Math `/sitemap_index.xml` etc. redirigent désormais en 301).
 - [ ] Surveiller le CTR de `/tuto-avion-en-papier-facile-planeur/` (page #1 en trafic, réécrite).
+- [ ] Semaines 1-4 : vérifier les nouvelles 404 dans Search Console — chaque 404 légitime = une ligne à ajouter dans `public/_redirects`.
 
 ## 5. Rollback
 
-La bascule DNS est réversible : repointez l'enregistrement vers l'ancien hébergeur WordPress (gardé en ligne sur un sous-domaine). Aucun contenu n'est perdu — tout le contenu du nouveau site vit dans ce dépôt Git.
+La bascule est réversible en ~1 minute : Cloudflare → Worker → retirer le domaine personnalisé, puis restaurer l'ancien enregistrement DNS/tunnel vers le serveur WordPress (gardé allumé, chemin d'origine intact, pendant ~1 mois après la bascule). Aucun contenu n'est perdu — tout le contenu du nouveau site vit dans ce dépôt Git.

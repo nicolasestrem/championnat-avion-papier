@@ -27,6 +27,24 @@ describe('schema builders', () => {
     expect(buildHowTo('t', 'd', [{ texte: 'a' }], 'PT10M').totalTime).toBe('PT10M');
   });
 
+  it('howto adds step image and top-level image when provided', () => {
+    const h = buildHowTo(
+      't',
+      'd',
+      [{ texte: 'a', image: 'https://x/a.avif' }],
+      undefined,
+      'https://x/hero.avif'
+    );
+    expect(h.image).toBe('https://x/hero.avif');
+    expect(h.step[0].image).toBe('https://x/a.avif');
+  });
+
+  it('howto omits image keys when absent', () => {
+    const h = buildHowTo('t', 'd', [{ texte: 'a' }]);
+    expect('image' in h).toBe(false);
+    expect('image' in h.step[0]).toBe(false);
+  });
+
   it('faq maps questions', () => {
     const f = buildFaq([{ question: 'q', reponse: 'r' }]);
     expect(f.mainEntity[0].acceptedAnswer.text).toBe('r');

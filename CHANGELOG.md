@@ -7,6 +7,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- **Branded 404 page** (`src/pages/404.astro`, noindex) — required by
+  `wrangler.jsonc` (`not_found_handling: "404-page"`), which expects `dist/404.html`.
+- **Cutover redirect rules** in `public/_redirects`: legacy Rank Math / WP core XML
+  sitemaps (`/sitemap.xml`, `/sitemap_index.xml`, `/wp-sitemap.xml`, per-type children)
+  → `/sitemap-index.xml`; WordPress feeds (`/feed/`, `/comments/feed/`, `/blog/feed/`)
+  → `/rss.xml`; stripped category archives (`/general/`, `/histoire/`); date archives
+  (`/2023/*`–`/2026/*`) → `/blog/`; `/author/*` → `/`.
+- HowTo JSON-LD now carries the tutorial image (`schema.ts` + `TutorialLayout`), with
+  real photos/fallback graphics wired for all tutorials and sponsor logo fields filled.
+- ADHD-friendly cutover checklist (`docs/CUTOVER-ONE-PAGER.md`).
 - Design spec + task-by-task implementation plan for the WordPress → Astro migration
   (`docs/superpowers/specs/` and `docs/superpowers/plans/`).
 - **Full static Astro 5 site** replacing WordPress/Elementor: 26 pages, mobile-first,
@@ -29,6 +39,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   prompts for the matching `_redirects` line.
 
 ### Changed
+- `TutorialLayout` now builds HowTo JSON-LD image URLs with the shared `absolute()`
+  helper (`src/lib/seo.ts`) instead of a local duplicate.
+- Raw image sources (`src/assets/**/_incoming/`, ~89 MB of Gemini outputs and sponsor
+  originals never imported by any page) are untracked and gitignored; only the derived
+  optimized assets stay in the repo.
+- `docs/DEPLOYMENT.md` switch-day checklist now covers the zone-level steps that can't
+  live in the repo: `www` → apex 301 Redirect Rule, disabling WordPress-era Cloudflare
+  rules (APO/Page Rules/Cache Rules), keeping the `*.workers.dev` preview behind
+  Cloudflare Access, LAN-only WordPress rollback (no public subdomain), and 4-week
+  Search Console 404 monitoring; rollback section documents the ~1-minute
+  remove-custom-domain path.
 - Sveltia CMS auth is live: `sveltia-cms-auth` Worker deployed
   (`https://sveltia-cms-auth.nicolas-estrem.workers.dev`, GitHub OAuth App + secrets in
   place), `base_url` set in `public/admin/config.yml`. CMS still targets `main`, so no

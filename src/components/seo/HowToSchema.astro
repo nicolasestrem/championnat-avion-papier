@@ -5,12 +5,13 @@ import { buildHowTo } from '../../lib/schema';
 interface Props {
   title: string;
   description: string;
-  etapes: { texte: string }[];
+  etapes: { texte: string; image?: string }[];
   totalTime?: string;
+  image?: string;
 }
 
-const { title, description, etapes, totalTime } = Astro.props;
-const data = buildHowTo(title, description, etapes, totalTime);
+const { title, description, etapes, totalTime, image } = Astro.props;
+const data = buildHowTo(title, description, etapes, totalTime, image);
 ---
 
 <JsonLd data={data} />

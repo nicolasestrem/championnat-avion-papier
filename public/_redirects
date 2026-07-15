@@ -23,3 +23,31 @@
 
 # --- Paginated blog archives → blog index ---
 /blog/page/*                 /blog/                                       301
+
+# --- Old category archives (Rank Math stripped the /category/ base) ---
+/general/                    /blog/                                       301
+/general/*                   /blog/                                       301
+/histoire/                   /histoire-avions-papier/                     301
+/histoire/*                  /histoire-avions-papier/                     301
+
+# --- Date & author archives → blog index / home ---
+/2023/*                      /blog/                                       301
+/2024/*                      /blog/                                       301
+/2025/*                      /blog/                                       301
+/2026/*                      /blog/                                       301
+/author/*                    /                                            301
+
+# --- Legacy XML sitemaps (Rank Math + WP core) → Astro sitemap index ---
+/sitemap.xml                 /sitemap-index.xml                           301
+/sitemap_index.xml           /sitemap-index.xml                           301
+/wp-sitemap.xml              /sitemap-index.xml                           301
+/wp-sitemap-*                /sitemap-index.xml                           301
+/post-sitemap.xml            /sitemap-index.xml                           301
+/page-sitemap.xml            /sitemap-index.xml                           301
+/category-sitemap.xml        /sitemap-index.xml                           301
+/tag-sitemap.xml             /sitemap-index.xml                           301
+
+# --- WordPress RSS feeds → Astro feed ---
+/feed/                       /rss.xml                                     301
+/comments/feed/              /rss.xml                                     301
+/blog/feed/                  /rss.xml                                     301

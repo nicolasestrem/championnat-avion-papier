@@ -29,3 +29,6 @@ pnpm-debug.log*
 # Large raw WordPress WXR export (reference only, not built)
 /_source/*.xml
 .claude/settings.local.json.doctor-bak
+
+# Raw image sources (Gemini outputs, sponsor originals) — only derived/optimized assets are committed
+**/_incoming/
