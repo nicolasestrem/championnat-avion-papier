@@ -32,6 +32,15 @@ const metaLabel = `${TYPE_VOL_LABEL[t.typeVol]} · ${DIFFICULTE_LABEL[t.difficul
 const minMatch = t.dureePliage.match(/(\d+)\s*min/i);
 const totalTime = minMatch ? `PT${minMatch[1]}M` : undefined;
 
+// Resolve tutorial images to absolute URLs for the HowTo JSON-LD (Google needs
+// absolute URLs). Steps without a per-step image simply omit it.
+const toAbsolute = (src: string) => new URL(src, Astro.site).href;
+const stepsForSchema = t.etapes.map((e) => ({
+  texte: e.texte,
+  ...(e.image ? { image: toAbsolute(e.image.src) } : {}),
+}));
+const howToImage = t.image ? toAbsolute(t.image.src) : undefined;
+
 const faqItems = t.faq.map((f) => ({ question: f.q, reponse: f.r }));
 
 const trail = [
@@ -48,7 +57,7 @@ const related = [...sameType, ...all.filter((e) => !sameType.includes(e))].slice
 
 <BaseLayout title={t.seoTitle} description={t.seoDescription}>
   <Fragment slot="head">
-    <HowToSchema title={t.title} description={t.seoDescription} etapes={t.etapes} totalTime={totalTime} />
+    <HowToSchema title={t.title} description={t.seoDescription} etapes={stepsForSchema} totalTime={totalTime} image={howToImage} />
     {faqItems.length > 0 && <FaqSchema items={faqItems} />}
     <BreadcrumbSchema trail={trail} />
   </Fragment>

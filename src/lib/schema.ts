@@ -48,19 +48,22 @@ export function buildEvent(r: EventInput) {
 export function buildHowTo(
   title: string,
   description: string,
-  etapes: { texte: string }[],
-  totalTime?: string
+  etapes: { texte: string; image?: string }[],
+  totalTime?: string,
+  image?: string
 ) {
   return {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
     name: title,
     description,
+    ...(image ? { image } : {}),
     ...(totalTime ? { totalTime } : {}),
     step: etapes.map((e, i) => ({
       '@type': 'HowToStep',
       position: i + 1,
       text: e.texte,
+      ...(e.image ? { image: e.image } : {}),
     })),
   };
 }

@@ -5,8 +5,8 @@ seoDescription: "Préparez-vous pour le Championnat du Monde de Lancer d'Avions 
 difficulte: "intermediaire"
 typeVol: "distance"
 dureePliage: "7 min"
-image: "../../assets/tutoriels/tutoriel-generique.avif"
-imageAlt: "Illustration d'un avion en papier blanc en vol dans un ciel bleu"
+image: "../../assets/tutoriels/faucon-hero.avif"
+imageAlt: "Le Faucon, avion en papier de distance à nez émoussé, en vol dans un ciel bleu"
 etapes:
   - texte: "Le pli central. Pose la feuille A4 en mode portrait et plie-la en deux dans le sens de la longueur. Écrase bien le pli, puis déplie. Cette ligne médiane est l'axe de symétrie du Faucon : elle doit être parfaitement centrée, sinon l'avion déviera systématiquement d'un côté en vol."
   - texte: "Les coins supérieurs. Rabats le coin supérieur droit vers la ligne centrale, bord supérieur aligné sur l'axe. Répète à gauche. Tu obtiens un triangle pointant vers le bas. C'est la base du nez, commune à beaucoup d'avions de distance."
@@ -49,6 +49,8 @@ Ce tutoriel reprend le Faucon étape par étape, sur une feuille A4 standard. L'
 La distance d'un avion en papier dépend de trois facteurs : la **répartition du poids** (concentré vers l'avant), la **finesse du profil** (peu de traînée), et la **rigidité des ailes** (elles ne doivent pas plier sous la vitesse). Le Faucon coche les trois cases. Son nez replié et lesté avance le centre de gravité, ses plis multiples densifient l'avant, et ses ailes étroites offrent peu de résistance à l'air. Résultat : un avion qui conserve sa vitesse longtemps après le lancer.
 
 ## Comment plier le Faucon : les 7 étapes
+
+![Les sept étapes de pliage du Faucon, du pli central à l'avion terminé](../../assets/tutoriels/faucon-etapes.avif)
 
 Suis les sept étapes ci-dessus. L'étape clé est le **repli du nez** (étape 4) : c'est elle qui distingue le Faucon d'une flèche ordinaire et lui donne sa stabilité. Prends le temps d'écraser chaque pli à fond — sur un modèle de distance, le moindre défaut de symétrie coûte des mètres.
 

@@ -12,24 +12,25 @@ confiance dans l'économie numérique, les présentes mentions légales sont por
 
 ## Éditeur du Site
 
-Le Site est édité par le **Rotary Club de Mérignac**, organisateur du Championnat
-du Monde de lancer d'avions en papier.
+Le Site est édité par le **Rotary Club de Mérignac**, association déclarée régie
+par la loi du 1er juillet 1901, organisateur du Championnat du Monde de lancer
+d'avions en papier.
 
-<!-- TODO: confirmer entité juridique/adresse avec le client -->
+Siège social : 116 avenue de Magudas, 33700 Mérignac, France.
+RNA : W332005712 — SIREN : 800 196 644.
 
 Contact : [contact@championnatavionpapier.fr](mailto:contact@championnatavionpapier.fr)
 
 ## Directeur de la publication
 
-Le directeur de la publication est le représentant légal du Rotary Club de
-Mérignac.
-
-<!-- TODO: confirmer entité juridique/adresse avec le client -->
+Le directeur de la publication est **Tobias Tomczak**, en sa qualité de président
+du Rotary Club de Mérignac.
 
 ## Hébergeur
 
 Le Site est hébergé par **Cloudflare, Inc.**
 101 Townsend Street, San Francisco, CA 94107, États-Unis.
+Téléphone : +1 (650) 319-8930.
 Site web : [https://www.cloudflare.com](https://www.cloudflare.com)
 
 ## Propriété intellectuelle

@@ -1,6 +1,7 @@
 {
   "nom": "Imprimerie Laplante",
   "url": "https://www.laplante.fr/",
+  "logo": "../../assets/sponsors/imprimerie-laplante.png",
   "descriptif": "L'Imprimerie Laplante accompagne le Championnat dans tous ses projets de communication, de l'affiche officielle aux supports distribués sur place. Un partenaire de confiance pour donner vie et couleur à l'identité de l'événement.",
   "ordre": 9
 }

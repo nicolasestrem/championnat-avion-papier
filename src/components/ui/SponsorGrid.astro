@@ -16,7 +16,7 @@ interface Props {
 const { sponsors } = Astro.props;
 ---
 
-<ul class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+<ul class="grid list-none grid-cols-2 gap-4 p-0 sm:grid-cols-3 lg:grid-cols-4">
   {sponsors.map((sponsor) => (
     <li class="rounded-2xl border border-sky/15 bg-white p-4 text-center shadow-sm transition-shadow hover:shadow-md">
       <a href={sponsor.url} target="_blank" rel="noopener" class="flex h-full flex-col items-center">
