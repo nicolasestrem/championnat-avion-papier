@@ -7,6 +7,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- **Tutoriel F-16** (`/plier-avion-en-papier-f16/`, 12 étapes, `draft: true`) — première
+  réplique d'avion réel du site. Plié d'après les planches de **Kyong H Lee**
+  ([amazingpaperairplanes.com](https://www.amazingpaperairplanes.com/), page `FoldingF16A.html`),
+  **reproduites avec son autorisation** — l'accord est détenu par Nicolas Estrem, à verser au
+  dossier avant publication. Le texte français est écrit pour ce site (pas une traduction) et les
+  cotes impériales de la source sont converties en cm pour le A4.
+  **Reste en `draft` jusqu'à un test de pliage réel** : les étapes 5 à 7 (pli renversé, pli pétale)
+  sont déduites de schémas statiques et n'ont pas été vérifiées papier en main.
+- **Tutoriel Aile Delta** (`/plier-avion-en-papier-aile-delta/`, 14 étapes, `draft: true`) —
+  même source et même autorisation que le F-16 (page `fighter-delta2-folding.html`).
+  Modèle le plus technique du site : trois plis renversés, ouverture de caisson d'aile,
+  verrouillage mécanique du fuselage. **Reste en `draft` en attendant un test de pliage.**
+  Schémas sources de 450–500 px seulement (contre 2475 px pour le F-16) — lisibles mais à
+  remplacer si de meilleures planches deviennent disponibles.
+- **`scripts/import-tutorial-images.mjs`** — conversion sharp des sources brutes
+  (`src/assets/tutoriels/_incoming/<slug>/`) en AVIF committés (1200 px, qualité 72).
+  Premier pipeline d'images réutilisable du dépôt ; `_incoming/` reste gitignoré.
+  Les slugs passés en argument sont normalisés (une complétion shell qui ajoute
+  `f16/` écrivait sinon dans un dossier inexistant), et `autoOrient()` est appliqué
+  avant redimensionnement — sans effet sur la sortie AVIF actuelle (vérifié :
+  pixels identiques), mais nécessaire si le format de sortie changeait un jour.
 - **Branded 404 page** (`src/pages/404.astro`, noindex) — required by
   `wrangler.jsonc` (`not_found_handling: "404-page"`), which expects `dist/404.html`.
 - **Cutover redirect rules** in `public/_redirects`: legacy Rank Math / WP core XML
