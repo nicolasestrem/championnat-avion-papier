@@ -63,3 +63,26 @@ Placement automatique uniquement (Auto Ads) — aucun bloc publicitaire manuel.
 La politique de consentement EU de Google impose un CMP avant de servir des annonces
 (ou au minimum des annonces non personnalisées) aux visiteurs UE/EEE. C'est une lacune
 connue, gérée séparément par le porteur du projet — pas un oubli.
+
+## 7. Google Analytics 4 et Google Tag Manager
+
+**GA4** et **Google Tag Manager** sont chargés sur toutes les pages publiques via
+`src/layouts/BaseLayout.astro` :
+
+- mesure GA4 directe : `G-EHTVL72LRY` ;
+- conteneur GTM : `GTM-N59XNT8X` ;
+- `/admin/` reste exclu, car Sveltia CMS est une page autonome copiée depuis `public/`.
+
+Le conteneur GTM publié a été contrôlé le 19/07/2026 et ne contenait aucun tag
+(`"tags":[]`). La configuration GA4 directe est donc l'unique source des pages vues.
+Si `G-EHTVL72LRY` est ajouté ultérieurement dans GTM, il faut retirer dans la même
+version le chargeur et l'appel `gtag('config', 'G-EHTVL72LRY')` de `BaseLayout.astro`
+afin d'éviter les événements en double.
+
+Le contrôle `npm run check:analytics`, inclus dans `npm run verify`, inspecte chaque
+page HTML publique générée et valide les identifiants, le nombre d'occurrences, l'ordre
+des scripts et la position du fallback GTM.
+
+⚠️ **Ce branchement ne met pas en place de CMP ni de Consent Mode.** Les exigences de
+consentement UE/EEE doivent être traitées avec la lacune déjà documentée pour AdSense
+avant l'utilisation en production.

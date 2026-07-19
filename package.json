@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "check:links": "node scripts/check-links.mjs",
-    "verify": "astro check && astro build && node scripts/check-links.mjs"
+    "check:analytics": "node scripts/check-analytics-tags.mjs",
+    "verify": "astro check && astro build && node scripts/check-links.mjs && node scripts/check-analytics-tags.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
