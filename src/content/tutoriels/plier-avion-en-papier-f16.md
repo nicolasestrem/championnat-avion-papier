@@ -65,7 +65,7 @@ tags:
   - avance
 datePublication: 2026-07-19
 dateMaj: ''
-draft: true
+draft: false
 ---
 
 Le **F-16 Fighting Falcon** est l'un des chasseurs les plus reconnaissables du monde,
