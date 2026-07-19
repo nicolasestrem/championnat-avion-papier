@@ -15,6 +15,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   cotes impériales de la source sont converties en cm pour le A4.
   **Reste en `draft` jusqu'à un test de pliage réel** : les étapes 5 à 7 (pli renversé, pli pétale)
   sont déduites de schémas statiques et n'ont pas été vérifiées papier en main.
+- **Tutoriel Aile Delta** (`/plier-avion-en-papier-aile-delta/`, 14 étapes, `draft: true`) —
+  même source et même autorisation que le F-16 (page `fighter-delta2-folding.html`).
+  Modèle le plus technique du site : trois plis renversés, ouverture de caisson d'aile,
+  verrouillage mécanique du fuselage. **Reste en `draft` en attendant un test de pliage.**
+  Schémas sources de 450–500 px seulement (contre 2475 px pour le F-16) — lisibles mais à
+  remplacer si de meilleures planches deviennent disponibles.
 - **`scripts/import-tutorial-images.mjs`** — conversion sharp des sources brutes
   (`src/assets/tutoriels/_incoming/<slug>/`) en AVIF committés (1200 px, qualité 72).
   Premier pipeline d'images réutilisable du dépôt ; `_incoming/` reste gitignoré.

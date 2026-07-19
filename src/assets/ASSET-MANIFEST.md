@@ -66,6 +66,40 @@ Le texte français des étapes est original — ce ne sont pas les instructions 
 | `src/assets/tutoriels/f16-etape-11.avif` | Étape 11 | Ailes + découpe des gouvernes de profondeur |
 | `src/assets/tutoriels/f16-etape-12.avif` | Étape 12 | Profil du F-16 terminé |
 
+### Aile Delta (post `/plier-avion-en-papier-aile-delta/`, 14 étapes)
+Même source et même pipeline que le F-16 ci-dessus (page source `fighter-delta2-folding.html`).
+Sources JPG de 450–500 px de large : ce sont des schémas de définition modeste, nettement moins
+nets que ceux du F-16 (2475 px). Ils restent lisibles au rendu (`StepList` affiche 560 px) mais
+c'est la limite basse acceptable — à remplacer si des planches de meilleure qualité apparaissent.
+Générés par `node scripts/import-tutorial-images.mjs delta`.
+
+| Asset path | Rôle / étape | Description FR |
+| --- | --- | --- |
+| `src/assets/tutoriels/delta-hero.avif` | Image à la une | L'Aile Delta terminée (source 1000 px) |
+| `src/assets/tutoriels/delta-etape-1.avif` | Étape 1 | Pli de repère dans la largeur |
+| `src/assets/tutoriels/delta-etape-2.avif` | Étape 2 | Ligne A à 10 cm + premier pli renversé |
+| `src/assets/tutoriels/delta-etape-3.avif` | Étape 3 | Lignes de repère A et B |
+| `src/assets/tutoriels/delta-etape-4.avif` | Étape 4 | Deuxième pli renversé |
+| `src/assets/tutoriels/delta-etape-5.avif` | Étape 5 | Répartition des couches, retournement |
+| `src/assets/tutoriels/delta-etape-6.avif` | Étape 6 | Bords vers l'axe + pli montagne ligne C |
+| `src/assets/tutoriels/delta-etape-7.avif` | Étape 7 | Plis de repère A–B |
+| `src/assets/tutoriels/delta-etape-8.avif` | Étape 8 | Ouverture du caisson d'aile (C→E, D→F) |
+| `src/assets/tutoriels/delta-etape-9.avif` | Étape 9 | Refermeture des bords sur l'axe |
+| `src/assets/tutoriels/delta-etape-10.avif` | Étape 10 | Coins du nez + troisième pli renversé |
+| `src/assets/tutoriels/delta-etape-11.avif` | Étape 11 | Pli en deux + verrouillage du coin A |
+| `src/assets/tutoriels/delta-etape-12.avif` | Étape 12 | Ailes et saumons relevés |
+| `src/assets/tutoriels/delta-etape-13.avif` | Étape 13 | Mise en forme et gouvernes |
+| `src/assets/tutoriels/delta-etape-14.avif` | Étape 14 | Dérive de queue optionnelle, modèle fini |
+
+### Modèles écartés de l'import
+
+- **B-1 Lancer** (`bomber-B-1-folding.html`) — **non importé**. Ce n'est pas un pliage : le modèle
+  part d'un gabarit imprimé (`bomber-B-1B_Lancer_Artwork.pdf`), ses instructions renvoient à des
+  numéros de lignes tracés sur ce gabarit, et l'assemblage final demande découpe, ruban double face
+  et pièces rapportées (dérive, verrière). C'est une maquette de présentation, pas un avion à lancer.
+- **Concorde, Navette, Nighthawk, F-15, hydravions, drone** — schémas sources de 160 à 280 px de
+  large, trop peu définis pour un affichage à 560 px.
+
 ## Événement — `src/assets/event/`
 
 | Asset path | Description FR | Page(s) cible(s) |
