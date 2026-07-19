@@ -32,3 +32,6 @@ pnpm-debug.log*
 
 # Raw image sources (Gemini outputs, sponsor originals) — only derived/optimized assets are committed
 **/_incoming/
+
+# Firecrawl scrape cache (source extraction working files)
+.firecrawl/

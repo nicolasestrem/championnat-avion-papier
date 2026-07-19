@@ -43,6 +43,29 @@ Source images `etape_1..8_result.avif`. In the post body: `etape_1` = image d'in
 | `src/assets/tutoriels/fleche-etape-7.avif` | (réserve) | Vue intermédiaire du pliage |
 | `src/assets/tutoriels/fleche-etape-8.avif` | Illustre étape 7 | Réglages fins des élevons + vol test |
 
+### F-16 (post `/plier-avion-en-papier-f16/`, 12 étapes)
+Planches de pliage de **Kyong H Lee** ([amazingpaperairplanes.com](https://www.amazingpaperairplanes.com/)),
+page source `FoldingF16A.html`, reproduites avec son autorisation. Les sources JPG (2475 px de large)
+sont stockées dans `_incoming/f16/` (gitignoré) ; les AVIF committés sont générés par
+`node scripts/import-tutorial-images.mjs f16` (redimensionnement 1200 px, qualité 72).
+Le texte français des étapes est original — ce ne sont pas les instructions anglaises traduites.
+
+| Asset path | Rôle / étape | Description FR |
+| --- | --- | --- |
+| `src/assets/tutoriels/f16-hero.avif` | Image à la une | Le F-16 terminé, vue de profil (source 500 px — la seule image basse définition du lot) |
+| `src/assets/tutoriels/f16-etape-1.avif` | Étape 1 | Pli central puis rabat des deux coins supérieurs |
+| `src/assets/tutoriels/f16-etape-2.avif` | Étape 2 | Rabattre la pointe du triangle vers le bas |
+| `src/assets/tutoriels/f16-etape-3.avif` | Étape 3 | Repères de construction du nez (1,3 cm / 3,8 cm) |
+| `src/assets/tutoriels/f16-etape-4.avif` | Étape 4 | Pli en biais du coin supérieur droit |
+| `src/assets/tutoriels/f16-etape-5.avif` | Étape 5 | Pli renversé — enfoncer les flancs |
+| `src/assets/tutoriels/f16-etape-6.avif` | Étape 6 | Rabattre la pointe A et écarter les volets |
+| `src/assets/tutoriels/f16-etape-7.avif` | Étape 7 | Pli pétale — relever la pointe, le nez apparaît |
+| `src/assets/tutoriels/f16-etape-8.avif` | Étape 8 | Basculer le volet vers la droite |
+| `src/assets/tutoriels/f16-etape-9.avif` | Étape 9 | Basculer le volet vers la gauche |
+| `src/assets/tutoriels/f16-etape-10.avif` | Étape 10 | Plis A et B, puis grand pli central |
+| `src/assets/tutoriels/f16-etape-11.avif` | Étape 11 | Ailes + découpe des gouvernes de profondeur |
+| `src/assets/tutoriels/f16-etape-12.avif` | Étape 12 | Profil du F-16 terminé |
+
 ## Événement — `src/assets/event/`
 
 | Asset path | Description FR | Page(s) cible(s) |

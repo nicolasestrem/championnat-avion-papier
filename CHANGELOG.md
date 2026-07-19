@@ -7,6 +7,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- **Tutoriel F-16** (`/plier-avion-en-papier-f16/`, 12 étapes, `draft: true`) — première
+  réplique d'avion réel du site. Plié d'après les planches de **Kyong H Lee**
+  ([amazingpaperairplanes.com](https://www.amazingpaperairplanes.com/), page `FoldingF16A.html`),
+  **reproduites avec son autorisation** — l'accord est détenu par Nicolas Estrem, à verser au
+  dossier avant publication. Le texte français est écrit pour ce site (pas une traduction) et les
+  cotes impériales de la source sont converties en cm pour le A4.
+  **Reste en `draft` jusqu'à un test de pliage réel** : les étapes 5 à 7 (pli renversé, pli pétale)
+  sont déduites de schémas statiques et n'ont pas été vérifiées papier en main.
+- **`scripts/import-tutorial-images.mjs`** — conversion sharp des sources brutes
+  (`src/assets/tutoriels/_incoming/<slug>/`) en AVIF committés (1200 px, qualité 72).
+  Premier pipeline d'images réutilisable du dépôt ; `_incoming/` reste gitignoré.
 - **Branded 404 page** (`src/pages/404.astro`, noindex) — required by
   `wrangler.jsonc` (`not_found_handling: "404-page"`), which expects `dist/404.html`.
 - **Cutover redirect rules** in `public/_redirects`: legacy Rank Math / WP core XML
