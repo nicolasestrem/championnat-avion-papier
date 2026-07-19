@@ -19,7 +19,14 @@ const WIDTH = 1200;
 const QUALITY = 72;
 const SOURCE_EXT = /\.(jpe?g|png|gif|webp|avif)$/i;
 
-const slugs = process.argv.slice(2);
+// Accept a bare slug, but tolerate what shell autocomplete actually produces —
+// a trailing separator, or the whole `src/assets/tutoriels/_incoming/f16` path.
+// The slug also names the output file, so an unstripped `f16/` would try to
+// write `<outDir>/f16/-hero.avif` into a directory that doesn't exist.
+const slugs = process.argv
+  .slice(2)
+  .map((s) => s.replace(/[/\\]+$/, '').split(/[/\\]/).pop())
+  .filter(Boolean);
 if (slugs.length === 0) {
   console.error('Usage: node scripts/import-tutorial-images.mjs <slug> [<slug>...]');
   process.exit(1);
@@ -63,9 +70,15 @@ for (const slug of slugs) {
     try {
       const input = join(dir, file);
       const { size: inSize } = await stat(input);
+      // autoOrient: a no-op for AVIF today — sharp's AVIF encoder already bakes
+      // in EXIF orientation (measured: identical pixels with and without it).
+      // Kept because that guarantee is format-specific: switch this pipeline to
+      // PNG/JPEG/WebP and an EXIF-rotated phone photo silently comes out
+      // sideways. One call to stay correct regardless of output format.
       // withoutEnlargement: diagrams are often already under 1200px — upscaling
       // a line drawing only inflates the file without adding detail.
       const info = await sharp(input)
+        .autoOrient()
         .resize({ width: WIDTH, withoutEnlargement: true })
         .avif({ quality: QUALITY })
         .toFile(outPath);

@@ -24,6 +24,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **`scripts/import-tutorial-images.mjs`** — conversion sharp des sources brutes
   (`src/assets/tutoriels/_incoming/<slug>/`) en AVIF committés (1200 px, qualité 72).
   Premier pipeline d'images réutilisable du dépôt ; `_incoming/` reste gitignoré.
+  Les slugs passés en argument sont normalisés (une complétion shell qui ajoute
+  `f16/` écrivait sinon dans un dossier inexistant), et `autoOrient()` est appliqué
+  avant redimensionnement — sans effet sur la sortie AVIF actuelle (vérifié :
+  pixels identiques), mais nécessaire si le format de sortie changeait un jour.
 - **Branded 404 page** (`src/pages/404.astro`, noindex) — required by
   `wrangler.jsonc` (`not_found_handling: "404-page"`), which expects `dist/404.html`.
 - **Cutover redirect rules** in `public/_redirects`: legacy Rank Math / WP core XML
