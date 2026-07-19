@@ -7,6 +7,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- **Google Analytics 4 + Google Tag Manager** wired site-wide through
+  `src/layouts/BaseLayout.astro` using GA4 measurement ID `G-EHTVL72LRY` and GTM
+  container `GTM-N59XNT8X`. The build-enforced `check:analytics` gate verifies exact
+  tag counts, ordering, body fallback placement, and intentional `/admin/` exclusion.
+  Direct GA4 remains the single analytics owner while the published GTM container is
+  empty; CMP/Consent Mode implementation remains separately tracked.
 - **Google AdSense (Auto Ads)** wired site-wide via `src/components/seo/BaseHead.astro`
   (client `ca-pub-9063907623690482`), plus `public/ads.txt`. Auto Ads only — no manual
   ad slots. Cookie-consent/CMP gating for EU visitors is explicitly out of scope for
