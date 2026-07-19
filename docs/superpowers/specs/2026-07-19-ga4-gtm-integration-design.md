@@ -86,10 +86,15 @@ Implementation follows a red-green build-output test:
 The checker must also enforce:
 
 - each public Astro-rendered HTML page contains each required loader/configuration once;
+- `G-EHTVL72LRY` appears exactly twice per applicable page (loader and configuration),
+  and `GTM-N59XNT8X` appears exactly twice (bootstrap and fallback);
+- the GTM head bootstrap precedes the direct GA4 loader;
 - the GTM iframe appears immediately after the opening `<body>` apart from whitespace;
 - the direct GA4 configuration contains the approved measurement ID;
 - the GTM loader and fallback contain the approved container ID;
-- the standalone `/admin/` CMS page is excluded from the public-site assertion;
+- the standalone `/admin/` CMS page is excluded from required tag presence and contains
+  neither identifier;
+- all failing relative paths and assertions are reported together before a nonzero exit;
 - the canonical `npm run verify` gate runs the tag checker after the build.
 
 Fresh verification before completion consists of the focused red-green tag check,
