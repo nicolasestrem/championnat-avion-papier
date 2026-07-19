@@ -14,6 +14,7 @@ const GTM_ID = 'GTM-N59XNT8X';
 const GA4_LOADER = `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`;
 const GA4_CONFIG = `gtag('config', '${GA4_ID}')`;
 const GTM_LOADER_PREFIX = 'https://www.googletagmanager.com/gtm.js?id=';
+const GTM_BOOTSTRAP = `})(window,document,'script','dataLayer','${GTM_ID}');`;
 const GTM_FALLBACK = `https://www.googletagmanager.com/ns.html?id=${GTM_ID}`;
 
 if (!existsSync(DIST)) {
@@ -66,6 +67,9 @@ for (const file of publicHtmlFiles) {
     if (countOccurrences(head, GA4_LOADER) !== 1) {
       errors.push(`${page}: expected one GA4 loader`);
     }
+    if (countOccurrences(head, GTM_BOOTSTRAP) !== 1) {
+      errors.push(`${page}: expected one GTM bootstrap invocation for ${GTM_ID}`);
+    }
     const gtmIndex = head.indexOf(GTM_LOADER_PREFIX);
     const ga4Index = head.indexOf(GA4_LOADER);
     if (gtmIndex >= 0 && ga4Index >= 0 && gtmIndex > ga4Index) {
@@ -100,7 +104,9 @@ for (const file of publicHtmlFiles) {
 }
 
 const adminFile = htmlFiles.find((file) => relativeHtmlPath(file) === ADMIN_HTML);
-if (adminFile) {
+if (!adminFile) {
+  errors.push(`${ADMIN_HTML}: required admin HTML file is missing`);
+} else {
   const adminHtml = readFileSync(adminFile, 'utf8');
   if (adminHtml.includes(GA4_ID) || adminHtml.includes(GTM_ID)) {
     errors.push(`${ADMIN_HTML}: analytics identifiers must remain absent`);
