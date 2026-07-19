@@ -48,3 +48,18 @@ Le code du Worker d'auth est dans `workers/sveltia-cms-auth/` (aucun secret comm
 ## 5. Rollback
 
 La bascule est réversible en ~1 minute : Cloudflare → Worker → retirer le domaine personnalisé, puis restaurer l'ancien enregistrement DNS/tunnel vers le serveur WordPress (gardé allumé, chemin d'origine intact, pendant ~1 mois après la bascule). Aucun contenu n'est perdu — tout le contenu du nouveau site vit dans ce dépôt Git.
+
+## 6. AdSense
+
+**Google AdSense (Auto Ads)** activé sur tout le site le 19/07/2026 : script chargeur
+ajouté dans `src/components/seo/BaseHead.astro` (inclus par les 4 layouts, donc sur
+les 17 routes de pages), identifiant client `ca-pub-9063907623690482`. `public/ads.txt`
+publié à la racine avec la ligne fournie par Google (`google.com, pub-9063907623690482,
+DIRECT, f08c47fec0942fa0`).
+
+Placement automatique uniquement (Auto Ads) — aucun bloc publicitaire manuel.
+
+⚠️ **Pas de bandeau de consentement cookies (RGPD) mis en place dans ce changement.**
+La politique de consentement EU de Google impose un CMP avant de servir des annonces
+(ou au minimum des annonces non personnalisées) aux visiteurs UE/EEE. C'est une lacune
+connue, gérée séparément par le porteur du projet — pas un oubli.

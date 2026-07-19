@@ -7,6 +7,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- **Google AdSense (Auto Ads)** wired site-wide via `src/components/seo/BaseHead.astro`
+  (client `ca-pub-9063907623690482`), plus `public/ads.txt`. Auto Ads only — no manual
+  ad slots. Cookie-consent/CMP gating for EU visitors is explicitly out of scope for
+  this change (see `docs/DEPLOYMENT.md` §6).
 - **Tutoriel F-16** (`/plier-avion-en-papier-f16/`, 12 étapes, `draft: true`) — première
   réplique d'avion réel du site. Plié d'après les planches de **Kyong H Lee**
   ([amazingpaperairplanes.com](https://www.amazingpaperairplanes.com/), page `FoldingF16A.html`),
