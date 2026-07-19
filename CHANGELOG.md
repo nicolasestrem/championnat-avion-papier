@@ -12,7 +12,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   container `GTM-N59XNT8X`. The build-enforced `check:analytics` gate verifies exact
   tag counts, ordering, body fallback placement, and intentional `/admin/` exclusion.
   Direct GA4 remains the single analytics owner while the published GTM container is
-  empty; CMP/Consent Mode implementation remains separately tracked.
+  empty; CMP/Consent Mode implementation remains separately tracked. The checker also
+  tolerates harmless generated-code formatting changes and identifier mentions in page
+  content while still rejecting duplicate runtime tags.
 - **Google AdSense (Auto Ads)** wired site-wide via `src/components/seo/BaseHead.astro`
   (client `ca-pub-9063907623690482`), plus `public/ads.txt`. Auto Ads only — no manual
   ad slots. Cookie-consent/CMP gating for EU visitors is explicitly out of scope for
