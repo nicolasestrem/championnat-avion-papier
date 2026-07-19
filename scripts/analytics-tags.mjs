@@ -17,30 +17,49 @@ const GTM_BOOTSTRAP = new RegExp(
   `\\}\\)\\s*\\(\\s*window\\s*,\\s*document\\s*,\\s*["']script["']\\s*,\\s*["']dataLayer["']\\s*,\\s*["']${escapeRegex(GTM_ID)}["']\\s*\\)\\s*;?`,
   'g',
 );
+const GA4_LOADER_TAG = new RegExp(
+  `<script\\b[^>]*\\bsrc=["']${escapeRegex(GA4_LOADER)}["'][^>]*>`,
+  'gi',
+);
 
 function countOccurrences(value, needle) {
   if (needle instanceof RegExp) return value.match(needle)?.length ?? 0;
   return value.split(needle).length - 1;
 }
 
+function inlineScriptContent(value) {
+  return [...value.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)]
+    .map((match) => match[1])
+    .join('\n');
+}
+
 export function validatePublicHtml(html, page) {
   const errors = [];
   const head = html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1];
   const body = html.match(/<body\b[^>]*>([\s\S]*?)<\/body>/i)?.[1];
+  const allInlineScripts = inlineScriptContent(html);
 
   if (head === undefined) {
     errors.push(`${page}: missing <head>`);
   } else {
+    const headInlineScripts = inlineScriptContent(head);
+
     if (countOccurrences(head, GTM_LOADER_PREFIX) !== 1) {
       errors.push(`${page}: expected one GTM head loader`);
     }
-    if (countOccurrences(head, GA4_LOADER) !== 1) {
+    if (
+      countOccurrences(head, GA4_LOADER_TAG) !== 1 ||
+      countOccurrences(html, GA4_LOADER_TAG) !== 1
+    ) {
       errors.push(`${page}: expected one GA4 loader`);
     }
-    if (countOccurrences(head, GTM_BOOTSTRAP) !== 1) {
+    if (countOccurrences(headInlineScripts, GTM_BOOTSTRAP) !== 1) {
       errors.push(`${page}: expected one GTM bootstrap invocation for ${GTM_ID}`);
     }
-    if (countOccurrences(head, GA4_CONFIG) !== 1) {
+    if (
+      countOccurrences(headInlineScripts, GA4_CONFIG) !== 1 ||
+      countOccurrences(allInlineScripts, GA4_CONFIG) !== 1
+    ) {
       errors.push(`${page}: expected one GA4 config call`);
     }
 
