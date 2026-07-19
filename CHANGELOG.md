@@ -15,7 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   empty; CMP/Consent Mode implementation remains separately tracked. The checker also
   tolerates harmless generated-code formatting changes and identifier mentions in page
   content while still rejecting duplicate runtime tags, including GA4 blocks injected
-  outside the document head.
+  outside the document head and duplicate GTM bootstraps.
 - **Google AdSense (Auto Ads)** wired site-wide via `src/components/seo/BaseHead.astro`
   (client `ca-pub-9063907623690482`), plus `public/ads.txt`. Auto Ads only — no manual
   ad slots. Cookie-consent/CMP gating for EU visitors is explicitly out of scope for

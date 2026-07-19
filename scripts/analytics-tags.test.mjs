@@ -53,4 +53,15 @@ describe('validatePublicHtml', () => {
     expect(errors).toContain('index.html: expected one GA4 loader');
     expect(errors).toContain('index.html: expected one GA4 config call');
   });
+
+  test('rejects a second executable GTM bootstrap in the body', () => {
+    const bodyExtra = `<script>j.src='https://www.googletagmanager.com/gtm.js?id='+i;})(window,document,'script','dataLayer','${GTM_ID}');</script>`;
+
+    const errors = validatePublicHtml(pageHtml({ bodyExtra }), 'index.html');
+
+    expect(errors).toContain('index.html: expected one GTM head loader');
+    expect(errors).toContain(
+      `index.html: expected one GTM bootstrap invocation for ${GTM_ID}`,
+    );
+  });
 });

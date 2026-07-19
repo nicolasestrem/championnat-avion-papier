@@ -44,7 +44,10 @@ export function validatePublicHtml(html, page) {
   } else {
     const headInlineScripts = inlineScriptContent(head);
 
-    if (countOccurrences(head, GTM_LOADER_PREFIX) !== 1) {
+    if (
+      countOccurrences(headInlineScripts, GTM_LOADER_PREFIX) !== 1 ||
+      countOccurrences(allInlineScripts, GTM_LOADER_PREFIX) !== 1
+    ) {
       errors.push(`${page}: expected one GTM head loader`);
     }
     if (
@@ -53,7 +56,10 @@ export function validatePublicHtml(html, page) {
     ) {
       errors.push(`${page}: expected one GA4 loader`);
     }
-    if (countOccurrences(headInlineScripts, GTM_BOOTSTRAP) !== 1) {
+    if (
+      countOccurrences(headInlineScripts, GTM_BOOTSTRAP) !== 1 ||
+      countOccurrences(allInlineScripts, GTM_BOOTSTRAP) !== 1
+    ) {
       errors.push(`${page}: expected one GTM bootstrap invocation for ${GTM_ID}`);
     }
     if (
