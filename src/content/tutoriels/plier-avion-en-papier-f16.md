@@ -64,7 +64,6 @@ tags:
   - chasseur
   - avance
 datePublication: 2026-07-19
-dateMaj: ''
 draft: false
 ---
 
