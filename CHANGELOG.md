@@ -36,7 +36,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `/ressources-avions-papier/`. Motif : les requêtes `avion en papier rond` /
   `avion papier rond` (356 impressions/90 j) se positionnaient via la page **planeur**
   plutôt que via le tutoriel dédié, lequel ne recevait que **4 impressions** — Google
-  ne distinguait pas les deux pages.
+  ne distinguait pas les deux pages. Le paragraphe d'accroche décrit le modèle
+  fidèlement au tutoriel lié (deux anneaux montés sur une paille, assemblés et non
+  pliés) : une première rédaction annonçait à tort « un anneau qui tourne sur lui-même »
+  et un pliage (remonté par la revue Codex).
 - **Schéma `BlogPosting`** pour les articles du blog via `buildArticle()` dans
   `src/lib/schema.ts` et le composant `src/components/seo/ArticleSchema.astro`.
   `ArticleLayout` n'émettait jusque-là qu'un fil d'Ariane. `dateModified` retombe sur
@@ -46,7 +49,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   de l'`Event`. L'ancien `replace(/[^\d.]/g, '')` transformait « 5 € / 10 € » en
   « 510 ». La fonction n'accepte qu'un montant unique et non ambigu, et omet sinon le
   champ — Google rejetant l'`Offer` entière sur un prix malformé, et une fourchette
-  affichant silencieusement un tarif faux. Couvert par 4 nouveaux tests.
+  affichant silencieusement un tarif faux. `priceCurrency` est désormais omis en même
+  temps que `price` : une devise sans montant est une `Offer` incomplète, signalée
+  comme telle par Google (remonté par la revue Gemini). Couvert par 4 nouveaux tests.
 - **Google Analytics 4 + Google Tag Manager** wired site-wide through
   `src/layouts/BaseLayout.astro` using GA4 measurement ID `G-EHTVL72LRY` and GTM
   container `GTM-N59XNT8X`. The build-enforced `check:analytics` gate verifies exact

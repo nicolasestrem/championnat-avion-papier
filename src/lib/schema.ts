@@ -42,8 +42,9 @@ export function buildEvent(r: EventInput) {
     offers: {
       '@type': 'Offer',
       // Derived from reglages so structured data stays in sync with the CMS.
-      ...(price ? { price } : {}),
-      priceCurrency: 'EUR',
+      // price and priceCurrency travel together: a currency with no amount is
+      // an incomplete Offer and Google warns on it.
+      ...(price ? { price, priceCurrency: 'EUR' } : {}),
       url: r.helloAssoUrl,
       availability: 'https://schema.org/InStock',
     },

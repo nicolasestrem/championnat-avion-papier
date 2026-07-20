@@ -39,8 +39,15 @@ describe('schema builders', () => {
       helloAssoUrl: 'https://x',
       beneficiaire: 'B',
     };
-    expect('price' in buildEvent({ ...base, tarifCompetiteur: '5 € / 10 €' }).offers).toBe(false);
-    expect(buildEvent({ ...base, tarifCompetiteur: '12,50 €' }).offers.price).toBe('12.50');
+    // priceCurrency must disappear alongside price — a currency with no amount
+    // is an incomplete Offer.
+    const ambiguous = buildEvent({ ...base, tarifCompetiteur: '5 € / 10 €' }).offers;
+    expect('price' in ambiguous).toBe(false);
+    expect('priceCurrency' in ambiguous).toBe(false);
+
+    const valid = buildEvent({ ...base, tarifCompetiteur: '12,50 €' }).offers;
+    expect(valid.price).toBe('12.50');
+    expect(valid.priceCurrency).toBe('EUR');
   });
 
   it('article falls back dateModified to datePublished', () => {
