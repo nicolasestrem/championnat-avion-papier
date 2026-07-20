@@ -1,5 +1,13 @@
 import { describe, it, expect } from 'vitest';
-import { buildEvent, buildHowTo, buildFaq, buildBreadcrumb, buildOrganization } from './schema';
+import {
+  buildEvent,
+  buildHowTo,
+  buildFaq,
+  buildBreadcrumb,
+  buildOrganization,
+  buildArticle,
+  parsePrice,
+} from './schema';
 
 describe('schema builders', () => {
   it('event has ISO startDate and 8 EUR offer', () => {
@@ -14,6 +22,58 @@ describe('schema builders', () => {
     expect(e.startDate).toBe('2026-06-13T11:00:00+02:00');
     expect(e.offers.price).toBe('8');
     expect(e.location.address.addressLocality).toBe('Mérignac');
+  });
+
+  it('parsePrice handles single amounts and rejects ambiguous ones', () => {
+    expect(parsePrice('8 €')).toBe('8');
+    expect(parsePrice('12,50 €')).toBe('12.50');
+    expect(parsePrice('5 € / 10 €')).toBeUndefined();
+    expect(parsePrice('Gratuit')).toBeUndefined();
+  });
+
+  it('event omits price rather than emitting a malformed one', () => {
+    const base = {
+      dateISO: '2026-06-13T11:00:00+02:00',
+      lieu: 'L',
+      ville: 'V',
+      helloAssoUrl: 'https://x',
+      beneficiaire: 'B',
+    };
+    // priceCurrency must disappear alongside price — a currency with no amount
+    // is an incomplete Offer.
+    const ambiguous = buildEvent({ ...base, tarifCompetiteur: '5 € / 10 €' }).offers;
+    expect('price' in ambiguous).toBe(false);
+    expect('priceCurrency' in ambiguous).toBe(false);
+
+    const valid = buildEvent({ ...base, tarifCompetiteur: '12,50 €' }).offers;
+    expect(valid.price).toBe('12.50');
+    expect(valid.priceCurrency).toBe('EUR');
+  });
+
+  it('article falls back dateModified to datePublished', () => {
+    const a = buildArticle({
+      title: 't',
+      description: 'd',
+      url: 'https://x/post/',
+      datePublished: '2026-01-02T00:00:00.000Z',
+    });
+    expect(a['@type']).toBe('BlogPosting');
+    expect(a.dateModified).toBe('2026-01-02T00:00:00.000Z');
+    expect(a.mainEntityOfPage['@id']).toBe('https://x/post/');
+    expect('image' in a).toBe(false);
+  });
+
+  it('article keeps an explicit dateModified and image', () => {
+    const a = buildArticle({
+      title: 't',
+      description: 'd',
+      url: 'https://x/post/',
+      datePublished: '2026-01-02T00:00:00.000Z',
+      dateModified: '2026-03-04T00:00:00.000Z',
+      image: 'https://x/i.avif',
+    });
+    expect(a.dateModified).toBe('2026-03-04T00:00:00.000Z');
+    expect(a.image).toBe('https://x/i.avif');
   });
 
   it('howto numbers steps from 1', () => {

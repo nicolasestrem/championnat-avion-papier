@@ -1,0 +1,10 @@
+---
+import JsonLd from './JsonLd.astro';
+import { buildArticle, type ArticleInput } from '../../lib/schema';
+
+type Props = ArticleInput;
+
+const data = buildArticle(Astro.props);
+---
+
+<JsonLd data={data} />

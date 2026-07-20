@@ -4,6 +4,7 @@ import { render, type CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
 import BreadcrumbSchema from '../components/seo/BreadcrumbSchema.astro';
+import ArticleSchema from '../components/seo/ArticleSchema.astro';
 import { absolute } from '../lib/seo';
 
 interface Props {
@@ -35,6 +36,14 @@ const emailShare = `mailto:?subject=${shareText}&body=${shareUrl}`;
 <BaseLayout title={a.seoTitle ?? a.title} description={a.description} image={a.image?.src}>
   <Fragment slot="head">
     <BreadcrumbSchema trail={trail} />
+    <ArticleSchema
+      title={a.title}
+      description={a.description}
+      url={pageUrl}
+      datePublished={a.datePublication.toISOString()}
+      dateModified={a.dateMaj?.toISOString()}
+      image={a.image ? absolute(a.image.src) : undefined}
+    />
   </Fragment>
 
   <Breadcrumbs trail={trail} />

@@ -55,7 +55,7 @@ const sameType = all.filter((e) => e.data.typeVol === t.typeVol);
 const related = [...sameType, ...all.filter((e) => !sameType.includes(e))].slice(0, 3);
 ---
 
-<BaseLayout title={t.seoTitle} description={t.seoDescription}>
+<BaseLayout title={t.seoTitle} description={t.seoDescription} image={t.image?.src}>
   <Fragment slot="head">
     <HowToSchema title={t.title} description={t.seoDescription} etapes={stepsForSchema} totalTime={totalTime} image={howToImage} />
     {faqItems.length > 0 && <FaqSchema items={faqItems} />}
