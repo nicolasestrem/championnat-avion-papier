@@ -1,7 +1,7 @@
 ---
 title: "Tuto avion en papier facile : le Faucon"
-seoTitle: "Tuto Avion en papier facile: \"LE FAUCON\""
-seoDescription: "Préparez-vous pour le Championnat du Monde de Lancer d'Avions en Papier ! Entraînez-vous pour battre le record."
+seoTitle: "Le Faucon : tuto avion en papier de distance en 7 étapes"
+seoDescription: "Pliez le Faucon, avion en papier conçu pour la distance, en 7 étapes et 7 minutes sur une feuille A4. Nez émoussé et ailes fines pour percer l'air. Schémas pas à pas."
 difficulte: "intermediaire"
 typeVol: "distance"
 dureePliage: "7 min"

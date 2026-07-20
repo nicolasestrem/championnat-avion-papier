@@ -1,7 +1,7 @@
 ---
 title: "Tuto avion en papier facile : le planeur"
-seoTitle: "Tuto Avion en Papier Facile: Le planeur"
-seoDescription: "Découvrez comment créer facilement des avions en papier avec nos étapes simples. Parfait pour les débutants."
+seoTitle: "Tuto avion en papier facile : le planeur qui reste en l'air"
+seoDescription: "Pliez un planeur en papier en 6 étapes et 3 minutes, avec une simple feuille A4. Nez émoussé et grandes ailes : il plane 4 à 6 secondes. Schémas et réglages."
 difficulte: "facile"
 typeVol: "duree"
 dureePliage: "3 min"
@@ -59,5 +59,7 @@ Si l'avion pique du nez, retrousse un peu plus l'arrière des ailes vers le haut
 ## Et après ?
 
 Une fois le planeur maîtrisé, tu peux passer à des modèles plus techniques qui explorent d'autres façons de voler. Pour un planeur de durée plus avancé, avec un vrai nez verrouillé, découvre le [Planeur Nakamura](/plier-avion-en-papier-nakamura/). Et si tu préfères la distance et la vitesse, la [Flèche Classique](/plier-avion-en-papier-fleche-classique/) est le complément parfait de ce planeur.
+
+Tu cherches quelque chose de vraiment différent ? L'[avion en papier rond](/avion-papier-rond/) n'a ni nez ni ailes au sens classique : c'est un anneau de papier qui tourne sur lui-même pour se stabiliser. Il surprend toujours, et il se plie en 5 étapes. Pour retrouver tous les modèles au même endroit, va faire un tour sur nos [tutos d'avions en papier](/ressources-avions-papier/).
 
 Partage tes essais avec la communauté sur Instagram avec **#AvionsPapierMerignac** — et n'oublie pas : au championnat, l'entrée est libre pour les visiteurs, alors viens tester ton planeur en vrai à Mérignac.

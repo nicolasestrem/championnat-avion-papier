@@ -12,7 +12,17 @@ export interface EventInput {
   beneficiaire: string;
 }
 
+// "8 €" -> "8", "12,50 €" -> "12.50". Returns undefined for anything that is not
+// a single unambiguous amount ("5 € / 10 €", "Gratuit"), so a malformed price is
+// omitted from the Offer rather than emitted wrong — Google rejects the whole
+// Offer on a bad price, and a range would silently advertise the wrong tariff.
+export function parsePrice(raw: string): string | undefined {
+  const matches = raw.replace(/,/g, '.').match(/\d+(?:\.\d+)?/g);
+  return matches?.length === 1 ? matches[0] : undefined;
+}
+
 export function buildEvent(r: EventInput) {
+  const price = parsePrice(r.tarifCompetiteur);
   return {
     '@context': 'https://schema.org',
     '@type': 'Event',
@@ -32,7 +42,7 @@ export function buildEvent(r: EventInput) {
     offers: {
       '@type': 'Offer',
       // Derived from reglages so structured data stays in sync with the CMS.
-      price: r.tarifCompetiteur.replace(',', '.').replace(/[^\d.]/g, ''),
+      ...(price ? { price } : {}),
       priceCurrency: 'EUR',
       url: r.helloAssoUrl,
       availability: 'https://schema.org/InStock',
@@ -90,6 +100,33 @@ export function buildBreadcrumb(trail: { label: string; url: string }[]) {
       name: t.label,
       item: t.url,
     })),
+  };
+}
+
+export interface ArticleInput {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified?: string;
+  image?: string;
+}
+
+export function buildArticle(a: ArticleInput) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: a.title,
+    description: a.description,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': a.url },
+    url: a.url,
+    datePublished: a.datePublished,
+    // Google treats a missing dateModified as "never updated"; fall back to the
+    // publication date so the field is always present and truthful.
+    dateModified: a.dateModified ?? a.datePublished,
+    ...(a.image ? { image: a.image } : {}),
+    author: { '@type': 'Organization', name: EVENT_NAME },
+    publisher: { '@type': 'Organization', name: EVENT_NAME },
   };
 }
 

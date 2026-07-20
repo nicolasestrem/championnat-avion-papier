@@ -31,9 +31,11 @@ const grouped = GROUPS.map((g) => ({
   items: tutoriels.filter((t) => t.data.typeVol === g.key),
 })).filter((g) => g.items.length > 0);
 
-const seoTitle = 'Tutoriels avion en papier : plier un planeur, une flèche et plus';
+// "tuto" massively outranks "tutoriel" in real French search demand for this
+// topic (GSC: ~4 000 impressions/90 j vs ~200), so the title leads with it.
+const seoTitle = 'Tuto avion en papier : tous nos modèles pas à pas';
 const seoDescription =
-  'Nos tutoriels pas à pas pour plier un avion en papier qui vole vraiment : planeur longue durée, flèche de distance, Nakamura, Intercepteur… Modèles faciles et avancés, avec photos et schéma HowTo.';
+  'Tous nos tutos d’avions en papier, du plus facile au plus technique : planeur longue durée, flèche de distance, Nakamura, Intercepteur, avion rond. Schémas et pliage pas à pas.';
 
 const breadcrumb = [
   { label: 'Accueil', href: '/' },

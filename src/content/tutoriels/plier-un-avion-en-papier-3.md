@@ -1,7 +1,7 @@
 ---
 title: "Apprendre à plier un avion en papier classique"
 seoTitle: "Apprendre à plier un avion en papier classique"
-seoDescription: "Apprendre plier un avion en papier classique facilement pour tous. Schéma et instructions."
+seoDescription: "Comment plier un avion en papier classique en 6 étapes et 5 minutes, avec une feuille A4. Le modèle de la cour de récré, expliqué pli par pli avec schémas."
 difficulte: "facile"
 typeVol: "distance"
 dureePliage: "5 min"

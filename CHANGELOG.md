@@ -6,7 +6,47 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+- **Réécriture des métadonnées SEO des trois tutoriels hérités de WordPress**, à la
+  suite d'un audit Google Search Console (90 j, 2026-04-21 → 2026-07-20). La page
+  `/tuto-avion-en-papier-facile-planeur/` concentre à elle seule **19 123 impressions
+  pour un CTR de 0,93 %** en position moyenne 6,8 — alors que le CTR attendu à cette
+  position est d'environ 3 %. Sa `seoDescription` était un texte générique qui ne
+  mentionnait ni « planeur », ni la durée de vol, ni aucun élément différenciant.
+  Les nouvelles descriptions suivent le même patron : requête cible d'abord, chiffre
+  concret ensuite (nombre d'étapes, durée de pliage, temps de vol), différenciateur
+  enfin — tous vérifiés contre les champs `etapes` / `faq` du fichier pour rester exacts.
+  Fichiers : `tuto-avion-en-papier-facile-planeur.md`, `tuto-avion-en-papier-le-faucon.md`
+  (dont le `seoTitle` contenait des guillemets échappés et la description un texte
+  d'événement sans rapport), `plier-un-avion-en-papier-3.md`.
+- **`/ressources-avions-papier/` retitré autour de « tuto »** plutôt que « tutoriels ».
+  La demande réelle est sans appel : `tuto avion en papier` pèse ~4 000 impressions/90 j
+  contre ~200 pour `tutoriel avion en papier`. La page était déjà le pilier du cluster
+  (elle liste les 9 tutoriels non-draft groupés par épreuve) et ressort en position
+  1,1–1,9 sur cette famille de requêtes — seul son titre ne parlait pas la langue des
+  utilisateurs.
+- **Images Open Graph des tutoriels** : `src/layouts/TutorialLayout.astro` ne
+  transmettait pas `image` à `BaseLayout`, si bien que les 9 tutoriels partageaient
+  `/og-default.jpg` malgré leurs visuels dédiés. Chaque tutoriel utilise désormais son
+  image de héros au partage.
+
 ### Added
+- **Liens internes contextuels** depuis le tutoriel planeur vers
+  `/avion-papier-rond/` (ancre exacte « avion en papier rond ») et
+  `/ressources-avions-papier/`. Motif : les requêtes `avion en papier rond` /
+  `avion papier rond` (356 impressions/90 j) se positionnaient via la page **planeur**
+  plutôt que via le tutoriel dédié, lequel ne recevait que **4 impressions** — Google
+  ne distinguait pas les deux pages.
+- **Schéma `BlogPosting`** pour les articles du blog via `buildArticle()` dans
+  `src/lib/schema.ts` et le composant `src/components/seo/ArticleSchema.astro`.
+  `ArticleLayout` n'émettait jusque-là qu'un fil d'Ariane. `dateModified` retombe sur
+  `datePublished` lorsqu'il est absent, Google interprétant un champ manquant comme
+  « jamais mis à jour ».
+- **`parsePrice()`** (`src/lib/schema.ts`) sécurise la dérivation du prix de l'`Offer`
+  de l'`Event`. L'ancien `replace(/[^\d.]/g, '')` transformait « 5 € / 10 € » en
+  « 510 ». La fonction n'accepte qu'un montant unique et non ambigu, et omet sinon le
+  champ — Google rejetant l'`Offer` entière sur un prix malformé, et une fourchette
+  affichant silencieusement un tarif faux. Couvert par 4 nouveaux tests.
 - **Google Analytics 4 + Google Tag Manager** wired site-wide through
   `src/layouts/BaseLayout.astro` using GA4 measurement ID `G-EHTVL72LRY` and GTM
   container `GTM-N59XNT8X`. The build-enforced `check:analytics` gate verifies exact
