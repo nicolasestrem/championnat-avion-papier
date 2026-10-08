@@ -36,3 +36,4 @@ pnpm-debug.log*
 # Firecrawl scrape cache (source extraction working files)
 .firecrawl/
 docs/SWITCH-DAY-ONE-PAGER.md
+WATCHDOG.yml
