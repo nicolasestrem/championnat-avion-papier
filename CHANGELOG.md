@@ -7,6 +7,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Changed
+- **Redirection WWW Cloudflare corrigée en production le 08/10/2026** :
+  HTTP WWW va directement vers l'apex HTTPS en un 301 au lieu de deux.
+  La règle préserve le chemin et les paramètres, y compris les valeurs répétées
+  ou encodées. Les PDF et la normalisation existante des slashs sont conservés.
+  Modification ciblée d'une seule Single Redirect ; aucun changement DNS ou WAF.
 - **Métadonnées `Event` de l'édition 2026 complétées avec des faits publiés** :
   description, fin le 13 juin à 17 h avec fuseau horaire, adresse postale complète
   et URL absolue du flyer de l'accueil. Les réglages typés et Sveltia CMS exposent
