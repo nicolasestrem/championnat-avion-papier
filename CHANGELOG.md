@@ -28,6 +28,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   activités et de l'impression utilisent un bloc CMS facultatif pris en charge
   par les sept pages éditables. Les bannières restent hors des styles Markdown
   pour conserver leurs titres et boutons lisibles.
+- **FAQ sur la cause soutenue rendue informative** : les faits concernant les
+  Pompiers Solidaires restent visibles dans la page et le JSON-LD, sans invitation
+  à s'inscrire ou à acheter un billet lorsque les inscriptions sont closes.
 - **Réécriture des métadonnées SEO des trois tutoriels hérités de WordPress**, à la
   suite d'un audit Google Search Console (90 j, 2026-04-21 → 2026-07-20). La page
   `/tuto-avion-en-papier-facile-planeur/` concentre à elle seule **19 123 impressions
