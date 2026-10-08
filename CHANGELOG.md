@@ -7,6 +7,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Changed
+- **Redirection WWW Cloudflare corrigée en production le 08/10/2026** :
+  HTTP WWW va directement vers l'apex HTTPS en un 301 au lieu de deux.
+  La règle préserve le chemin et les paramètres, y compris les valeurs répétées
+  ou encodées. Les PDF et la normalisation existante des slashs sont conservés.
+  Modification ciblée d'une seule Single Redirect ; aucun changement DNS ou WAF.
+- **Métadonnées `Event` de l'édition 2026 complétées avec des faits publiés** :
+  description, fin le 13 juin à 17 h avec fuseau horaire, adresse postale complète
+  et URL absolue du flyer de l'accueil. Les réglages typés et Sveltia CMS exposent
+  les nouveaux champs. Aucun artiste ni début de vente non documenté n'est inventé.
+- **Inscriptions closes représentées explicitement** : le réglage
+  `inscriptionsOuvertes` masque les invitations courantes et omet les `offers`
+  du JSON-LD quand il vaut `false`. L'export Google Agenda indique aussi la clôture.
+  Les deux actualités historiques d'ouverture restent inchangées.
+- **Consignes d'inscription cohérentes avec l'état central** : les trois FAQ
+  d'inscription, d'inscription sur place et de tarif disparaissent ensemble
+  de la page et du JSON-LD quand les inscriptions sont closes. Les réponses
+  générales sur les visiteurs et les deux épreuves ne promettent plus une
+  inscription disponible. Les invitations de l'accueil, de l'histoire, des
+  activités et de l'impression utilisent un bloc CMS facultatif pris en charge
+  par les sept pages éditables. Les bannières restent hors des styles Markdown
+  pour conserver leurs titres et boutons lisibles.
+- **FAQ sur la cause soutenue rendue informative** : les faits concernant les
+  Pompiers Solidaires restent visibles dans la page et le JSON-LD, sans invitation
+  à s'inscrire ou à acheter un billet lorsque les inscriptions sont closes.
 - **Réécriture des métadonnées SEO des trois tutoriels hérités de WordPress**, à la
   suite d'un audit Google Search Console (90 j, 2026-04-21 → 2026-07-20). La page
   `/tuto-avion-en-papier-facile-planeur/` concentre à elle seule **19 123 impressions

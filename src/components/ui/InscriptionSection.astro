@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import CtaBanner from './CtaBanner.astro';
+
+type Inscription = CollectionEntry<'pages'>['data']['inscription'];
+type Reglages = CollectionEntry<'reglages'>['data'];
+
+interface Props {
+  inscription?: Inscription;
+  reglages: Reglages;
+  afficherTarifs?: boolean;
+  afficherBeneficiaire?: boolean;
+}
+
+const { inscription, reglages, afficherTarifs = false, afficherBeneficiaire = false } = Astro.props;
+const tarifs = afficherTarifs
+  ? ` ${reglages.tarifCompetiteur} pour les compétiteurs, ${reglages.entreeVisiteur.toLowerCase()} pour les visiteurs.`
+  : '';
+const beneficiaire = afficherBeneficiaire ? ` Au profit de ${reglages.beneficiaire}.` : '';
+---
+
+{inscription && (
+  <CtaBanner
+    heading={reglages.inscriptionsOuvertes ? inscription.titre : 'Inscriptions closes'}
+    text={reglages.inscriptionsOuvertes ? `${inscription.texte}${tarifs}${beneficiaire}` : 'Les inscriptions pour cette édition sont closes.'}
+    href={reglages.inscriptionsOuvertes ? reglages.helloAssoUrl : undefined}
+    label={reglages.inscriptionsOuvertes ? 'S’inscrire au Championnat' : undefined}
+  />
+)}

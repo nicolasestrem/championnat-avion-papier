@@ -4,6 +4,9 @@ seoTitle: "Histoire du Championnat du monde de lancer avions papier"
 seoDescription: "Découvrez l'histoire fascinante du Championnat du monde de lancer d'avions en papier à Mérignac"
 image: "../../assets/editions/edition-2025-01.avif"
 imageAlt: "Lancer d'avion en papier lors d'une édition du Championnat à Mérignac"
+inscription:
+  titre: "Rejoignez l'aventure"
+  texte: "Inscrivez-vous dès maintenant pour participer à une journée remplie d'amusement, de compétition et de créativité, et écrivez, vous aussi, une page de cette histoire déjà riche."
 ---
 
 ## Une histoire de champions
@@ -39,7 +42,3 @@ Chaque édition est l'occasion de tenter de nouvelles performances. La référen
 Le [Rotary Club de Mérignac](https://www.rotary-merignac.fr/) est à l'origine de l'organisation du Championnat depuis 2023. Implanté au cœur de la métropole bordelaise, ce club service réunit des bénévoles engagés dans des actions solidaires, locales et internationales. En reprenant cet événement festif et intergénérationnel, le Rotary lui a donné une nouvelle dimension, en l'associant à chaque édition à une cause forte.
 
 Lors des éditions 2023 et 2024, l'événement a notamment soutenu la prévention des incendies de forêt en Gironde, avec un don à la DFCI. Pour l'édition **2026**, les bénéfices sont désormais reversés aux **Pompiers Solidaires**. D'année en année, les membres du club mobilisent leurs compétences pour faire de cette journée un moment inoubliable : compétition ludique, ateliers pédagogiques et esprit de partage font du Championnat un rendez-vous emblématique de Mérignac.
-
-## Rejoignez l'aventure
-
-Inscrivez-vous dès maintenant pour participer à une journée remplie d'amusement, de compétition et de créativité — et écrivez, vous aussi, une page de cette histoire déjà riche.

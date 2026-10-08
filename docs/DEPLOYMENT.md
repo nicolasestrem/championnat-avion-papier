@@ -36,7 +36,12 @@ Le code du Worker d'auth est dans `workers/sveltia-cms-auth/` (aucun secret comm
 - [ ] Sauvegarde complète du WordPress actuel.
 - [ ] Abaisser le TTL DNS (ex. 300 s) 24 h avant.
 - [ ] Ajouter `championnatavionpapier.fr` comme **domaine personnalisé** du Worker.
-- [ ] **Règle de redirection zone Cloudflare** : `www.championnatavionpapier.fr/*` → apex, 301 (impossible à exprimer dans `public/_redirects`, qui ne matche que des chemins).
+- [x] **Règle de redirection zone Cloudflare** : HTTP et HTTPS `www.championnatavionpapier.fr` vont directement vers l'apex HTTPS en un 301, vérifié en production le 08/10/2026.
+  - Single Redirect, phase `http_request_dynamic_redirect`, ruleset `131515bf392b41b093dfedb3aaf1ec32`, règle `0337b6045ba2477fa6cb4e806cf38f60`.
+  - Expression : `(http.host eq "www.championnatavionpapier.fr")`.
+  - Cible : `concat("https://championnatavionpapier.fr", http.request.uri.path)` ; statut `301` ; `preserve_query_string: true`.
+  - Modifier cette règle seule par `PATCH`, en conservant les autres règles et leur ordre. Elle ne peut pas être remplacée par `public/_redirects`, qui ne matche que des chemins.
+  - La normalisation existante des pages sans slash reste séparée : un 308 supplémentaire est attendu après le 301 d'hôte. Ne pas ajouter de slash aux fichiers, notamment aux PDF.
 - [ ] **Désactiver les règles Cloudflare héritées de WordPress** si présentes : APO, Page Rules, Cache Rules (elles serviraient du cache WordPress périmé sur le nouveau site).
 - [ ] Vérifier que la preview `*.workers.dev` reste protégée par Cloudflare Access et que le worker OAuth conserve la variable `ALLOWED_DOMAINS=championnatavionpapier.fr`.
 - [ ] Garder le serveur WordPress **allumé et son chemin d'origine restaurable** (tunnel / enregistrement DNS d'origine conservés, juste plus pointés par le domaine) pendant ~1 mois pour le rollback — mais **pas de sous-domaine public** vers WordPress (contenu dupliqué + surface d'attaque) ; l'accès de vérification se fait via le LAN.

@@ -29,6 +29,35 @@ npm run check:links
 - `_source/` — exports WordPress d'origine (référence, non buildé)
 - `docs/` — spec, plan d'implémentation, **DEPLOYMENT.md**, **CONTENT-REVIEW.md**
 
+## Réglages de l'édition
+
+La source de vérité est `src/content/reglages/reglages.json`, éditable dans
+la collection **Réglages** de Sveltia CMS.
+
+- `dateISO` et `dateFinISO` doivent inclure le fuseau horaire, par exemple
+  `2026-06-13T11:00:00+02:00` et `2026-06-13T17:00:00+02:00`.
+- `descriptionEvenement`, `adresseRue`, `codePostal` et `ville` alimentent le
+  JSON-LD `Event`. Utiliser uniquement des informations publiées et vérifiées.
+  L'image de l'événement provient du visuel de la page d'accueil.
+- `inscriptionsOuvertes: false` masque les liens d'inscription courants, indique
+  la clôture dans Google Agenda et omet les `offers` du JSON-LD. Les actualités
+  historiques restent consultables. Ne réactiver ce champ que lorsque les
+  inscriptions à l'édition concernée sont réellement ouvertes.
+- Dans la collection **FAQ**, activer `inscriptionsOuvertesUniquement` pour les
+  questions qui donnent des consignes d'inscription à l'édition courante.
+  Lorsque les inscriptions sont closes, ces entrées sont absentes à la fois
+  de la page et du JSON-LD `FAQPage`. Les questions générales restent visibles.
+- Dans la collection **Pages**, placer les invitations courantes dans le bloc
+  facultatif `inscription` (`titre` et `texte`, en texte simple), pas dans le
+  corps Markdown. Les sept pages CMS prennent ce bloc en charge : il affiche
+  l'invitation et le lien HelloAsso si les inscriptions sont ouvertes, sinon
+  un avis de clôture. Sans bloc, aucune bannière supplémentaire n'est ajoutée.
+  Les pages utilisant `PageLayout` rendent cette bannière dans le slot
+  `after-content`, hors des styles du contenu rédactionnel.
+- Pour une nouvelle édition, mettre à jour ensemble les dates, le lieu, le
+  descriptif, le flyer et l'URL HelloAsso. Ne pas déduire `performer` ou
+  `offers.validFrom` d'une date de publication ou d'une information inconnue.
+
 ## Mise en ligne
 
 Voir **`docs/DEPLOYMENT.md`** (déploiement Cloudflare, OAuth CMS, bascule DNS) et **`docs/CONTENT-REVIEW.md`** (contenu à relire avant la mise en ligne).

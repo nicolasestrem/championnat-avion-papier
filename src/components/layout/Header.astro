@@ -5,7 +5,7 @@ import Nav from './Nav.astro';
 import logo from '../../assets/event/logo-championnat.png';
 
 const reglages = await getEntry('reglages', 'reglages');
-const helloAssoUrl = reglages?.data.helloAssoUrl ?? '#';
+const inscriptionsOuvertes = reglages?.data.inscriptionsOuvertes ?? false;
 const pathname = Astro.url.pathname;
 ---
 
@@ -27,14 +27,16 @@ const pathname = Astro.url.pathname;
     </nav>
 
     <div class="flex items-center gap-2">
-      <a
-        href={helloAssoUrl}
-        target="_blank"
-        rel="noopener"
-        class="inline-flex items-center rounded-full bg-orange px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-orange/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange"
-      >
-        S’inscrire
-      </a>
+      {inscriptionsOuvertes && (
+        <a
+          href={reglages!.data.helloAssoUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center rounded-full bg-orange px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-orange/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange"
+        >
+          S’inscrire
+        </a>
+      )}
 
       <details class="relative md:hidden">
         <summary

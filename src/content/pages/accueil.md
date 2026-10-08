@@ -4,6 +4,9 @@ seoTitle: "Championnat du Monde de lancer d'avions en papier"
 seoDescription: "Le site officiel du Championnat du Monde de lancer d'avions en papier à Mérignac. Venez en famille et soutenez une bonne cause !"
 image: "../../assets/event/flyer-2026.webp"
 imageAlt: "Flyer du Championnat du Monde de Lancer d'Avions en Papier 2026"
+inscription:
+  titre: "Prêt à décoller ?"
+  texte: "Réservez votre place et rejoignez l'aventure 2026."
 ---
 
 ## Une bonne action à coups d'avions en papier
@@ -21,7 +24,6 @@ Pliez, lancez, visez le record du monde. Le **Championnat du Monde de Lancer d'A
 - **Combien ?** 8 € pour les compétiteurs, **entrée libre** pour les visiteurs.
 - **Pour qui ?** Tout le monde : un classement adultes, un classement enfants, et des animations pour toute la famille.
 
-L'inscription en ligne via HelloAsso est recommandée pour gagner du temps le jour J — mais vous pouvez aussi vous inscrire sur place.
 
 ## Deux épreuves, deux façons de voler
 
@@ -48,5 +50,3 @@ Cette compétition est avant tout un événement engagé : l'intégralité des b
 ## Merci à nos partenaires
 
 Grâce à la générosité de nos sponsors — entreprises, institutions et associations de la métropole bordelaise — le Championnat peut prendre son envol chaque année. Un immense merci à celles et ceux qui nous accompagnent dans cette belle aventure.
-
-**Prêt à décoller ?** Réservez votre place et rejoignez l'aventure 2026.

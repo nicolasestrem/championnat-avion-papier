@@ -4,9 +4,13 @@ import { glob, file } from 'astro/loaders';
 const reglages = defineCollection({
   loader: file('src/content/reglages/reglages.json'),
   schema: z.object({
-    dateISO: z.string(),
+    dateISO: z.string().datetime({ offset: true }),
+    dateFinISO: z.string().datetime({ offset: true }),
     dateLabel: z.string(),
+    descriptionEvenement: z.string(),
     lieu: z.string(),
+    adresseRue: z.string(),
+    codePostal: z.string(),
     ville: z.string(),
     horaireSelections: z.string(),
     horaireFinales: z.string(),
@@ -14,6 +18,7 @@ const reglages = defineCollection({
     entreeVisiteur: z.string(),
     beneficiaire: z.string(),
     helloAssoUrl: z.string().url(),
+    inscriptionsOuvertes: z.boolean(),
     emailContact: z.string().email(),
     emailPrivacy: z.string().email(),
     instagram: z.string().url().optional(),
@@ -86,6 +91,7 @@ const faq = defineCollection({
     question: z.string(), reponse: z.string(),
     categorie: z.enum(['pratique', 'inscription', 'sur-place', 'general']),
     ordre: z.number().default(99),
+    inscriptionsOuvertesUniquement: z.boolean().default(false),
   }),
 });
 
@@ -102,6 +108,9 @@ const pages = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(), seoTitle: z.string(), seoDescription: z.string(),
     image: image().optional(), imageAlt: z.string().optional(),
+    inscription: z.object({
+      titre: z.string(), texte: z.string(),
+    }).optional(),
   }),
 });
 
