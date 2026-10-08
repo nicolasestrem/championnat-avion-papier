@@ -68,8 +68,8 @@ const related = [...sameType, ...all.filter((e) => !sameType.includes(e))].slice
     title={t.title}
     subtitle={t.seoDescription}
     dateLabel={metaLabel}
-    ctaLabel="S’inscrire au Championnat"
-    ctaHref={r?.helloAssoUrl ?? '#'}
+    ctaLabel={r?.inscriptionsOuvertes ? 'S’inscrire au Championnat' : undefined}
+    ctaHref={r?.inscriptionsOuvertes ? r.helloAssoUrl : undefined}
     image={t.image}
     imageAlt={t.imageAlt}
   />
@@ -135,9 +135,11 @@ const related = [...sameType, ...all.filter((e) => !sameType.includes(e))].slice
   )}
 
   <CtaBanner
-    heading="Prêt à faire décoller votre avion ?"
-    text={r ? `Rendez-vous le ${r.dateLabel} à ${r.ville}. Inscription ${r.tarifCompetiteur} par compétiteur.` : undefined}
-    href={r?.helloAssoUrl ?? '#'}
-    label="S’inscrire au Championnat"
+    heading={r?.inscriptionsOuvertes ? 'Prêt à faire décoller votre avion ?' : 'Inscriptions closes'}
+    text={r?.inscriptionsOuvertes
+      ? `Rendez-vous le ${r.dateLabel} à ${r.ville}. Inscription ${r.tarifCompetiteur} par compétiteur.`
+      : 'Les inscriptions pour cette édition sont closes.'}
+    href={r?.inscriptionsOuvertes ? r.helloAssoUrl : undefined}
+    label={r?.inscriptionsOuvertes ? 'S’inscrire au Championnat' : undefined}
   />
 </BaseLayout>

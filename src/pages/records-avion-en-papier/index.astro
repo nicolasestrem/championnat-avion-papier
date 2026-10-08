@@ -43,9 +43,11 @@ const breadcrumb = [
   </p>
 
   <CtaBanner
-    heading="À vous de viser le record"
-    text={`Rendez-vous le ${r.dateLabel} à ${r.ville}. Inscription ${r.tarifCompetiteur} par compétiteur.`}
-    href={r.helloAssoUrl}
-    label="S’inscrire au Championnat"
+    heading={r.inscriptionsOuvertes ? 'À vous de viser le record' : 'Inscriptions closes'}
+    text={r.inscriptionsOuvertes
+      ? `Rendez-vous le ${r.dateLabel} à ${r.ville}. Inscription ${r.tarifCompetiteur} par compétiteur.`
+      : 'Les inscriptions pour cette édition sont closes.'}
+    href={r.inscriptionsOuvertes ? r.helloAssoUrl : undefined}
+    label={r.inscriptionsOuvertes ? 'S’inscrire au Championnat' : undefined}
   />
 </PageLayout>

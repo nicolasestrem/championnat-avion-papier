@@ -13,7 +13,7 @@ import photoPliage2025 from '../assets/editions/edition-2025-04.avif';
 import photoAlphajet2026 from '../assets/editions/edition-2026-05.avif';
 import photoAmbiance2025 from '../assets/editions/edition-2025-05.avif';
 import photoFinales2026 from '../assets/editions/edition-2026-06.avif';
-
+import { absolute } from '../lib/seo';
 const reglages = await getEntry('reglages', 'reglages');
 const r = reglages!.data;
 
@@ -34,11 +34,16 @@ const mosaicItems = [
 
 const eventInput = {
   dateISO: r.dateISO,
+  dateFinISO: r.dateFinISO,
+  descriptionEvenement: r.descriptionEvenement,
   lieu: r.lieu,
+  adresseRue: r.adresseRue,
+  codePostal: r.codePostal,
   ville: r.ville,
   tarifCompetiteur: r.tarifCompetiteur,
   helloAssoUrl: r.helloAssoUrl,
-  beneficiaire: r.beneficiaire,
+  inscriptionsOuvertes: r.inscriptionsOuvertes,
+  image: page!.data.image ? absolute(page!.data.image.src) : undefined,
 };
 ---
 
@@ -52,8 +57,8 @@ const eventInput = {
     title="Championnat du Monde de Lancer d’Avions en Papier"
     subtitle={`Pliez, lancez, visez le record du monde — au profit des ${r.beneficiaire}. Une journée festive et familiale à ${r.ville}.`}
     dateLabel={`${r.dateLabel} · ${r.lieu}, ${r.ville}`}
-    ctaLabel="S’inscrire"
-    ctaHref={r.helloAssoUrl}
+    ctaLabel={r.inscriptionsOuvertes ? 'S’inscrire' : undefined}
+    ctaHref={r.inscriptionsOuvertes ? r.helloAssoUrl : undefined}
     image={page!.data.image}
     imageAlt={page!.data.imageAlt}
   />
@@ -97,9 +102,11 @@ const eventInput = {
   </section>
 
   <CtaBanner
-    heading={`Rendez-vous le ${r.dateLabel}`}
-    text={`${r.lieu}, ${r.ville}. Compétiteur ${r.tarifCompetiteur}, ${r.entreeVisiteur.toLowerCase()} pour les visiteurs. Au profit des ${r.beneficiaire}.`}
-    href={r.helloAssoUrl}
-    label="S’inscrire au Championnat"
+    heading={r.inscriptionsOuvertes ? `Rendez-vous le ${r.dateLabel}` : 'Inscriptions closes'}
+    text={r.inscriptionsOuvertes
+      ? `${r.lieu}, ${r.ville}. Compétiteur ${r.tarifCompetiteur}, ${r.entreeVisiteur.toLowerCase()} pour les visiteurs. Au profit des ${r.beneficiaire}.`
+      : 'Les inscriptions pour cette édition sont closes.'}
+    href={r.inscriptionsOuvertes ? r.helloAssoUrl : undefined}
+    label={r.inscriptionsOuvertes ? 'S’inscrire au Championnat' : undefined}
   />
 </BaseLayout>

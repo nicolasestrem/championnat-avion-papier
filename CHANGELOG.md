@@ -7,6 +7,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Changed
+- **Métadonnées `Event` de l'édition 2026 complétées avec des faits publiés** :
+  description, fin le 13 juin à 17 h avec fuseau horaire, adresse postale complète
+  et URL absolue du flyer de l'accueil. Les réglages typés et Sveltia CMS exposent
+  les nouveaux champs. Aucun artiste ni début de vente non documenté n'est inventé.
+- **Inscriptions closes représentées explicitement** : le réglage
+  `inscriptionsOuvertes` masque les invitations courantes et omet les `offers`
+  du JSON-LD quand il vaut `false`. L'export Google Agenda indique aussi la clôture.
+  Les deux actualités historiques d'ouverture restent inchangées.
 - **Réécriture des métadonnées SEO des trois tutoriels hérités de WordPress**, à la
   suite d'un audit Google Search Console (90 j, 2026-04-21 → 2026-07-20). La page
   `/tuto-avion-en-papier-facile-planeur/` concentre à elle seule **19 123 impressions

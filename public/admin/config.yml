@@ -30,9 +30,13 @@ collections:
             label: "Réglages"
             widget: object
             fields:
-              - { name: dateISO, label: "Date & heure ISO", widget: string, hint: "Ex. 2026-06-13T11:00:00+02:00" }
+              - { name: dateISO, label: "Date et heure de début ISO", widget: string, hint: "Ex. 2026-06-13T11:00:00+02:00" }
+              - { name: dateFinISO, label: "Date et heure de fin ISO", widget: string, hint: "Ex. 2026-06-13T17:00:00+02:00" }
               - { name: dateLabel, label: "Date affichée", widget: string }
+              - { name: descriptionEvenement, label: "Description de l'événement", widget: text }
               - { name: lieu, label: "Lieu", widget: string }
+              - { name: adresseRue, label: "Adresse", widget: string }
+              - { name: codePostal, label: "Code postal", widget: string }
               - { name: ville, label: "Ville", widget: string }
               - { name: horaireSelections, label: "Horaires des sélections", widget: string }
               - { name: horaireFinales, label: "Horaire des finales", widget: string }
@@ -40,6 +44,7 @@ collections:
               - { name: entreeVisiteur, label: "Entrée visiteurs", widget: string }
               - { name: beneficiaire, label: "Bénéficiaire", widget: string }
               - { name: helloAssoUrl, label: "Lien HelloAsso", widget: string }
+              - { name: inscriptionsOuvertes, label: "Inscriptions ouvertes", widget: boolean }
               - { name: emailContact, label: "E-mail de contact", widget: string }
               - { name: emailPrivacy, label: "E-mail confidentialité", widget: string }
               - { name: instagram, label: "Instagram", widget: string, required: false }

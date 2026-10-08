@@ -29,6 +29,24 @@ npm run check:links
 - `_source/` — exports WordPress d'origine (référence, non buildé)
 - `docs/` — spec, plan d'implémentation, **DEPLOYMENT.md**, **CONTENT-REVIEW.md**
 
+## Réglages de l'édition
+
+La source de vérité est `src/content/reglages/reglages.json`, éditable dans
+la collection **Réglages** de Sveltia CMS.
+
+- `dateISO` et `dateFinISO` doivent inclure le fuseau horaire, par exemple
+  `2026-06-13T11:00:00+02:00` et `2026-06-13T17:00:00+02:00`.
+- `descriptionEvenement`, `adresseRue`, `codePostal` et `ville` alimentent le
+  JSON-LD `Event`. Utiliser uniquement des informations publiées et vérifiées.
+  L'image de l'événement provient du visuel de la page d'accueil.
+- `inscriptionsOuvertes: false` masque les liens d'inscription courants, indique
+  la clôture dans Google Agenda et omet les `offers` du JSON-LD. Les actualités
+  historiques restent consultables. Ne réactiver ce champ que lorsque les
+  inscriptions à l'édition concernée sont réellement ouvertes.
+- Pour une nouvelle édition, mettre à jour ensemble les dates, le lieu, le
+  descriptif, le flyer et l'URL HelloAsso. Ne pas déduire `performer` ou
+  `offers.validFrom` d'une date de publication ou d'une information inconnue.
+
 ## Mise en ligne
 
 Voir **`docs/DEPLOYMENT.md`** (déploiement Cloudflare, OAuth CMS, bascule DNS) et **`docs/CONTENT-REVIEW.md`** (contenu à relire avant la mise en ligne).

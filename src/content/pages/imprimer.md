@@ -37,6 +37,5 @@ Vous pouvez imprimer les gabarits autant de fois que vous le souhaitez, tester p
 Une fois les gabarits maîtrisés, apprenez à plier vos avions sans modèle grâce à nos tutoriels pas à pas, puis venez confronter vos créations à celles des compétiteurs du monde entier :
 
 - Rendez-vous **samedi 13 juin 2026** au Complexe sportif Daniel Colombier, à Mérignac.
-- **[Inscrivez-vous en ligne via HelloAsso](https://www.helloasso.com/associations/rotary-merignac/evenements/championnat-du-monde-de-lancer-d-avions-en-papier-2026)** — tarif compétiteur 8 €, entrée libre pour les visiteurs.
 
 Partagez vos plus belles réussites : imprimez, pliez, lancez… et faites voler vos avions en papier !

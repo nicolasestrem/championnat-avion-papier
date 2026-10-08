@@ -10,18 +10,21 @@ import {
 } from './schema';
 
 describe('schema builders', () => {
-  it('event has ISO startDate and 8 EUR offer', () => {
-    const e = buildEvent({
-      dateISO: '2026-06-13T11:00:00+02:00',
-      lieu: 'Complexe sportif Daniel Colombier',
-      ville: 'Mérignac',
-      tarifCompetiteur: '8 €',
-      helloAssoUrl: 'https://x',
-      beneficiaire: 'Pompiers Solidaires',
-    });
-    expect(e.startDate).toBe('2026-06-13T11:00:00+02:00');
-    expect(e.offers.price).toBe('8');
-    expect(e.location.address.addressLocality).toBe('Mérignac');
+  const event = {
+    dateISO: '2026-06-13T11:00:00+02:00',
+    dateFinISO: '2026-06-13T17:00:00+02:00',
+    descriptionEvenement: 'Description de l’événement',
+    lieu: 'Complexe sportif Daniel Colombier',
+    adresseRue: '12 Allée des Acacias',
+    codePostal: '33700',
+    ville: 'Mérignac',
+    helloAssoUrl: 'https://x',
+  };
+
+  it('event omits offers when registration is closed', () => {
+    const closed = buildEvent({ ...event, tarifCompetiteur: '8 €', inscriptionsOuvertes: false });
+
+    expect('offers' in closed).toBe(false);
   });
 
   it('parsePrice handles single amounts and rejects ambiguous ones', () => {
@@ -33,21 +36,20 @@ describe('schema builders', () => {
 
   it('event omits price rather than emitting a malformed one', () => {
     const base = {
-      dateISO: '2026-06-13T11:00:00+02:00',
-      lieu: 'L',
-      ville: 'V',
-      helloAssoUrl: 'https://x',
-      beneficiaire: 'B',
+      ...event,
+      inscriptionsOuvertes: true,
     };
     // priceCurrency must disappear alongside price — a currency with no amount
     // is an incomplete Offer.
     const ambiguous = buildEvent({ ...base, tarifCompetiteur: '5 € / 10 €' }).offers;
-    expect('price' in ambiguous).toBe(false);
-    expect('priceCurrency' in ambiguous).toBe(false);
+    expect(ambiguous).toBeDefined();
+    expect('price' in ambiguous!).toBe(false);
+    expect('priceCurrency' in ambiguous!).toBe(false);
 
     const valid = buildEvent({ ...base, tarifCompetiteur: '12,50 €' }).offers;
-    expect(valid.price).toBe('12.50');
-    expect(valid.priceCurrency).toBe('EUR');
+    expect(valid).toBeDefined();
+    expect(valid!.price).toBe('12.50');
+    expect(valid!.priceCurrency).toBe('EUR');
   });
 
   it('article falls back dateModified to datePublished', () => {

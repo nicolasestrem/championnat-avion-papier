@@ -5,11 +5,16 @@ const EVENT_NAME = 'Championnat du Monde de Lancer d’Avions en Papier';
 
 export interface EventInput {
   dateISO: string;
+  dateFinISO: string;
+  descriptionEvenement: string;
   lieu: string;
+  adresseRue: string;
+  codePostal: string;
   ville: string;
   tarifCompetiteur: string;
   helloAssoUrl: string;
-  beneficiaire: string;
+  inscriptionsOuvertes: boolean;
+  image?: string;
 }
 
 // "8 €" -> "8", "12,50 €" -> "12.50". Returns undefined for anything that is not
@@ -22,12 +27,26 @@ export function parsePrice(raw: string): string | undefined {
 }
 
 export function buildEvent(r: EventInput) {
-  const price = parsePrice(r.tarifCompetiteur);
+  const price = r.inscriptionsOuvertes ? parsePrice(r.tarifCompetiteur) : undefined;
+  const offers = r.inscriptionsOuvertes
+    ? {
+        '@type': 'Offer',
+        // Derived from reglages so structured data stays in sync with the CMS.
+        // price and priceCurrency travel together: a currency with no amount is
+        // an incomplete Offer and Google warns on it.
+        ...(price ? { price, priceCurrency: 'EUR' } : {}),
+        url: r.helloAssoUrl,
+        availability: 'https://schema.org/InStock',
+      }
+    : undefined;
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: EVENT_NAME,
+    description: r.descriptionEvenement,
     startDate: r.dateISO,
+    endDate: r.dateFinISO,
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     eventStatus: 'https://schema.org/EventScheduled',
     location: {
@@ -35,19 +54,14 @@ export function buildEvent(r: EventInput) {
       name: r.lieu,
       address: {
         '@type': 'PostalAddress',
+        streetAddress: r.adresseRue,
+        postalCode: r.codePostal,
         addressLocality: r.ville,
         addressCountry: 'FR',
       },
     },
-    offers: {
-      '@type': 'Offer',
-      // Derived from reglages so structured data stays in sync with the CMS.
-      // price and priceCurrency travel together: a currency with no amount is
-      // an incomplete Offer and Google warns on it.
-      ...(price ? { price, priceCurrency: 'EUR' } : {}),
-      url: r.helloAssoUrl,
-      availability: 'https://schema.org/InStock',
-    },
+    ...(r.image ? { image: r.image } : {}),
+    ...(offers ? { offers } : {}),
     organizer: {
       '@type': 'Organization',
       name: 'Rotary Club de Mérignac',

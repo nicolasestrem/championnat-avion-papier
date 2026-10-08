@@ -30,7 +30,9 @@ Tout le contenu français ci-dessous a été **rédigé/réécrit pour la migrat
    - **Faucon, Rond, Lanceur, Intercepteur** → `tutoriel-generique.avif` : illustration décorative sur-mesure (avion en papier blanc sur ciel bleu, aux couleurs de la marque). **Aucune photo source n'existe** pour ces 4 pliages. Décision restante : produire de vraies photos de pliage (idéalement par étape), commander des illustrations, ou conserver l'illustration générique. Le script de génération est `scripts/make-tutorial-fallback.mjs`.
 2. **Slug « avion rond »** — publié en `/avion-papier-rond/` au lieu du `/avion-en-papier-rond/` prévu. Page neuve sans historique SEO : choisir le slug canonique définitif.
 3. **Mentions légales** — les détails de l'entité juridique (éditeur, hébergeur, directeur de publication, adresse) sont à confirmer ; un `TODO` est laissé dans le fichier, aucune adresse n'a été inventée.
-4. **Faits canoniques 2026** — vérifiez `src/content/reglages/reglages.json` : date (samedi 13 juin 2026), lieu (Complexe sportif Daniel Colombier), horaires (sélections 11h–15h, finales 15h30), tarifs (8 € / entrée libre), bénéficiaire (Pompiers Solidaires), URL HelloAsso.
+4. **Faits canoniques 2026** : vérifiez `src/content/reglages/reglages.json` : date (samedi 13 juin 2026), lieu (Complexe sportif Daniel Colombier), horaires (sélections 11h–15h, finales 15h30), tarifs (8 € / entrée libre), bénéficiaire (Pompiers Solidaires), URL HelloAsso.
+   - La page HelloAsso publiée indique une journée de **11 h à 17 h**, au **12 Allée des Acacias, 33700 Mérignac**, et des inscriptions terminées. Ces faits alimentent `dateFinISO`, `adresseRue`, `codePostal` et `inscriptionsOuvertes: false`.
+   - `descriptionEvenement` reprend la présentation publiée. Le JSON-LD utilise le flyer de l'accueil en URL absolue. Ne pas inventer d'artiste, de début de vente ou de nouvelle édition.
 
 ## Vérifications techniques restantes (nécessitent navigateur/déploiement)
 

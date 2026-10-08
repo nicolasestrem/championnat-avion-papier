@@ -42,7 +42,11 @@ const gcalEndDate = new Date(r.dateISO.slice(0, 10) + 'T00:00:00Z');
 gcalEndDate.setUTCDate(gcalEndDate.getUTCDate() + 1);
 const gcalEnd = gcalEndDate.toISOString().slice(0, 10).replace(/-/g, '');
 const gcalDetails = encodeURIComponent(
-  `Championnat du Monde de Lancer d’Avions en Papier — ${r.lieu}, ${r.ville}. Sélections ${r.horaireSelections}, finales ${r.horaireFinales}. Inscription : ${r.helloAssoUrl}`
+  `Championnat du Monde de Lancer d’Avions en Papier - ${r.lieu}, ${r.ville}. Sélections ${r.horaireSelections}, finales ${r.horaireFinales}. ${
+    r.inscriptionsOuvertes
+      ? `Inscription : ${r.helloAssoUrl}`
+      : 'Les inscriptions pour cette édition sont closes.'
+  }`
 );
 const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
   'Championnat du Monde de Lancer d’Avions en Papier'
@@ -72,14 +76,18 @@ const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&tex
         <div><dt class="inline font-semibold">Au profit de :</dt> <dd class="inline">{r.beneficiaire}</dd></div>
       </dl>
       <div class="mt-5 flex flex-wrap gap-3">
-        <a
-          href={r.helloAssoUrl}
-          target="_blank"
-          rel="noopener"
-          class="inline-flex items-center rounded-full bg-orange px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-orange/90"
-        >
-          S’inscrire sur HelloAsso
-        </a>
+        {r.inscriptionsOuvertes ? (
+          <a
+            href={r.helloAssoUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center rounded-full bg-orange px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-orange/90"
+          >
+            S’inscrire sur HelloAsso
+          </a>
+        ) : (
+          <p class="self-center font-semibold text-sky-deep">Les inscriptions pour cette édition sont closes.</p>
+        )}
         <a
           href={gcalUrl}
           target="_blank"

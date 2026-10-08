@@ -21,7 +21,6 @@ Pliez, lancez, visez le record du monde. Le **Championnat du Monde de Lancer d'A
 - **Combien ?** 8 € pour les compétiteurs, **entrée libre** pour les visiteurs.
 - **Pour qui ?** Tout le monde : un classement adultes, un classement enfants, et des animations pour toute la famille.
 
-L'inscription en ligne via HelloAsso est recommandée pour gagner du temps le jour J — mais vous pouvez aussi vous inscrire sur place.
 
 ## Deux épreuves, deux façons de voler
 
