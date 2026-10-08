@@ -1,8 +1,10 @@
 ---
 import { getEntry, render } from 'astro:content';
+import InscriptionSection from '../../components/ui/InscriptionSection.astro';
 import PageLayout from '../../layouts/PageLayout.astro';
 
 const page = await getEntry('pages', 'histoire');
+const reglages = await getEntry('reglages', 'reglages');
 const { Content } = await render(page!);
 
 const breadcrumb = [
@@ -20,4 +22,5 @@ const breadcrumb = [
   breadcrumb={breadcrumb}
 >
   <Content />
+  <InscriptionSection slot="after-content" inscription={page!.data.inscription} reglages={reglages!.data} />
 </PageLayout>

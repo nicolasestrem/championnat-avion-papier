@@ -14,7 +14,7 @@ Tout le contenu français ci-dessous a été **rédigé/réécrit pour la migrat
 | Lanceur (tuto) | `/lanceur-avion-en-papier/` | **Nouveau** | Faisabilité/sécurité du lanceur décrit. |
 | Intercepteur (tuto) | `/plier-avion-en-papier-intercepteur/` | **Réactivé** (brouillon WP) | Cohérence avec la série Flèche/Nakamura. |
 | Classique (tuto) | `/plier-un-avion-en-papier-3/` | Réécrit | Exactitude. |
-| FAQ (21 questions) | `/contact-faq/` | **Élargi** ~200 mots → 21 Q/R | Exactitude des infos pratiques (tarifs, horaires, accès). |
+| FAQ (21 questions, 18 si inscriptions closes) | `/contact-faq/` | **Élargi** ~200 mots → 21 Q/R | Exactitude des infos pratiques ; mêmes questions dans la page et le JSON-LD selon l'état des inscriptions. |
 | Records | `/records-avion-en-papier/` | Nouveau | Exactitude des records/années/détenteurs. |
 | À imprimer | `/avion-papier-a-imprimer/` | Nouveau | Le PDF proposé est le bon. |
 | Éditions 2023/24/25/26 | `/editions/2026/` etc. | Nouveau | Participants, nations, faits marquants. **Galeries photos ajoutées le 14/07/2026** (2023 : 11 clichés, 2024 : 5, 2025 : 6, 2026 : 7) — trier sur la preview les photos à retirer (visages identifiables, selfie 2023 ; noter que `edition-2023-09/10` sont des captures Instagram avec texte incrusté). |
@@ -33,6 +33,8 @@ Tout le contenu français ci-dessous a été **rédigé/réécrit pour la migrat
 4. **Faits canoniques 2026** : vérifiez `src/content/reglages/reglages.json` : date (samedi 13 juin 2026), lieu (Complexe sportif Daniel Colombier), horaires (sélections 11h–15h, finales 15h30), tarifs (8 € / entrée libre), bénéficiaire (Pompiers Solidaires), URL HelloAsso.
    - La page HelloAsso publiée indique une journée de **11 h à 17 h**, au **12 Allée des Acacias, 33700 Mérignac**, et des inscriptions terminées. Ces faits alimentent `dateFinISO`, `adresseRue`, `codePostal` et `inscriptionsOuvertes: false`.
    - `descriptionEvenement` reprend la présentation publiée. Le JSON-LD utilise le flyer de l'accueil en URL absolue. Ne pas inventer d'artiste, de début de vente ou de nouvelle édition.
+   - Les trois FAQ de tarif et d'inscription portent `inscriptionsOuvertesUniquement: true`. Elles ne doivent apparaître ni dans la page ni dans `FAQPage` quand les inscriptions sont closes. Les questions générales sur les visiteurs et les épreuves restent informatives, sans invitation à s'inscrire.
+   - Les invitations de l'accueil, de l'histoire du Championnat, des activités et de l'impression sont dans le bloc `inscription` des pages, éditable via Sveltia. Vérifier l'avis de clôture avec le réglage à `false`, puis le texte et le lien HelloAsso uniquement lors d'une ouverture réelle. Les pages sans ce bloc ne reçoivent pas de bannière.
 
 ## Vérifications techniques restantes (nécessitent navigateur/déploiement)
 

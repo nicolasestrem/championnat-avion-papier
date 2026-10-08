@@ -2,6 +2,9 @@
 title: "Avion en papier à imprimer"
 seoTitle: "Avion en Papier à Imprimer — Gabarit et Kit Gratuit à Télécharger"
 seoDescription: "Téléchargez gratuitement notre kit d'avion en papier à imprimer : gabarits prêts à plier, repères de pliage et modèles pour la distance comme pour la durée de vol. Parfait pour la maison, l'école ou le Championnat."
+inscription:
+  titre: "Prêt à faire décoller votre avion ?"
+  texte: "Rejoignez le Championnat et prenez part à une journée de compétition, de partage et de solidarité."
 ---
 
 ## Un gabarit d'avion en papier à imprimer, prêt à plier

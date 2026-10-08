@@ -35,5 +35,6 @@ const { title, seoTitle, seoDescription, breadcrumb = [], image, noindex } = Ast
     <div class="mt-6 text-lg leading-relaxed text-ink/90 [&_a]:text-sky-deep [&_a]:underline [&_h2]:mt-8 [&_h2]:font-brand [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-sky-deep [&_h3]:mt-6 [&_h3]:font-brand [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-sky-deep [&_p]:mt-4 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:mt-4 [&_ol]:list-decimal [&_ol]:pl-6">
       <slot />
     </div>
+    <slot name="after-content" />
   </div>
 </BaseLayout>

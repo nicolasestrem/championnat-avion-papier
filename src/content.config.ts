@@ -91,6 +91,7 @@ const faq = defineCollection({
     question: z.string(), reponse: z.string(),
     categorie: z.enum(['pratique', 'inscription', 'sur-place', 'general']),
     ordre: z.number().default(99),
+    inscriptionsOuvertesUniquement: z.boolean().default(false),
   }),
 });
 
@@ -107,6 +108,9 @@ const pages = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(), seoTitle: z.string(), seoDescription: z.string(),
     image: image().optional(), imageAlt: z.string().optional(),
+    inscription: z.object({
+      titre: z.string(), texte: z.string(),
+    }).optional(),
   }),
 });
 

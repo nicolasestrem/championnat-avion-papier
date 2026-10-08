@@ -20,6 +20,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `inscriptionsOuvertes` masque les invitations courantes et omet les `offers`
   du JSON-LD quand il vaut `false`. L'export Google Agenda indique aussi la clôture.
   Les deux actualités historiques d'ouverture restent inchangées.
+- **Consignes d'inscription cohérentes avec l'état central** : les trois FAQ
+  d'inscription, d'inscription sur place et de tarif disparaissent ensemble
+  de la page et du JSON-LD quand les inscriptions sont closes. Les réponses
+  générales sur les visiteurs et les deux épreuves ne promettent plus une
+  inscription disponible. Les invitations de l'accueil, de l'histoire, des
+  activités et de l'impression utilisent un bloc CMS facultatif pris en charge
+  par les sept pages éditables. Les bannières restent hors des styles Markdown
+  pour conserver leurs titres et boutons lisibles.
 - **Réécriture des métadonnées SEO des trois tutoriels hérités de WordPress**, à la
   suite d'un audit Google Search Console (90 j, 2026-04-21 → 2026-07-20). La page
   `/tuto-avion-en-papier-facile-planeur/` concentre à elle seule **19 123 impressions

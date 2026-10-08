@@ -70,6 +70,13 @@ collections:
       - { name: seoDescription, label: "Description SEO", widget: text }
       - { name: image, label: "Image", widget: image, required: false }
       - { name: imageAlt, label: "Texte alternatif de l'image", widget: string, required: false }
+      - name: inscription
+        label: "Invitation affichée pendant les inscriptions"
+        widget: object
+        required: false
+        fields:
+          - { name: titre, label: "Titre", widget: string }
+          - { name: texte, label: "Texte", widget: text }
       - { name: body, label: "Contenu", widget: markdown }
 
   # --- Tutoriels ---
@@ -238,6 +245,7 @@ collections:
           - { label: "Sur place", value: sur-place }
           - { label: "Général", value: general }
       - { name: ordre, label: "Ordre d'affichage", widget: number, value_type: int, default: 99 }
+      - { name: inscriptionsOuvertesUniquement, label: "Afficher uniquement quand les inscriptions sont ouvertes", widget: boolean, default: false }
 
   # --- Records ---
   - name: records

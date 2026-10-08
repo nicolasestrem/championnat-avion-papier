@@ -1,11 +1,10 @@
 ---
 import { getEntry, render } from 'astro:content';
-import CtaBanner from '../../components/ui/CtaBanner.astro';
+import InscriptionSection from '../../components/ui/InscriptionSection.astro';
 import PageLayout from '../../layouts/PageLayout.astro';
 
 const page = await getEntry('pages', 'imprimer');
 const reglages = await getEntry('reglages', 'reglages');
-const r = reglages!.data;
 const { Content } = await render(page!);
 
 const breadcrumb = [
@@ -23,12 +22,5 @@ const breadcrumb = [
   breadcrumb={breadcrumb}
 >
   <Content />
-  <CtaBanner
-    heading={r.inscriptionsOuvertes ? 'Prêt à faire décoller votre avion ?' : 'Inscriptions closes'}
-    text={r.inscriptionsOuvertes
-      ? `Rendez-vous le ${r.dateLabel} à ${r.ville}. Inscription ${r.tarifCompetiteur} par compétiteur.`
-      : 'Les inscriptions pour cette édition sont closes.'}
-    href={r.inscriptionsOuvertes ? r.helloAssoUrl : undefined}
-    label={r.inscriptionsOuvertes ? 'S’inscrire au Championnat' : undefined}
-  />
+  <InscriptionSection slot="after-content" inscription={page!.data.inscription} reglages={reglages!.data} afficherTarifs afficherBeneficiaire />
 </PageLayout>

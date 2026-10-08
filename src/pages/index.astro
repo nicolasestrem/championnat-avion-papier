@@ -2,7 +2,7 @@
 import { getEntry, getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/ui/Hero.astro';
-import CtaBanner from '../components/ui/CtaBanner.astro';
+import InscriptionSection from '../components/ui/InscriptionSection.astro';
 import FlightDivider from '../components/ui/FlightDivider.astro';
 import PhotoMosaic from '../components/ui/PhotoMosaic.astro';
 import SponsorGrid from '../components/ui/SponsorGrid.astro';
@@ -101,12 +101,5 @@ const eventInput = {
     </div>
   </section>
 
-  <CtaBanner
-    heading={r.inscriptionsOuvertes ? `Rendez-vous le ${r.dateLabel}` : 'Inscriptions closes'}
-    text={r.inscriptionsOuvertes
-      ? `${r.lieu}, ${r.ville}. Compétiteur ${r.tarifCompetiteur}, ${r.entreeVisiteur.toLowerCase()} pour les visiteurs. Au profit des ${r.beneficiaire}.`
-      : 'Les inscriptions pour cette édition sont closes.'}
-    href={r.inscriptionsOuvertes ? r.helloAssoUrl : undefined}
-    label={r.inscriptionsOuvertes ? 'S’inscrire au Championnat' : undefined}
-  />
+  <InscriptionSection inscription={page!.data.inscription} reglages={r} />
 </BaseLayout>

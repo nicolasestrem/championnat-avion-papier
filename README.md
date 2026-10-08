@@ -43,6 +43,17 @@ la collection **Réglages** de Sveltia CMS.
   la clôture dans Google Agenda et omet les `offers` du JSON-LD. Les actualités
   historiques restent consultables. Ne réactiver ce champ que lorsque les
   inscriptions à l'édition concernée sont réellement ouvertes.
+- Dans la collection **FAQ**, activer `inscriptionsOuvertesUniquement` pour les
+  questions qui donnent des consignes d'inscription à l'édition courante.
+  Lorsque les inscriptions sont closes, ces entrées sont absentes à la fois
+  de la page et du JSON-LD `FAQPage`. Les questions générales restent visibles.
+- Dans la collection **Pages**, placer les invitations courantes dans le bloc
+  facultatif `inscription` (`titre` et `texte`, en texte simple), pas dans le
+  corps Markdown. Les sept pages CMS prennent ce bloc en charge : il affiche
+  l'invitation et le lien HelloAsso si les inscriptions sont ouvertes, sinon
+  un avis de clôture. Sans bloc, aucune bannière supplémentaire n'est ajoutée.
+  Les pages utilisant `PageLayout` rendent cette bannière dans le slot
+  `after-content`, hors des styles du contenu rédactionnel.
 - Pour une nouvelle édition, mettre à jour ensemble les dates, le lieu, le
   descriptif, le flyer et l'URL HelloAsso. Ne pas déduire `performer` ou
   `offers.validFrom` d'une date de publication ou d'une information inconnue.

@@ -7,7 +7,9 @@ import FaqSchema from '../../components/seo/FaqSchema.astro';
 const reglages = await getEntry('reglages', 'reglages');
 const r = reglages!.data;
 
-const faqEntries = (await getCollection('faq')).sort((a, b) => a.data.ordre - b.data.ordre);
+const faqEntries = (await getCollection('faq'))
+  .filter((entry) => r.inscriptionsOuvertes || !entry.data.inscriptionsOuvertesUniquement)
+  .sort((a, b) => a.data.ordre - b.data.ordre);
 
 const CATEGORIES = [
   { key: 'pratique', label: 'Infos pratiques' },
@@ -71,7 +73,7 @@ const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&tex
         <div><dt class="inline font-semibold">Lieu :</dt> <dd class="inline">{r.lieu}, {r.ville}</dd></div>
         <div><dt class="inline font-semibold">Sélections :</dt> <dd class="inline">{r.horaireSelections}</dd></div>
         <div><dt class="inline font-semibold">Finales :</dt> <dd class="inline">à partir de {r.horaireFinales}</dd></div>
-        <div><dt class="inline font-semibold">Tarif compétiteur :</dt> <dd class="inline">{r.tarifCompetiteur}</dd></div>
+        {r.inscriptionsOuvertes && <div><dt class="inline font-semibold">Tarif compétiteur :</dt> <dd class="inline">{r.tarifCompetiteur}</dd></div>}
         <div><dt class="inline font-semibold">Visiteurs :</dt> <dd class="inline">{r.entreeVisiteur}</dd></div>
         <div><dt class="inline font-semibold">Au profit de :</dt> <dd class="inline">{r.beneficiaire}</dd></div>
       </dl>
@@ -123,4 +125,5 @@ const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&tex
       </div>
     </section>
   ))}
+
 </PageLayout>

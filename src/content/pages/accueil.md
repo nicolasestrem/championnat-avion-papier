@@ -4,6 +4,9 @@ seoTitle: "Championnat du Monde de lancer d'avions en papier"
 seoDescription: "Le site officiel du Championnat du Monde de lancer d'avions en papier à Mérignac. Venez en famille et soutenez une bonne cause !"
 image: "../../assets/event/flyer-2026.webp"
 imageAlt: "Flyer du Championnat du Monde de Lancer d'Avions en Papier 2026"
+inscription:
+  titre: "Prêt à décoller ?"
+  texte: "Réservez votre place et rejoignez l'aventure 2026."
 ---
 
 ## Une bonne action à coups d'avions en papier
@@ -47,5 +50,3 @@ Cette compétition est avant tout un événement engagé : l'intégralité des b
 ## Merci à nos partenaires
 
 Grâce à la générosité de nos sponsors — entreprises, institutions et associations de la métropole bordelaise — le Championnat peut prendre son envol chaque année. Un immense merci à celles et ceux qui nous accompagnent dans cette belle aventure.
-
-**Prêt à décoller ?** Réservez votre place et rejoignez l'aventure 2026.

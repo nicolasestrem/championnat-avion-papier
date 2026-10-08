@@ -4,6 +4,9 @@ seoTitle: "Activités - Championnat du Monde de lancer d'avions en papier de Mé
 seoDescription: "Les activités proposées pour le Championnat du Monde de lancer d'avions en papier à Mérignac."
 image: "../../assets/event/journee-championnat-type.png"
 imageAlt: "Illustration du déroulé d'une journée type du Championnat de lancer d'avions en papier"
+inscription:
+  titre: "Venir nous voir"
+  texte: "Un événement convivial et ouvert à tous, qui rassemble les familles et favorise le partage. Participez, apprenez, amusez-vous et faites une bonne action en même temps."
 ---
 
 ## Une journée complète, rythmée et festive
@@ -61,8 +64,4 @@ Un même pliage ne peut pas exceller dans les deux registres : les compétiteurs
 
 Le Championnat conserve, année après année, sa dimension solidaire et éducative. Pour l'édition 2026, l'intégralité des bénéfices est reversée aux **Pompiers Solidaires**, une ONG française qui agit sous le slogan « Agir pour l'avenir ». Missions humanitaires, réponse aux catastrophes, formation aux gestes qui sauvent, accompagnement des populations sinistrées : leurs interventions, en France comme à l'international, sont portées par des professionnels du feu et du secours.
 
-En participant à la compétition, en achetant un billet ou en tentant votre chance à la tombola, vous soutenez directement ces missions. Chaque avion lancé contribue à financer leurs actions de prévention et de secours. Un petit geste, un grand impact.
-
-## Venir nous voir
-
-Un événement convivial et ouvert à tous, qui rassemble les familles et favorise le partage. Participez, apprenez, amusez-vous — et faites une bonne action en même temps. **Entrée libre pour les visiteurs ; 8 € pour les compétiteurs** (inscription recommandée à l'avance via HelloAsso).
+Les recettes de l'édition 2026 sont destinées à soutenir ces missions de prévention et de secours.
